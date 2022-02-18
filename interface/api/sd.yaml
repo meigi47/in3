@@ -1,0 +1,46 @@
+
+contract:
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/contracts/page"
+    type: "get"
+    description: "销售分销/合同管理/查询合同"
+  create:
+    url: "/v2/api/tenants/{tenant_id}/contracts"
+    type: "post"
+    description: "销售分销/合同管理/新增合同"
+  update:
+    url: "/v2/api/tenants/{tenant_id}/contracts/{contract_id}/update-contract-no"
+    type: "put"
+    description: "销售分销/合同管理/编辑合同编号"
+  get_detail:
+    url: "/v2/api/tenants/{tenant_id}/contracts/{contract_id}"
+    type: "get"
+    description: "销售分销/合同管理/合同信息详情"
+
+sales_order:
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/sales-orders/page"
+    type: "get"
+    description: "销售分销/订单管理/查询订单"
+  create:
+    url: "/v2/api/tenants/{tenant_id}/sales-orders"
+    type: "post"
+    description: "销售分销/订单管理/新增订单"
+  update:
+    url: "/v2/api/tenants/{tenant_id}/sales-orders/{so_id}"
+    type: "put"
+    description: "销售分销/订单管理/编辑订单"
+  get_detail:
+    url: "/v2/api/tenants/{tenant_id}/sales-orders/{so_id}"
+    type: "get"
+    description: "销售分销/订单管理/订单信息详情"
+  get_so_types:
+    url: "/v2/api/tenants/{tenant_id}/sales-orders/{so_id}"
+    type: "get"
+    description: "codedef:销售订单类型"
+  create_approval:
+    url: "/v2/api/tenants/{tenant_id}/sales-orders/{so_id}/release"
+    type: "post"
+    description: "下发审批"
+
+

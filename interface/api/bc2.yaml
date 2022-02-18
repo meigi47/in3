@@ -1,0 +1,29 @@
+activiti: #这是给interface调取接口存的常量关系
+  config:
+    url: "/v2/api/tenants/{tenant_id}/apvc/workflows/configs"
+    type: "get"
+    description: "获取Configs"
+  need_dept:
+    url: "/v2/api/tenants/{tenant_id}/apvc/workflows/processes/need-dept"
+    type: "get"
+    description: "下级审批节点是否需要部门审批"
+  next_task_config:
+    url: "/v2/api/tenants/{tenant_id}/apvc/workflows/processes/all-user-tasks-behind"
+    type: "get"
+    description: "下级审批节点配置详情"
+  managers:
+    url: "/v2/api/tenants/{tenant_id}/apvc/workflows/orgs/{org_id}/managers"
+    type: "get"
+    description: "获取主管信息"
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/apvc/workflows/tasks/page"
+    type: "get"
+    description: "查询审批任务列表"
+  get_detail:
+    url: "/v2/api/tenants/{tenant_id}/apvc/workflows/tasks/{task_id}"
+    type: "get"
+    description: "查询审批任务详情"
+  handle_approve:
+    url: "/v2/api/tenants/{tenant_id}/apvc/workflows/tasks/{task_id}/handle"
+    type: "post"
+    description: "拒绝审批"

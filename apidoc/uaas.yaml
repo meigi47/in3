@@ -1,0 +1,5708 @@
+swagger: '2.0'
+info:
+  description: Uaas REST API Documentation
+  version: 3.12.1.RELEASE
+  title: Uaas API
+  termsOfService: Terms of service
+  contact:
+    name: Industics Ltd
+    url: 'http://support.industics.com'
+    email: support@industics.com
+  license:
+    name: License of API
+    url: API license URL
+host: 'localhost:30099'
+basePath: /uaas
+tags:
+  - name: ACCESS_LOG
+    description: Identity Access Log Feign Client
+  - name: CODE_DEF
+    description: Code Def Proxy Endpoint
+  - name: CODE_DEF_MGR
+    description: Code Def Mgr Proxy Endpoint
+  - name: EXTEND_COLUMN_DEF
+    description: Extend Column Def Proxy Endpoint
+  - name: LOGIN
+    description: Login Endpoint
+  - name: ORG
+    description: Org Proxy Endpoint
+  - name: PRIVATE_USER
+    description: Private User Endpoint
+  - name: PUBLIC_APP
+    description: Public App Endpoint
+  - name: PUBLIC_TENANT
+    description: Public Tenant Endpoint
+  - name: PUBLIC_USER
+    description: Public User Endpoint
+  - name: ROLE-TAG
+    description: Role Tag Proxy Endpoint
+  - name: TAG
+    description: Tag Proxy Endpoint
+  - name: TENANT
+    description: Tenant Proxy Endpoint
+  - name: TENANT_APP
+    description: Tenant App Proxy Endpoint
+  - name: TOKEN_MOCK
+    description: Mock Token Endpoint
+  - name: UAAS - DEVICE
+    description: Tenant Device Endpoint
+  - name: UAAS - JS-API
+    description: Js Api Endpoint
+  - name: UAAS - USER - MENU
+    description: User Menu Endpoint
+  - name: USER
+    description: Tenant User Endpoint
+  - name: WECHAT
+    description: Wechat Proxy Endpoint
+  - name: authorization-endpoint
+    description: Authorization Endpoint
+  - name: check-token-endpoint
+    description: Check Token Endpoint
+  - name: introspect-endpoint
+    description: Introspect Endpoint
+  - name: token-endpoint
+    description: Token Endpoint
+  - name: token-key-endpoint
+    description: Token Key Endpoint
+  - name: user-info-endpoint
+    description: User Info Endpoint
+  - name: whitelabel-approval-endpoint
+    description: Whitelabel Approval Endpoint
+  - name: whitelabel-error-endpoint
+    description: Whitelabel Error Endpoint
+schemes:
+  - http
+paths:
+  /introspect:
+    post:
+      tags:
+        - introspect-endpoint
+      summary: introspect
+      operationId: introspectUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: token
+          in: query
+          description: token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /oauth/authorize:
+    get:
+      tags:
+        - authorization-endpoint
+      summary: authorize
+      operationId: authorizeUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: complete
+          in: query
+          required: false
+          type: boolean
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: parameters
+          in: query
+          description: parameters
+          required: true
+          items:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    head:
+      tags:
+        - authorization-endpoint
+      summary: authorize
+      operationId: authorizeUsingHEAD
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: complete
+          in: query
+          required: false
+          type: boolean
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: parameters
+          in: query
+          description: parameters
+          required: true
+          items:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+    post:
+      tags:
+        - authorization-endpoint
+      summary: approveOrDeny
+      operationId: approveOrDenyUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: approvalParameters
+          in: query
+          description: approvalParameters
+          required: true
+          items:
+            type: object
+            additionalProperties:
+              type: string
+        - name: complete
+          in: query
+          required: false
+          type: boolean
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: user_oauth_approval
+          in: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/View'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - authorization-endpoint
+      summary: authorize
+      operationId: authorizeUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: complete
+          in: query
+          required: false
+          type: boolean
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: parameters
+          in: query
+          description: parameters
+          required: true
+          items:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - authorization-endpoint
+      summary: authorize
+      operationId: authorizeUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: complete
+          in: query
+          required: false
+          type: boolean
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: parameters
+          in: query
+          description: parameters
+          required: true
+          items:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+    options:
+      tags:
+        - authorization-endpoint
+      summary: authorize
+      operationId: authorizeUsingOPTIONS
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: complete
+          in: query
+          required: false
+          type: boolean
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: parameters
+          in: query
+          description: parameters
+          required: true
+          items:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+    patch:
+      tags:
+        - authorization-endpoint
+      summary: authorize
+      operationId: authorizeUsingPATCH
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: complete
+          in: query
+          required: false
+          type: boolean
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: parameters
+          in: query
+          description: parameters
+          required: true
+          items:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /oauth/check_token:
+    post:
+      tags:
+        - check-token-endpoint
+      summary: checkToken
+      operationId: checkTokenUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: token
+          in: query
+          description: token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /oauth/confirm_access:
+    get:
+      tags:
+        - whitelabel-approval-endpoint
+      summary: getAccessConfirmation
+      operationId: getAccessConfirmationUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    head:
+      tags:
+        - whitelabel-approval-endpoint
+      summary: getAccessConfirmation
+      operationId: getAccessConfirmationUsingHEAD
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+    post:
+      tags:
+        - whitelabel-approval-endpoint
+      summary: getAccessConfirmation
+      operationId: getAccessConfirmationUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - whitelabel-approval-endpoint
+      summary: getAccessConfirmation
+      operationId: getAccessConfirmationUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - whitelabel-approval-endpoint
+      summary: getAccessConfirmation
+      operationId: getAccessConfirmationUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+    options:
+      tags:
+        - whitelabel-approval-endpoint
+      summary: getAccessConfirmation
+      operationId: getAccessConfirmationUsingOPTIONS
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+    patch:
+      tags:
+        - whitelabel-approval-endpoint
+      summary: getAccessConfirmation
+      operationId: getAccessConfirmationUsingPATCH
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: model
+          in: query
+          description: model
+          required: false
+          type: object
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /oauth/error:
+    get:
+      tags:
+        - whitelabel-error-endpoint
+      summary: handleError
+      operationId: handleErrorUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    head:
+      tags:
+        - whitelabel-error-endpoint
+      summary: handleError
+      operationId: handleErrorUsingHEAD
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+    post:
+      tags:
+        - whitelabel-error-endpoint
+      summary: handleError
+      operationId: handleErrorUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - whitelabel-error-endpoint
+      summary: handleError
+      operationId: handleErrorUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - whitelabel-error-endpoint
+      summary: handleError
+      operationId: handleErrorUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+    options:
+      tags:
+        - whitelabel-error-endpoint
+      summary: handleError
+      operationId: handleErrorUsingOPTIONS
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+    patch:
+      tags:
+        - whitelabel-error-endpoint
+      summary: handleError
+      operationId: handleErrorUsingPATCH
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ModelAndView'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /oauth/token:
+    get:
+      tags:
+        - token-endpoint
+      summary: getAccessToken
+      operationId: getAccessTokenUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: parameters
+          in: query
+          description: parameters
+          required: true
+          items:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OAuth2AccessToken'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - token-endpoint
+      summary: postAccessToken
+      operationId: postAccessTokenUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: parameters
+          in: query
+          description: parameters
+          required: true
+          items:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OAuth2AccessToken'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /oauth/token_key:
+    get:
+      tags:
+        - token-key-endpoint
+      summary: getKey
+      operationId: getKeyUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: false
+          type: string
+          default: Bearer XXX
+        - name: name
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /userinfo:
+    get:
+      tags:
+        - user-info-endpoint
+      summary: userinfo
+      operationId: userinfoUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UserDetails'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/api-access-logs:
+    get:
+      tags:
+        - API
+        - ACCESS_LOG
+      summary: 查询API访问日志
+      operationId: findAllApiAccessLogsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: api_url
+          in: query
+          description: api_url
+          required: false
+          type: string
+        - name: app_name
+          in: query
+          description: app_name
+          required: false
+          type: string
+        - name: client_id
+          in: query
+          description: client_id
+          required: false
+          type: string
+        - name: disposed
+          in: query
+          description: disposed
+          required: false
+          type: string
+        - name: error
+          in: query
+          description: error
+          required: false
+          type: string
+        - name: from_date
+          in: query
+          description: from_date
+          required: false
+          type: string
+          format: date
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: remote_ip
+          in: query
+          description: remote_ip
+          required: false
+          type: string
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: query
+          description: tenant_id
+          required: false
+          type: string
+        - name: to_date
+          in: query
+          description: to_date
+          required: false
+          type: string
+          format: date
+        - name: user_id
+          in: query
+          description: user_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfApiAccessLogVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - API
+        - ACCESS_LOG
+      summary: 创建API访问日志(异步接口)
+      operationId: createApiAccessLogUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: param0
+          description: param0
+          required: true
+          schema:
+            $ref: '#/definitions/ApiAccessLogCreateRequest'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/api-access-logs/disposed:
+    post:
+      tags:
+        - API
+        - ACCESS_LOG
+      summary: 批量处理API日志
+      operationId: batchDisposeApiAccessLogsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDisposedApiAccessLogRequest'
+        - name: tenant_id
+          in: query
+          description: tenant_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/apps/{app_id}/access-logs':
+    get:
+      tags:
+        - APP
+        - ACCESS_LOG
+      summary: 查询APP访问日志
+      operationId: findAllAppAccessLogsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: from_date
+          in: query
+          description: from_date
+          required: false
+          type: string
+          format: date
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: query
+          description: tenant_id
+          required: false
+          type: string
+        - name: to_date
+          in: query
+          description: to_date
+          required: false
+          type: string
+          format: date
+        - name: user_id
+          in: query
+          description: user_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfAppAccessLogVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - APP
+        - ACCESS_LOG
+      summary: 创建APP访问日志(异步接口)
+      operationId: createOrUpdateAppAccessLogUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            $ref: '#/definitions/AppAccessLogCreateVO'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/jsapi/signature:
+    get:
+      tags:
+        - UAAS - JS-API
+      summary: signJsApiTicket
+      operationId: signJsApiTicketUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: domain
+          in: query
+          description: domain
+          required: true
+          type: string
+        - name: type
+          in: query
+          description: type
+          required: true
+          type: string
+        - name: url
+          in: query
+          description: url
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/JsApiSignatureVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/mock/token/api/id-proxy:
+    get:
+      tags:
+        - MOCK
+        - PROXY
+        - TOKEN_MOCK
+      summary: ID Proxy Test
+      operationId: checkUsernameExistsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfAppAccessLogVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: true
+  /v2/api/private/users/acct-welcome-email:
+    post:
+      tags:
+        - PRIVATE
+        - USER
+        - PRIVATE_USER
+      summary: 发送IN3密码重置邮件
+      operationId: sendIn3PortalWelcomeEmailUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: passwordResetInitRequest
+          description: passwordResetInitRequest
+          required: true
+          schema:
+            $ref: '#/definitions/PasswordResetInitRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PasswordResetInitRequestResult'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/users/clean-crop-pwd-err-count:
+    get:
+      tags:
+        - PRIVATE
+        - PWD
+        - USER
+        - PRIVATE_USER
+      summary: 清空用户名的密码尝试次数
+      operationId: cleanCropUserPwdErrorCountUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: tenant_id
+          in: query
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: query
+          description: user_id
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/users/welcome-email:
+    post:
+      tags:
+        - PRIVATE
+        - USER
+        - PRIVATE_USER
+      summary: 发送密码重置邮件
+      operationId: sendWelcomeEmailUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: passwordResetInitRequest
+          description: passwordResetInitRequest
+          required: true
+          schema:
+            $ref: '#/definitions/PasswordResetInitRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PasswordResetInitRequestResult'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/apps:
+    get:
+      tags:
+        - APP
+        - PUBLIC
+        - PUBLIC_APP
+      summary: 查询所有APP
+      operationId: findAllAppsUsingGET
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AppVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/apps/{id}':
+    get:
+      tags:
+        - APP
+        - PUBLIC
+        - PUBLIC_APP
+      summary: 根据ID获取APP
+      operationId: getAppUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AppVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/devices/register:
+    get:
+      tags:
+        - UAAS - DEVICE
+      summary: 检查并获取设备注册信息
+      operationId: findOneTenantDeviceRegisterByMacAddrUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: mac
+          in: query
+          description: mac
+          required: true
+          type: string
+        - name: signature
+          in: query
+          description: signature
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantDeviceRegisterResult'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/login-page-setting:
+    get:
+      tags:
+        - PUBLIC
+        - LOGIN
+      summary: 获取登录页的设定
+      operationId: getLoginPageSettingUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: domain
+          in: query
+          description: domain
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/LoginPageSettingInfo'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/tenants/check_contact:
+    get:
+      tags:
+        - PUBLIC
+        - TENANT
+        - PUBLIC_TENANT
+      summary: 用户名输入的手机号/邮箱号是否匹配
+      operationId: checkContactUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: contact
+          in: query
+          description: contact
+          required: true
+          type: string
+        - name: domain
+          in: query
+          description: domain
+          required: true
+          type: string
+        - name: identify_type
+          in: query
+          description: identify_type
+          required: true
+          type: string
+        - name: user_type
+          in: query
+          description: user_type
+          required: true
+          type: string
+          enum:
+            - CORP
+            - ACCT
+            - SRMP
+        - name: username
+          in: query
+          description: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/tenants/reset-code/check:
+    get:
+      tags:
+        - PUBLIC
+        - TENANT
+        - PUBLIC_TENANT
+      summary: 检查重置密码验证码
+      operationId: checkResetCodeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: domain
+          in: query
+          description: domain
+          required: true
+          type: string
+        - name: identify_type
+          in: query
+          description: identify_type
+          required: true
+          type: string
+        - name: reset_code
+          in: query
+          description: reset_code
+          required: true
+          type: string
+        - name: user_type
+          in: query
+          description: user_type
+          required: true
+          type: string
+          enum:
+            - CORP
+            - ACCT
+            - SRMP
+        - name: username
+          in: query
+          description: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/tenants/reset-code/send:
+    post:
+      tags:
+        - PUBLIC
+        - TENANT
+        - PUBLIC_TENANT
+      summary: 发送重置密码验证码
+      operationId: sendResetCodeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: passwordResetRequest
+          description: passwordResetRequest
+          required: true
+          schema:
+            $ref: '#/definitions/PasswordResetRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int32
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/tenants/reset-password:
+    post:
+      tags:
+        - PUBLIC
+        - TENANT
+        - PUBLIC_TENANT
+      summary: 重置密码
+      operationId: resetByUsernameUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/PasswordResetConfirmRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/tenants/username/exist:
+    get:
+      tags:
+        - PUBLIC
+        - TENANT
+        - PUBLIC_TENANT
+      summary: 用户名是否存在
+      operationId: checkUsernameExistsUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: domain
+          in: query
+          description: domain
+          required: true
+          type: string
+        - name: user_type
+          in: query
+          description: user_type
+          required: true
+          type: string
+          enum:
+            - CORP
+            - ACCT
+            - SRMP
+        - name: username
+          in: query
+          description: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PasswordResetVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/tenants/{id}':
+    get:
+      tags:
+        - PUBLIC
+        - TENANT
+        - PUBLIC_TENANT
+      summary: 根据ID获取租户
+      operationId: getTenantUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/tenants/{id}/tenant-info':
+    get:
+      tags:
+        - PUBLIC
+        - TENANT
+        - PUBLIC_TENANT
+      summary: 根据ID获取租户
+      operationId: getTenantInfoUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantInfoVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/tenants/{name}/get-by-name':
+    get:
+      tags:
+        - PUBLIC
+        - TENANT
+        - PUBLIC_TENANT
+      summary: 根据Domain Name或Tenant Name获取租户
+      operationId: getTenantByNameUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: name
+          in: path
+          description: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/tenants/{tenant_id}/apps/{app_id}/users/{user_id}/m/menus':
+    get:
+      tags:
+        - UAAS - USER - MENU
+      summary: 获取匿名用户的移动菜单信息
+      operationId: findAllAnonymousMobileMenusUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MenuVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/users/reset-password/finish:
+    put:
+      tags:
+        - PUBLIC
+        - USER
+        - PUBLIC_USER
+      summary: 用户确认重置密码请求
+      operationId: finishPasswordResetByUsernameUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: passwordResetFinishRequest
+          description: passwordResetFinishRequest
+          required: true
+          schema:
+            $ref: '#/definitions/PasswordResetFinishRequest'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/users/reset-password/init:
+    post:
+      tags:
+        - PUBLIC
+        - USER
+        - PUBLIC_USER
+      summary: 用户发送重置密码请求
+      operationId: requestPasswordResetByUsernameUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: passwordResetInitRequest
+          description: passwordResetInitRequest
+          required: true
+          schema:
+            $ref: '#/definitions/PasswordResetInitRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PasswordResetInitRequestResult'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/users/reset-password/reset-key-exist:
+    get:
+      tags:
+        - PUBLIC
+        - USER
+        - PUBLIC_USER
+      summary: 检查用户重置密码请求中的KEY是否有效
+      operationId: checkPasswordResetResetKeyExistsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: domain
+          in: query
+          description: domain
+          required: true
+          type: string
+        - name: reset_key
+          in: query
+          description: reset_key
+          required: true
+          type: string
+        - name: user_type
+          in: query
+          description: user_type
+          required: true
+          type: string
+          enum:
+            - CORP
+            - ACCT
+            - SRMP
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/users/username/exist:
+    get:
+      tags:
+        - PUBLIC
+        - TENANT
+        - PUBLIC_USER
+      summary: 供应商帐号是否存在
+      operationId: checkUsernameExistsUsingGET_2
+      produces:
+        - application/json
+      parameters:
+        - name: domain
+          in: query
+          description: domain
+          required: true
+          type: string
+        - name: user_type
+          in: query
+          description: user_type
+          required: true
+          type: string
+          enum:
+            - CORP
+            - ACCT
+            - SRMP
+        - name: username
+          in: query
+          description: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}':
+    get:
+      tags:
+        - TENANT
+      summary: 查询租户信息
+      operationId: getTenantUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/admin/code-defs/types/{type}':
+    get:
+      tags:
+        - CODE_DEF_MGR
+      summary: findAllCodeDefByType
+      operationId: findAllCodeDefByTypeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: type
+          in: path
+          description: type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CodeDefVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - CODE_DEF_MGR
+      summary: 添加CodeDef
+      operationId: createTenantCodeDefUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: codeDefCreateVO
+          description: codeDefCreateVO
+          required: true
+          schema:
+            $ref: '#/definitions/CodeDefCreateVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: type
+          in: path
+          description: type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/admin/code-defs/{id}':
+    put:
+      tags:
+        - CODE_DEF_MGR
+      summary: 更新CodeDef
+      operationId: updateTenantCodeDefUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: codeDefUpdateVO
+          description: codeDefUpdateVO
+          required: true
+          schema:
+            $ref: '#/definitions/CodeDefUpdateVO'
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - CODE_DEF_MGR
+      summary: 禁用CodeDef
+      operationId: deleteCodeDefUsingDELETE
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/admin/code-defs/{id}/active':
+    put:
+      tags:
+        - CODE_DEF_MGR
+      summary: 启用CodeDef
+      operationId: activeCodeDefUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps':
+    get:
+      tags:
+        - TENANT
+        - TENANT_APP
+      summary: 租户应用分页查询
+      operationId: findAllTenantAppsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int32
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantAppVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/users/{user_id}/a/menus':
+    get:
+      tags:
+        - UAAS - USER - MENU
+      summary: 获取用户的APP菜单信息
+      operationId: findAllUserHybridMenusUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MenuVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/users/{user_id}/m/menus':
+    get:
+      tags:
+        - UAAS - USER - MENU
+      summary: 获取用户的移动菜单信息
+      operationId: findAllUserMobileMenusUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MenuVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/users/{user_id}/menus':
+    get:
+      tags:
+        - UAAS - USER - MENU
+      summary: 获取人员的菜单信息
+      operationId: findAllUserMenusUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MenuVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/code-defs':
+    get:
+      tags:
+        - TENANT
+        - CODE_DEF
+      summary: 获取租户CODE DEF
+      operationId: findAllCodeDefsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: codes
+          in: query
+          description: codes
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: include_deleted
+          in: query
+          description: include_deleted
+          required: false
+          type: boolean
+          default: false
+        - name: parent_code
+          in: query
+          description: parent_code
+          required: false
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: type
+          in: query
+          description: type
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: array
+              items:
+                $ref: '#/definitions/CodeDefVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/devices/register':
+    post:
+      tags:
+        - UAAS - DEVICE
+      summary: 注册/添加设备
+      operationId: resisterTenantDeviceUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: registerRequest
+          description: registerRequest
+          required: true
+          schema:
+            $ref: '#/definitions/TenantDeviceRegisterRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantDeviceRegisterResult'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/excol-defs/batch':
+    put:
+      tags:
+        - TENANT
+        - EXTEND_COLUMN_DEF
+      summary: 批量保存扩展字段配置
+      operationId: batchSaveExtendColumnDefsUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: extendColumnDefBatchSaveVO
+          description: extendColumnDefBatchSaveVO
+          required: true
+          schema:
+            $ref: '#/definitions/ExtendColumnDefBatchSaveVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/excol-defs/page':
+    get:
+      tags:
+        - TENANT
+        - EXTEND_COLUMN_DEF
+      summary: 获取扩展字段配置
+      operationId: findAllExtendColumnDefsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: table_name
+          in: query
+          description: table_name
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfExtendColumnDefVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/orgs':
+    get:
+      tags:
+        - ORG
+      summary: 租户组织 - 查询所有组织
+      operationId: findAllTenantOrgUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantOrgVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/orgs/page':
+    get:
+      tags:
+        - TENANT
+        - ORG
+      summary: 查询组织信息
+      operationId: findAllTenantOrgUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - PARENT
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfTenantOrgVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/orgs/{org_id}':
+    get:
+      tags:
+        - ORG
+      summary: 租户组织 - 查询某个组织的详情
+      operationId: getTenantOrgUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: org_id
+          in: path
+          description: org_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantOrgVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/orgs/{org_id}/users':
+    get:
+      tags:
+        - ORG
+        - USER
+      summary: 用户 - 查询某个组织的中的用户
+      operationId: findAllUserByOrgUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: include_child
+          in: query
+          description: include_child
+          required: true
+          type: boolean
+        - name: org_id
+          in: path
+          description: org_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantOrgUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/orgs/{org_id}/users/page':
+    get:
+      tags:
+        - ORG
+        - USER
+      summary: 用户 - 查询某个组织的中的用户
+      operationId: findAllUserByOrgUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: include_child
+          in: query
+          description: include_child
+          required: true
+          type: boolean
+        - name: org_id
+          in: path
+          description: org_id
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfTenantOrgUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/role-tags':
+    post:
+      tags:
+        - ROLE-TAG
+      summary: createTenantTag
+      operationId: createTenantTagUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: createRequest
+          description: createRequest
+          required: true
+          schema:
+            $ref: '#/definitions/RoleTagCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - ROLE-TAG
+      summary: updateTenantTag
+      operationId: updateTenantTagUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: updateRequest
+          description: updateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/RoleTagBulkUpdateRequest'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/role-tags/{role_tag_id}':
+    delete:
+      tags:
+        - ROLE-TAG
+      summary: deleteTenantTag
+      operationId: deleteTenantTagUsingDELETE
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: role_tag_id
+          in: path
+          description: role_tag_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/tags':
+    get:
+      tags:
+        - TAG
+      summary: 标签 - 查询所有标签
+      operationId: findAllTenantTagUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantTagVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/tags/{tag_id}':
+    get:
+      tags:
+        - TAG
+      summary: 标签 - 查询某个标签的详情
+      operationId: getTenantTagUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tag_id
+          in: path
+          description: tag_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantTagVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/tags/{tag_id}/users':
+    get:
+      tags:
+        - TAG
+        - USER
+      summary: 用户 - 查询某个标签下的用户
+      operationId: findAllUserByTagUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - ORG
+        - name: tag_id
+          in: path
+          description: tag_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/tags/{tag_id}/users/page':
+    get:
+      tags:
+        - TAG
+        - USER
+      summary: 用户 - 查询某个标签下的用户
+      operationId: findAllUserByTagUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - ORG
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tag_id
+          in: path
+          description: tag_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfTenantUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users':
+    get:
+      tags:
+        - APP
+        - TENANT
+        - USER
+      summary: 查询租户用户信息
+      operationId: findAllTenantUsersUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: false
+          type: integer
+          format: int32
+        - name: fullname
+          in: query
+          description: fullname
+          required: false
+          type: string
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - ORG
+        - name: mobile
+          in: query
+          description: mobile
+          required: false
+          type: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+        - name: reference_id
+          in: query
+          description: reference_id
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: reference_type
+          in: query
+          description: reference_type
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int32
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/by-username':
+    get:
+      tags:
+        - APP
+        - TENANT
+        - USER
+      summary: 查询租户用户信息
+      operationId: findTenantUsersByUsernameUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: false
+          type: integer
+          format: int32
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - ORG
+        - name: precise_query
+          in: query
+          description: precise_query
+          required: false
+          type: boolean
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: username
+          in: query
+          description: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/deleted':
+    get:
+      tags:
+        - APP
+        - TENANT
+        - USER
+      summary: 查询租户已删除用户信息
+      operationId: findAllDeletedTenantUsersUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: email
+          in: query
+          description: email
+          required: false
+          type: string
+        - name: emp_no
+          in: query
+          description: emp_no
+          required: false
+          type: string
+        - name: fullname
+          in: query
+          description: fullname
+          required: false
+          type: string
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - ORG
+        - name: mobile
+          in: query
+          description: mobile
+          required: false
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: username
+          in: query
+          description: username
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/deleted/page':
+    get:
+      tags:
+        - APP
+        - TENANT
+        - USER
+      summary: 查询租户已删除用户信息
+      operationId: findAllDeletedTenantUsersUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: email
+          in: query
+          description: email
+          required: false
+          type: string
+        - name: emp_no
+          in: query
+          description: emp_no
+          required: false
+          type: string
+        - name: fullname
+          in: query
+          description: fullname
+          required: false
+          type: string
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - ORG
+        - name: mobile
+          in: query
+          description: mobile
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: username
+          in: query
+          description: username
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfTenantUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/page':
+    get:
+      tags:
+        - APP
+        - TENANT
+        - USER
+      summary: 查询租户用户信息
+      operationId: findAllTenantUsersUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: false
+          type: integer
+          format: int32
+        - name: fullname
+          in: query
+          description: fullname
+          required: false
+          type: string
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - ORG
+        - name: mobile
+          in: query
+          description: mobile
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+        - name: reference_id
+          in: query
+          description: reference_id
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: reference_type
+          in: query
+          description: reference_type
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int32
+          collectionFormat: multi
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfTenantUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/query':
+    post:
+      tags:
+        - APP
+        - TENANT
+        - USER
+      summary: 查询租户用户信息
+      operationId: findAllTenantAppUsersUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: false
+          type: integer
+          format: int32
+        - name: fullname
+          in: query
+          description: fullname
+          required: false
+          type: string
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - ORG
+        - name: mobile
+          in: query
+          description: mobile
+          required: false
+          type: string
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+        - name: reference_id
+          in: query
+          description: reference_id
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: reference_type
+          in: query
+          description: reference_type
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int32
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: userIds
+          description: userIds
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantUserVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/query/page':
+    post:
+      tags:
+        - APP
+        - TENANT
+        - USER
+      summary: 查询租户用户信息
+      operationId: findAllTenantAppUsersUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: false
+          type: integer
+          format: int32
+        - name: fullname
+          in: query
+          description: fullname
+          required: false
+          type: string
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - ORG
+        - name: mobile
+          in: query
+          description: mobile
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+        - name: reference_id
+          in: query
+          description: reference_id
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: reference_type
+          in: query
+          description: reference_type
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int32
+          collectionFormat: multi
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: userIds
+          description: userIds
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfTenantUserVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/{user_id}':
+    get:
+      tags:
+        - TENANT
+        - USER
+      summary: 获取指定的租户用户信息
+      operationId: getTenantUserUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: include_profile
+          in: query
+          description: include_profile
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+          allowEmptyValue: false
+          enum:
+            - ORG
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/{user_id}/apps':
+    get:
+      tags:
+        - TENANT
+        - USER
+        - TENANT_APP
+      summary: 查询当前用户可以访问的应用
+      operationId: findAllUserTenantAppsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantAppVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/{user_id}/role-tags':
+    get:
+      tags:
+        - ROLE-TAG
+      summary: findAllRoleTagsByUserId
+      operationId: findAllRoleTagsByUserIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RoleTagVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/{user_id}/update-password':
+    post:
+      tags:
+        - TENANT
+        - USER
+      summary: updateTenantUserPassword
+      operationId: updateTenantUserPasswordUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: tenantUserUpdatePasswordVO
+          description: tenantUserUpdatePasswordVO
+          required: true
+          schema:
+            $ref: '#/definitions/TenantUserUpdatePasswordVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/{user_id}/user-references':
+    get:
+      tags:
+        - USER-REFERENCE
+        - TENANT
+        - USER
+      summary: 获取用户第三方账号
+      operationId: findUserReferencesByUserUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserReferenceVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/{user_id}/user-references/unbinding':
+    post:
+      tags:
+        - USER-REFERENCE
+        - TENANT
+        - USER
+      summary: 解除微信账号绑定
+      operationId: unbindingUserReferenceUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: reference_id
+          in: query
+          description: reference_id
+          required: true
+          type: string
+        - name: reference_type
+          in: query
+          description: reference_type
+          required: true
+          type: integer
+          format: int32
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/{user_id}/user-references/{type}/binding':
+    post:
+      tags:
+        - USER-REFERENCE
+        - TENANT
+        - USER
+      summary: 绑定第三方账号
+      operationId: bindingThirdPartyIdUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: code
+          in: query
+          description: code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: type
+          in: path
+          description: type
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/user-info:
+    get:
+      tags:
+        - USER
+      summary: 从Token中获取用户信息
+      operationId: getUserInfoUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/wechat/jsapi/signature:
+    get:
+      tags:
+        - WECHAT
+      summary: signature
+      operationId: signatureUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: domain
+          in: query
+          description: domain
+          required: true
+          type: string
+        - name: url
+          in: query
+          description: url
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WxCpJsApiSignatureVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+definitions:
+  ApiAccessLogCreateRequest:
+    type: object
+    properties:
+      apiUrl:
+        type: string
+      appName:
+        type: string
+      errMsg:
+        type: string
+      extend:
+        type: string
+      methodName:
+        type: string
+      remoteIp:
+        type: string
+      request:
+        type: string
+      requestTime:
+        type: string
+        format: date-time
+      response:
+        type: object
+      responseTime:
+        type: string
+        format: date-time
+      spendMillis:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+    title: ApiAccessLogCreateRequest
+  ApiAccessLogVO:
+    type: object
+    properties:
+      apiUrl:
+        type: string
+      appId:
+        type: integer
+        format: int32
+      appName:
+        type: string
+      disposed:
+        type: string
+      errMsg:
+        type: string
+      extend:
+        type: string
+      id:
+        type: string
+      methodName:
+        type: string
+      remoteIp:
+        type: string
+      request:
+        type: string
+      requestTime:
+        type: string
+        format: date-time
+      response:
+        type: string
+      responseTime:
+        type: string
+        format: date-time
+      spendMillis:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+    title: ApiAccessLogVO
+  AppAccessLogCreateVO:
+    type: object
+    required:
+      - userId
+    properties:
+      accessAgent:
+        type: string
+      accessIp:
+        type: string
+      tenantId:
+        type: string
+      userId:
+        type: string
+    title: AppAccessLogCreateVO
+  AppAccessLogVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      date:
+        type: string
+        format: date
+      disposed:
+        type: integer
+        format: int32
+      id:
+        type: string
+      lastAccessAgent:
+        type: string
+      lastAccessIp:
+        type: string
+      lastAccessTime:
+        type: string
+        format: date-time
+      tenantId:
+        type: string
+      userId:
+        type: string
+    title: AppAccessLogVO
+  AppVO:
+    type: object
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+        format: int32
+      logoUrl:
+        type: string
+      name:
+        type: string
+      shortName:
+        type: string
+      status:
+        type: integer
+        format: int32
+      supportedTypes:
+        type: array
+        items:
+          type: string
+      uri:
+        type: string
+    title: AppVO
+  BatchDisposedApiAccessLogRequest:
+    type: object
+    properties:
+      ids:
+        type: array
+        items:
+          type: integer
+          format: int64
+    title: BatchDisposedApiAccessLogRequest
+  CodeDefCreateVO:
+    type: object
+    required:
+      - sequence
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      parentCode:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      type:
+        type: string
+    title: CodeDefCreateVO
+  CodeDefUpdateVO:
+    type: object
+    required:
+      - sequence
+      - status
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      parentCode:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      status:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      type:
+        type: string
+    title: CodeDefUpdateVO
+  CodeDefVO:
+    type: object
+    properties:
+      code:
+        type: string
+      deleted:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      parentCode:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      status:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      type:
+        type: string
+    title: CodeDefVO
+  DingTalkSetting:
+    type: object
+    properties:
+      loginAppId:
+        type: string
+      loginAppSecret:
+        type: string
+    title: DingTalkSetting
+  ExtendColumnDefBatchSaveVO:
+    type: object
+    properties:
+      extendColumnDefs:
+        type: array
+        items:
+          $ref: '#/definitions/ExtendColumnDefSaveVO'
+      tableName:
+        type: string
+        minLength: 0
+        maxLength: 64
+    title: ExtendColumnDefBatchSaveVO
+  ExtendColumnDefSaveVO:
+    type: object
+    properties:
+      columnDesc:
+        type: string
+        minLength: 0
+        maxLength: 64
+      columnName:
+        type: string
+        minLength: 0
+        maxLength: 32
+      columnOption:
+        type: string
+        minLength: 0
+        maxLength: 512
+      columnType:
+        type: string
+        minLength: 0
+        maxLength: 32
+      excelColumn:
+        type: boolean
+      id:
+        type: string
+        minLength: 0
+        maxLength: 32
+      maxLength:
+        type: integer
+        format: int32
+      searchColumn:
+        type: boolean
+    title: ExtendColumnDefSaveVO
+  ExtendColumnDefVO:
+    type: object
+    properties:
+      columnDesc:
+        type: string
+      columnName:
+        type: string
+      columnOption:
+        type: string
+      columnType:
+        type: string
+      excelColumn:
+        type: boolean
+      id:
+        type: string
+      maxLength:
+        type: integer
+        format: int32
+      searchColumn:
+        type: boolean
+      tableName:
+        type: string
+    title: ExtendColumnDefVO
+  GrantedAuthority:
+    type: object
+    properties:
+      authority:
+        type: string
+    title: GrantedAuthority
+  JsApiSignatureVO:
+    type: object
+    properties:
+      agentId:
+        type: integer
+        format: int64
+      corpId:
+        type: string
+      nonceStr:
+        type: string
+      signature:
+        type: string
+      timestamp:
+        type: string
+    title: JsApiSignatureVO
+  LoginPageSettingInfo:
+    type: object
+    properties:
+      appDisplayName:
+        type: string
+      dingTalkSetting:
+        $ref: '#/definitions/DingTalkSetting'
+      hasScreen:
+        type: boolean
+      loginBackground:
+        type: string
+      loginLocation:
+        type: string
+      loginMarginTop:
+        type: integer
+        format: int32
+      logoUrl:
+        type: string
+      supportedAuthcTypes:
+        type: array
+        items:
+          type: string
+      wechatSetting:
+        $ref: '#/definitions/WechatSetting'
+    title: LoginPageSettingInfo
+  MenuVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      category:
+        type: string
+      children:
+        type: array
+        items:
+          $ref: '#/definitions/MenuVO'
+      code:
+        type: string
+      color:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      deleted:
+        type: boolean
+      description:
+        type: string
+      icon:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      name:
+        type: string
+      originId:
+        type: string
+      pid:
+        type: string
+      resource:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      state:
+        type: string
+      tenantId:
+        type: string
+      type:
+        type: integer
+        format: int32
+      url:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: MenuVO
+  ModelAndView:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      model:
+        type: object
+      modelMap:
+        type: object
+        additionalProperties:
+          type: object
+      reference:
+        type: boolean
+      status:
+        type: string
+        enum:
+          - 100 CONTINUE
+          - 101 SWITCHING_PROTOCOLS
+          - 102 PROCESSING
+          - 103 CHECKPOINT
+          - 200 OK
+          - 201 CREATED
+          - 202 ACCEPTED
+          - 203 NON_AUTHORITATIVE_INFORMATION
+          - 204 NO_CONTENT
+          - 205 RESET_CONTENT
+          - 206 PARTIAL_CONTENT
+          - 207 MULTI_STATUS
+          - 208 ALREADY_REPORTED
+          - 226 IM_USED
+          - 300 MULTIPLE_CHOICES
+          - 301 MOVED_PERMANENTLY
+          - 302 FOUND
+          - 302 MOVED_TEMPORARILY
+          - 303 SEE_OTHER
+          - 304 NOT_MODIFIED
+          - 305 USE_PROXY
+          - 307 TEMPORARY_REDIRECT
+          - 308 PERMANENT_REDIRECT
+          - 400 BAD_REQUEST
+          - 401 UNAUTHORIZED
+          - 402 PAYMENT_REQUIRED
+          - 403 FORBIDDEN
+          - 404 NOT_FOUND
+          - 405 METHOD_NOT_ALLOWED
+          - 406 NOT_ACCEPTABLE
+          - 407 PROXY_AUTHENTICATION_REQUIRED
+          - 408 REQUEST_TIMEOUT
+          - 409 CONFLICT
+          - 410 GONE
+          - 411 LENGTH_REQUIRED
+          - 412 PRECONDITION_FAILED
+          - 413 PAYLOAD_TOO_LARGE
+          - 413 REQUEST_ENTITY_TOO_LARGE
+          - 414 URI_TOO_LONG
+          - 414 REQUEST_URI_TOO_LONG
+          - 415 UNSUPPORTED_MEDIA_TYPE
+          - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+          - 417 EXPECTATION_FAILED
+          - 418 I_AM_A_TEAPOT
+          - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+          - 420 METHOD_FAILURE
+          - 421 DESTINATION_LOCKED
+          - 422 UNPROCESSABLE_ENTITY
+          - 423 LOCKED
+          - 424 FAILED_DEPENDENCY
+          - 425 TOO_EARLY
+          - 426 UPGRADE_REQUIRED
+          - 428 PRECONDITION_REQUIRED
+          - 429 TOO_MANY_REQUESTS
+          - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+          - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+          - 500 INTERNAL_SERVER_ERROR
+          - 501 NOT_IMPLEMENTED
+          - 502 BAD_GATEWAY
+          - 503 SERVICE_UNAVAILABLE
+          - 504 GATEWAY_TIMEOUT
+          - 505 HTTP_VERSION_NOT_SUPPORTED
+          - 506 VARIANT_ALSO_NEGOTIATES
+          - 507 INSUFFICIENT_STORAGE
+          - 508 LOOP_DETECTED
+          - 509 BANDWIDTH_LIMIT_EXCEEDED
+          - 510 NOT_EXTENDED
+          - 511 NETWORK_AUTHENTICATION_REQUIRED
+      view:
+        $ref: '#/definitions/View'
+      viewName:
+        type: string
+    title: ModelAndView
+  NewInstanceVO:
+    type: object
+    properties:
+      id:
+        type: string
+    title: NewInstanceVO
+  OAuth2AccessToken:
+    type: object
+    properties:
+      additionalInformation:
+        type: object
+      expiration:
+        type: string
+        format: date-time
+      expired:
+        type: boolean
+      expiresIn:
+        type: integer
+        format: int32
+      refreshToken:
+        $ref: '#/definitions/OAuth2RefreshToken'
+      scope:
+        type: array
+        items:
+          type: string
+      tokenType:
+        type: string
+      value:
+        type: string
+    title: OAuth2AccessToken
+  OAuth2RefreshToken:
+    type: object
+    properties:
+      value:
+        type: string
+    title: OAuth2RefreshToken
+  OptionalOfstring:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      present:
+        type: boolean
+    title: OptionalOfstring
+  PageOfApiAccessLogVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/ApiAccessLogVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfApiAccessLogVO
+  PageOfAppAccessLogVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/AppAccessLogVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfAppAccessLogVO
+  PageOfExtendColumnDefVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/ExtendColumnDefVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfExtendColumnDefVO
+  PageOfTenantOrgUserVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/TenantOrgUserVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfTenantOrgUserVO
+  PageOfTenantOrgVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/TenantOrgVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfTenantOrgVO
+  PageOfTenantUserVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/TenantUserVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfTenantUserVO
+  PasswordResetConfirmRequest:
+    type: object
+    required:
+      - userType
+    properties:
+      domain:
+        type: string
+      identifyType:
+        type: string
+      password:
+        type: string
+      resetToken:
+        type: string
+      userType:
+        type: string
+        enum:
+          - CORP
+          - ACCT
+          - SRMP
+      username:
+        type: string
+    title: PasswordResetConfirmRequest
+  PasswordResetFinishRequest:
+    type: object
+    required:
+      - appId
+      - password
+      - resetKey
+      - userType
+      - username
+    properties:
+      appId:
+        type: integer
+        format: int32
+      domain:
+        type: string
+      password:
+        type: string
+      resetKey:
+        type: string
+      userType:
+        type: string
+        enum:
+          - CORP
+          - ACCT
+          - SRMP
+      username:
+        type: string
+    title: PasswordResetFinishRequest
+  PasswordResetInitRequest:
+    type: object
+    required:
+      - appId
+      - userType
+      - username
+    properties:
+      appId:
+        type: integer
+        format: int32
+      domain:
+        type: string
+      email:
+        type: string
+      userType:
+        type: string
+        enum:
+          - CORP
+          - ACCT
+          - SRMP
+      username:
+        type: string
+    title: PasswordResetInitRequest
+  PasswordResetInitRequestResult:
+    type: object
+    properties:
+      email:
+        type: string
+    title: PasswordResetInitRequestResult
+  PasswordResetRequest:
+    type: object
+    required:
+      - userType
+    properties:
+      contact:
+        type: string
+      domain:
+        type: string
+      identifyType:
+        type: string
+      userType:
+        type: string
+        enum:
+          - CORP
+          - ACCT
+          - SRMP
+      username:
+        type: string
+    title: PasswordResetRequest
+  PasswordResetVO:
+    type: object
+    properties:
+      email:
+        type: string
+      mobile:
+        type: string
+      remindedCount:
+        type: integer
+        format: int32
+      username:
+        type: string
+    title: PasswordResetVO
+  PrivilegeVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      builtin:
+        type: boolean
+      code:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      operation:
+        type: integer
+        format: int32
+      parentId:
+        type: string
+      resource:
+        type: string
+      tenantId:
+        type: string
+      url:
+        type: string
+      visible:
+        type: boolean
+    title: PrivilegeVO
+  RoleTagBulkUpdateRequest:
+    type: object
+    properties:
+      roleId:
+        type: string
+      tags:
+        type: array
+        items:
+          type: string
+    title: RoleTagBulkUpdateRequest
+  RoleTagCreateRequest:
+    type: object
+    properties:
+      roleId:
+        type: string
+      tag:
+        type: string
+    title: RoleTagCreateRequest
+  RoleTagVO:
+    type: object
+    properties:
+      id:
+        type: string
+      roleId:
+        type: string
+      tag:
+        type: string
+      tenantId:
+        type: string
+    title: RoleTagVO
+  RoleVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      builtin:
+        type: boolean
+      code:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/RoleTagVO'
+      tenantId:
+        type: string
+    title: RoleVO
+  Sort:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      sorted:
+        type: boolean
+      unsorted:
+        type: boolean
+    title: Sort
+  TenantAppVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      description:
+        type: string
+      effectiveDate:
+        type: string
+        format: date
+      expiredDate:
+        type: string
+        format: date
+      id:
+        type: string
+      logoUrl:
+        type: string
+      name:
+        type: string
+      shortName:
+        type: string
+      status:
+        type: integer
+        format: int32
+      supportedTypes:
+        type: array
+        items:
+          type: string
+      tenantId:
+        type: string
+      uri:
+        type: string
+    title: TenantAppVO
+  TenantCarouselVO:
+    type: object
+    properties:
+      id:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      url:
+        type: string
+    title: TenantCarouselVO
+  TenantDeviceRegisterRequest:
+    type: object
+    required:
+      - deviceId
+      - deviceType
+      - macAddress
+    properties:
+      deviceId:
+        type: string
+      deviceName:
+        type: string
+      deviceType:
+        type: string
+      macAddress:
+        type: string
+    title: TenantDeviceRegisterRequest
+  TenantDeviceRegisterResult:
+    type: object
+    properties:
+      clientId:
+        type: string
+      clientSecret:
+        type: string
+      deviceName:
+        type: string
+      domain:
+        type: string
+      macAddress:
+        type: string
+      newInstanceId:
+        type: string
+      tenantId:
+        type: string
+    title: TenantDeviceRegisterResult
+  TenantInfoExtendVO:
+    type: object
+    properties:
+      bizId:
+        type: string
+      bizType:
+        type: string
+      bizValue:
+        type: string
+      id:
+        type: string
+      tenantId:
+        type: string
+    title: TenantInfoExtendVO
+  TenantInfoVO:
+    type: object
+    properties:
+      baseInfo:
+        $ref: '#/definitions/TenantVO'
+      carousels:
+        type: array
+        items:
+          $ref: '#/definitions/TenantCarouselVO'
+    title: TenantInfoVO
+  TenantOrgUserVO:
+    type: object
+    properties:
+      avatar:
+        type: string
+      birthday:
+        type: string
+        format: date
+      description:
+        type: string
+      email:
+        type: string
+      empNo:
+        type: string
+      fullname:
+        type: string
+      gender:
+        type: string
+      id:
+        type: string
+      mobile:
+        type: string
+      orgId:
+        type: string
+      orgRole:
+        type: integer
+        format: int32
+      organizations:
+        type: array
+        items:
+          $ref: '#/definitions/TenantOrgVO'
+      privileges:
+        type: array
+        items:
+          $ref: '#/definitions/PrivilegeVO'
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/RoleVO'
+      status:
+        type: integer
+        format: int32
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/TenantTagVO'
+      telephone:
+        type: string
+      tenantId:
+        type: string
+      title:
+        type: string
+      username:
+        type: string
+    title: TenantOrgUserVO
+  TenantOrgVO:
+    type: object
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      level:
+        type: integer
+        format: int32
+      name:
+        type: string
+      orgNo:
+        type: string
+      parent:
+        $ref: '#/definitions/TenantOrgVO'
+      parentId:
+        type: string
+      path:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      wxDepartId:
+        type: string
+      wxParentDepartId:
+        type: string
+    title: TenantOrgVO
+  TenantTagVO:
+    type: object
+    properties:
+      id:
+        type: string
+      tagName:
+        type: string
+      tenantId:
+        type: string
+    title: TenantTagVO
+  TenantUserUpdatePasswordVO:
+    type: object
+    properties:
+      newPassword:
+        type: string
+    title: TenantUserUpdatePasswordVO
+  TenantUserVO:
+    type: object
+    properties:
+      avatar:
+        type: string
+      birthday:
+        type: string
+        format: date
+      description:
+        type: string
+      email:
+        type: string
+      empNo:
+        type: string
+      fullname:
+        type: string
+      gender:
+        type: string
+      id:
+        type: string
+      mobile:
+        type: string
+      organizations:
+        type: array
+        items:
+          $ref: '#/definitions/TenantOrgVO'
+      privileges:
+        type: array
+        items:
+          $ref: '#/definitions/PrivilegeVO'
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/RoleVO'
+      status:
+        type: integer
+        format: int32
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/TenantTagVO'
+      telephone:
+        type: string
+      tenantId:
+        type: string
+      title:
+        type: string
+      username:
+        type: string
+    title: TenantUserVO
+  TenantVO:
+    type: object
+    properties:
+      companyAddress:
+        type: string
+      companyDomain:
+        type: string
+      companyEmail:
+        type: string
+      companyFax:
+        type: string
+      companyLogo:
+        type: string
+      companyPhone:
+        type: string
+      companySite:
+        type: string
+      companyStandardColor:
+        type: string
+      companyTheme:
+        type: string
+      description:
+        type: string
+      helpDeskEnable:
+        type: boolean
+      id:
+        type: string
+      loginBackground:
+        type: string
+      loginLocation:
+        type: string
+      loginMarginTop:
+        type: integer
+        format: int32
+      logo:
+        type: string
+      name:
+        type: string
+      nickName:
+        type: string
+      status:
+        type: integer
+        format: int32
+      tenantInfoExtendList:
+        type: array
+        items:
+          $ref: '#/definitions/TenantInfoExtendVO'
+    title: TenantVO
+  UserDetails:
+    type: object
+    properties:
+      accountNonExpired:
+        type: boolean
+      accountNonLocked:
+        type: boolean
+      authcType:
+        $ref: '#/definitions/OptionalOfstring'
+      authorities:
+        type: array
+        items:
+          $ref: '#/definitions/GrantedAuthority'
+      credentialsNonExpired:
+        type: boolean
+      enabled:
+        type: boolean
+      fullname:
+        $ref: '#/definitions/OptionalOfstring'
+      password:
+        type: string
+      tenantDomain:
+        $ref: '#/definitions/OptionalOfstring'
+      tenantId:
+        $ref: '#/definitions/OptionalOfstring'
+      userId:
+        $ref: '#/definitions/OptionalOfstring'
+      userType:
+        $ref: '#/definitions/OptionalOfstring'
+      username:
+        type: string
+    title: UserDetails
+  UserReferenceVO:
+    type: object
+    properties:
+      id:
+        type: string
+      referenceId:
+        type: string
+      referenceToken:
+        type: string
+      referenceType:
+        type: integer
+        format: int32
+      status:
+        type: integer
+        format: int32
+      userId:
+        type: string
+    title: UserReferenceVO
+  UserVO:
+    type: object
+    properties:
+      avatar:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      email:
+        type: string
+      empNo:
+        type: string
+      fullname:
+        type: string
+      gender:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      metadatas:
+        type: object
+      mobile:
+        type: string
+      privileges:
+        type: array
+        items:
+          $ref: '#/definitions/PrivilegeVO'
+      status:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      type:
+        type: string
+        enum:
+          - CORP
+          - ACCT
+          - SRMP
+      username:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: UserVO
+  View:
+    type: object
+    properties:
+      contentType:
+        type: string
+    title: View
+  WechatSetting:
+    type: object
+    properties:
+      wechatAppId:
+        type: string
+      wechatCorpId:
+        type: string
+    title: WechatSetting
+  WxCpJsApiSignatureVO:
+    type: object
+    properties:
+      corpId:
+        type: string
+      nonceStr:
+        type: string
+      signature:
+        type: string
+      timestamp:
+        type: string
+    title: WxCpJsApiSignatureVO

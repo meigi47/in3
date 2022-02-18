@@ -1,0 +1,16 @@
+# host: https://in3-qa.industics.com
+# api-server: https://apiv3-qa.industics.com
+# login_info:
+#   tenant_name: sl
+#   tenant_id: "10034"
+#   username: corp:koumiao@sl #corp:changyu@sl #koumiao/ind123.
+#   password: Ind123.
+#   login_token: "basic OGI4MGJmMTNhYjQ2MTFlYTgzNTYwMDBjMjliYTczNDA6ZDYyMjNjNjEwMmVjNDdkY2I4YTk3OTc2MTlkZGU3NTg="
+host: https://in3-qa.industics.com
+api-server: https://apiv3-qa.industics.com
+login_info:
+  tenant_name: captain
+  tenant_id: "20001"
+  username: corp:koumiao@captain #corp:changyu@sl #koumiao/ind123.
+  password: Ind123.
+  login_token: "basic OGI4MGJmMTNhYjQ2MTFlYTgzNTYwMDBjMjliYTczNDA6ZDYyMjNjNjEwMmVjNDdkY2I4YTk3OTc2MTlkZGU3NTg="

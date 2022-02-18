@@ -1,0 +1,12 @@
+__pycache__ 
+.pytest_cache
+result/*
+.vscode/*
+!.vscode/settings.json
+.vs
+test_temp.py
+.idea
+.DS_Store
+*.ipynb*
+new_yaml
+new_excel

@@ -1,0 +1,25 @@
+task: 
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/tasks/page"
+    type: "get"
+    description: "查询任务列表"
+  export_arriver_order_items:
+    url: "/v2/api/tenants/{tenant_id}/export-tasks/arrived-order-items"
+    type: "post"
+    description: "创建到货单导出任务"
+  export_out_in_stock:
+    url: "/v2/api/tenants/{tenant_id}/export-tasks/to-item-list"
+    type: "post"
+    description: "创建出入库明细导出任务"
+  export_query_material_doc:
+    url: "/v2/api/tenants/{tenant_id}/export-tasks/document"
+    type: "post"
+    description: "创建物料凭证明细查询导出任务"
+  export_query_bin_stock:
+    url: "/v2/api/tenants/{tenant_id}/export-tasks/bin-stocks"
+    type: "post"
+    description: "创建库位库存明细查询导出任务"
+  export_total_stock:
+    url: "/v2/api/tenants/{tenant_id}/export-tasks/storage-location-stocks"
+    type: "post"
+    description: "创建库存汇总导出任务"

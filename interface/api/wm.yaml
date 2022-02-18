@@ -1,0 +1,266 @@
+invoice:
+  create: 
+    url: "/v2/api/tenants/{tenant_id}/tos/{id}/docs"
+    type: "post"
+    description: "采购管理/采购申请管理/打印单据"
+
+
+inventory:
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/stocks/bin-stocks/pages"
+    type: "get"
+    description: "仓库管理/库位库存查询/明细查询"
+
+otherStore:
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/bins/query-all"
+    type: "get"
+    description: "仓库管理/其他入库/查询"
+  goods_movements:
+    url: "/v2/api/tenants/{tenant_id}/goods-movements"
+    type: "post"
+    description: "仓库管理/其他入库/还料"
+
+arrived_order:
+  get_detail:
+    url: "/v2/api/tenants/{tenant_id}/arrived-order/{arrived_order_id}"
+    type: "get"
+    description: "查看详情"
+  create:
+    url: "/v2/api/tenants/{tenant_id}/arrived-order"
+    type: "post"
+    description: "查看详情"
+
+  detail_retrieve:
+    url: "/v2/api/tenants/{tenant_id}/arrived-order/detail/page"
+    type: "get"
+    description: "仓库管理/到货单明细/查询"
+  export:
+    url: "/v2/api/tenants/{tenant_id}/export-tasks/arrived-order-items"
+    type: "post"
+    description: "仓库管理/到货单/导出"
+    
+goods_movement:
+  create:
+    url: /v2/api/tenants/{tenant_id}/goods-movements
+    type: post
+    description: 仓库管理/其他入库/701-盘盈入库
+
+  get_plant_info: 
+    url: /v2/api/tenants/{tenant_id}/plants
+    type: get
+    description: 获取plant_no和plant_name
+  picking:
+    url: /v2/api/tenants/{tenant_id}/goods-movements/picking/{tr_id}
+    type: post
+    description: 仓库管理/其他领料单/领料
+
+warehouse:
+  get_warehouse_no:
+    url: /v2/api/tenants/{tenant_id}/warehouse-nos
+    type: get
+    description: 获取仓库No
+  get_warehouse_bin_info:
+    url: /v2/api/tenants/{tenant_id}/bins/page
+    type: get
+    description: 获取仓库库位信息
+  retrieve_bins:
+    url: "/v2/api/tenants/{tenant_id}/bins/query-all"
+    type: "get"
+    description: "带条件查询仓库下的所有库位" 
+  retrieve_warehouses:
+    url: "/v2/api/tenants/{tenant_id}/warehouse-nos"
+    type: "get"
+    description: "查询工厂下所有仓库与库存地点（可带仓库编号模糊匹配）" 
+  move_goods:
+    url: /v2/api/tenants/{tenant_id}/goods-movements
+    type: post
+    description: "出入库" 
+  retrieve_move_types:
+    url: /v2/api/private/tenants/{tenant_id}/move-types/page
+    type: get
+    description: 获取移动的业务类型
+  get_all_move_types:
+    url: /v2/api/tenants/{tenant_id}/move-types
+    type: get
+    description: 获取所有的移动类型
+  get_move_types:
+    url: /v2/api/tenants/{tenant_id}/move-types
+    type: get
+    description: 获取移动类型
+
+sales_order_shipments:
+  create:
+    url: "/v2/api/tenants/{tenant_id}/sales-order-shipments"
+    type: "post"
+    description: "参考so创建销售发运单"
+  retrieve:
+    url: /v2/api/tenants/{tenant_id}/sales-order-shipments/page
+    type: get
+    description: "销售发运单查询"
+  get_detail:
+    url: /v2/api/tenants/{tenant_id}/sales-order-shipments/{sales_order_shipment_id}
+    type: get
+    description: "销售发运单详情查询"
+
+stock:
+  retrieve:
+    url: /v2/api/tenants/{tenant_id}/stocks/storage-location-stocks/pages
+    type: get
+    description: "仓库管理/库位库存查询/汇总查询"
+  retrieve_bin_stock:
+    url: /v2/api/tenants/{tenant_id}/stocks/bin-stocks/pages
+    type: get
+    description: "仓库管理/库位库存查询"
+  retrieve_bin_stock_list:
+    url: "/v2/api/tenants/{tenant_id}/stocks/bin-stocks/list"
+    type: get
+    description: 仓库管理/库存转储查询
+  update:
+    url: "/v2/api/tenants/{tenant_id}/goods-movements"
+    type: "post"
+    deacription: "仓库管理/库存转储/库存转移"
+  retrieve_storage_locations:
+    url: "/v2/api/tenants/{tenant_id}/storage-locations/page"
+    type: get
+    deacription: "仓库管理/查询库存地点信息"
+
+    
+
+
+material_doc:
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/material-docs"   
+    type: "get"
+    description: "仓库管理/物料凭证单据查询/查询"
+  get_detail:
+    url: /v2/api/tenants/{tenant_id}/material-docs/{material_doc_id}
+    type: get
+    description: "查看物料凭证详情"
+  retrieve_material_doc_detail:
+    url: /v2/api/tenants/{tenant_id}/material-docs/items
+    type: get
+    description: 物料凭证明细查询
+  retrieve_tos:
+    url: /v2/api/tenants/{tenant_id}/tos/page
+    type: get
+    description: 出入库记录查询
+  get_tos_detal:
+    url: /v2/api/tenants/{tenant_id}/tos/{id}
+    type: get
+    description: 查询出入库单据详情
+
+out_in_stock:
+  retrieve: 
+    url: "/v2/api/tenants/{tenant_id}/tos-items/page"   
+    type: "get"
+    description: "仓库管理/出入库明细查询/查询"
+
+delivery-orders:
+  retrieve_delivery_quantity: 
+    url: /v2/api/tenants/10034/delivery-orders/summaries
+    type: get
+    description: 查询订单交付物(总量/已发运/未发运数量) 
+material_pick:
+  workorder_retrieve: 
+    url: "/v2/api/tenants/{tenant_id}/in-mos/page"   
+    type: "get"
+    description: "仓库管理/工单领料/工单查询"
+  material_in_workorder_retrieve:
+    url: /v2/api/tenants/{tenant_id}/requisitions/mo-items/group-by-so
+    type: post
+    description: "仓库管理/工单领料/获取工单bom合并之后的物料"
+  pickorder_create:
+    url: /v2/api/tenants/{tenant_id}/transfer-requests/requisition
+    type: post
+    description: "仓库管理/工单领料/创建领料单"
+  retrieve:
+    url: /v2/api/tenants/{tenant_id}/transfer-requests/page
+    type: get
+    description: "仓库管理/工单领料/领料单查询"
+  get_detail:
+    url: /v2/api/tenants/{tenant_id}/transfer-requests/{tr_id}
+    type: get
+    description: "仓库管理/工单领料/领料单详情"
+  retrieve_warehouse_location:
+    url: /v2/api/tenants/{tenant_id}/warehouse-nos
+    type: get
+    description: "仓库管理/工单领料/查看所有的仓库库位"
+  have_material_location:
+    url: /v2/api/tenants/{tenant_id}/bins/available/bulk
+    type: post
+    description: "仓库管理/工单领料/查看所选仓库是否有库位有所选的物料"
+  pick_material:
+    url: /v2/api/tenants/{tenant_id}/goods-movements/picking/{tr_id}
+    type: post
+    description: "仓库管理/工单领料/领料"
+  pick_check:
+    url: /v2/api/tenants/{tenant_id}/material-docs/{material_doc_id}
+    type: get
+    description: "仓库管理/工单领料/查看领料凭证详情"
+  create:
+    url: /v2/api/tenants/{tenant_id}/requisitions/batch-create
+    type: post
+    description: 仓库管理/其他领料单/新建领料单
+  get_pick_list_detail:
+    url: /v2/api/tenants/{tenant_id}/requisitions/{tr_id}
+    type: get
+    description: 获取领料单详情
+  retrieve_pick_list:
+    url: /v2/api/tenants/{tenant_id}/requisitions/page
+    type: get
+    description: 查询领料单
+  validate_pick_list:
+    url: /v2/api/tenants/{tenant_id}/transfer-requests/validate/{tr_id}
+    type: get
+    description: 验证领料单是否有效
+
+material_return:
+  workorder_retrieve: 
+    url: "/v2/api/tenants/{tenant_id}/in-mos/page"   
+    type: "get"
+    description: "仓库管理/工单退料/工单查询"
+  return_order_create:
+    url: /v2/api/tenants/{tenant_id}/transfer-requests/return
+    type: post
+    description: "仓库管理/工单退料/创建退料单"
+  material_in_workorder_retrieve:
+    url: /v2/api/tenants/{tenant_id}/requisitions/mo-items/group-by-so
+    type: post
+    description: "仓库管理/工单领料/获取工单bom合并之后的物料"
+  retrieve:
+    url: /v2/api/tenants/{tenant_id}/transfer-requests/page
+    type: get
+    description: "仓库管理/工单退料/退料单查询"
+  get_detail:
+    url: /v2/api/tenants/{tenant_id}/transfer-requests/{tr_id}
+    type: get
+    description: "仓库管理/工单退料/退料单详情"
+  
+  
+mo:
+  finish_process: 
+    url: "/v2/api/tenants/{tenant_id}/mos/finish/process"   
+    type: "post"
+    description: "执行工单完工"
+mo_warehouse_application:
+  bulk: 
+    url: "/v2/api/tenants/{tenant_id}/mo-warehouse-application/bulk"   
+    type: "post"
+    description: "批量查询工单申请未入库数量"
+  create:
+    url: "/v2/api/tenants/{tenant_id}/mo-warehouse-application"   
+    type: "post"
+    description: "创建工单入库申请单"
+  get_detail:
+    url: "/v2/api/tenants/{tenant_id}/mo-warehouse-application/{mo_warehouse_application_id}"   
+    type: "get"
+    description: "查询工单入库申请单详情"
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/mo-warehouse-application/page"   
+    type: "get"
+    description: "查询工单入库申请单列表"
+  abandon:
+    url: "/v2/api/tenants/{tenant_id}/mo-warehouse-application/abandon/{mo_warehouse_application_id}"   
+    type: "put"
+    description: "废弃工单入库申请单"

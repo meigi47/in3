@@ -1,0 +1,656 @@
+swagger: '2.0'
+info:
+  description: TASK CENTER REST API
+  version: v1.0
+  title: TASK CENTER REST API
+  termsOfService: Terms of service
+  contact:
+    name: Industics Ltd
+    url: http://support.industics.com
+    email: support@industics.com
+  license:
+    name: License of API
+    url: API license URL
+host: localhost:34000
+basePath: /tskt
+tags:
+  - name: Private Tasks
+    description: Private Task Endpoint
+  - name: Tasks
+    description: Task Endpoint
+schemes:
+  - http
+paths:
+  /v2/api/private/tenants/{tenant_id}/tasks:
+    post:
+      tags:
+        - Private Tasks
+      summary: 创建任务
+      operationId: createTaskUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: createRequest
+          description: createRequest
+          required: true
+          schema:
+            $ref: '#/definitions/TaskCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/tasks/import:
+    post:
+      tags:
+        - Private Tasks
+      summary: 批量创建导入任务
+      operationId: createImportTasksUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: createRequest
+          description: createRequest
+          required: true
+          schema:
+            $ref: '#/definitions/TaskImportCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/tasks/page/sbos:
+    get:
+      tags:
+        - Private Tasks
+      summary: 查询任务
+      operationId: queryTasksUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: source_created_by
+          in: query
+          description: source_created_by
+          required: true
+          type: string
+        - name: source_type
+          in: query
+          description: source_type
+          required: true
+          type: string
+        - name: task_type
+          in: query
+          description: task_type
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfImportTaskVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/tasks/{task_id}/cancel:
+    put:
+      tags:
+        - Private Tasks
+      summary: 取消任务
+      operationId: cancelTaskUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: task_id
+          in: path
+          description: task_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/tasks:
+    post:
+      tags:
+        - Tasks
+      summary: 创建任务
+      operationId: createTaskUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: createRequest
+          description: createRequest
+          required: true
+          schema:
+            $ref: '#/definitions/TaskCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/tasks/page:
+    get:
+      tags:
+        - Tasks
+      summary: 查询任务
+      operationId: queryTaskPageUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfTaskVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/tasks/{task_id}/cancel:
+    put:
+      tags:
+        - Tasks
+      summary: 取消任务
+      operationId: cancelTaskUsingPUT_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: task_id
+          in: path
+          description: task_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+definitions:
+  ImportTaskVO:
+    type: object
+    properties:
+      code:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      durationTime:
+        type: number
+      errorType:
+        type: string
+      expiredAt:
+        type: string
+        format: date-time
+      extra:
+        type: object
+      failCount:
+        type: integer
+        format: int32
+      finishedAt:
+        type: string
+        format: date-time
+      groupNo:
+        type: integer
+        format: int64
+      id:
+        type: string
+      importFileObject:
+        $ref: '#/definitions/OsmObjectVO'
+      importFileObjectId:
+        type: string
+      importResultObject:
+        $ref: '#/definitions/OsmObjectVO'
+      importResultObjectId:
+        type: string
+      importType:
+        type: string
+      msg:
+        type: string
+      name:
+        type: string
+      remark:
+        type: string
+      result:
+        type: string
+      sourceCreatedBy:
+        type: string
+      status:
+        type: string
+      successCount:
+        type: integer
+        format: int32
+      sysSn:
+        type: integer
+        format: int64
+      taskSource:
+        type: string
+      tenantId:
+        type: string
+      type:
+        type: string
+    title: ImportTaskVO
+  NewInstanceVO:
+    type: object
+    properties:
+      id:
+        type: string
+    title: NewInstanceVO
+  OsmObjectVO:
+    type: object
+    properties:
+      bizType:
+        type: string
+      bizValue:
+        type: string
+      createdBy:
+        type: string
+      createdByName:
+        type: string
+      deleted:
+        type: boolean
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedByName:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      name:
+        type: string
+      ossKey:
+        type: string
+      previewObjectId:
+        type: string
+      public:
+        type: integer
+        format: int32
+      signature:
+        $ref: '#/definitions/OssSignature'
+      size:
+        type: integer
+        format: int32
+      tagId:
+        type: string
+      type:
+        type: string
+    title: OsmObjectVO
+  OssSignature:
+    type: object
+    properties:
+      expireTime:
+        type: string
+        format: date-time
+      origin:
+        type: string
+      pdf:
+        type: string
+      standard:
+        type: string
+      thumbnail:
+        type: string
+    title: OssSignature
+  PageOfImportTaskVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/ImportTaskVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfImportTaskVO
+  PageOfTaskVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/TaskVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfTaskVO
+  Sort:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      sorted:
+        type: boolean
+      unsorted:
+        type: boolean
+    title: Sort
+  TaskCreateRequest:
+    type: object
+    properties:
+      code:
+        type: string
+      errorType:
+        type: string
+      importObjectId:
+        type: string
+      importType:
+        type: string
+      params:
+        type: object
+      remark:
+        type: string
+    title: TaskCreateRequest
+  TaskImportCreateRequest:
+    type: object
+    required:
+      - fileList
+    properties:
+      errorType:
+        type: string
+      fileList:
+        type: array
+        items:
+          $ref: '#/definitions/TaskImportFileCreateRequest'
+      remark:
+        type: string
+      sourceCreateBy:
+        type: string
+      sourceType:
+        type: string
+    title: TaskImportCreateRequest
+  TaskImportFileCreateRequest:
+    type: object
+    properties:
+      code:
+        type: string
+      importType:
+        type: string
+      objectId:
+        type: string
+    title: TaskImportFileCreateRequest
+  TaskInstanceVO:
+    type: object
+    properties:
+      newIdList:
+        type: array
+        items:
+          type: string
+      success:
+        type: boolean
+    title: TaskInstanceVO
+  TaskVO:
+    type: object
+    properties:
+      code:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      durationTime:
+        type: number
+      expiredAt:
+        type: string
+        format: date-time
+      extra:
+        type: object
+      finishedAt:
+        type: string
+        format: date-time
+      groupNo:
+        type: integer
+        format: int64
+      id:
+        type: string
+      name:
+        type: string
+      remark:
+        type: string
+      result:
+        type: string
+      sourceCreatedBy:
+        type: string
+      status:
+        type: string
+      sysSn:
+        type: integer
+        format: int64
+      taskSource:
+        type: string
+      tenantId:
+        type: string
+      type:
+        type: string
+    title: TaskVO

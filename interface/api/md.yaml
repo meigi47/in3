@@ -1,0 +1,42 @@
+customer: #这是给interface调取接口存的常量关系
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/accounts/page"
+    type: "get"
+    description: "销售分销/客户管理/查询客户"
+  create:
+    url: "/v2/api/tenants/{tenant_id}/accounts"
+    type: "post"
+    description: "销售分销/客户管理/新增客户"
+  update:
+    url: "/v2/api/tenants/{tenant_id}/accounts/{account_id}"
+    type: "put"
+    description: "销售分销/客户管理/编辑客户信息"
+  get_detail:
+    url: "/v2/api/tenants/{tenant_id}/accounts/{account_id}"
+    type: "get"
+    description: "销售分销/客户管理/客户信息详情"
+mdm_material:
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/mdm/materials/selected/page"
+    type: "get"
+    description: "主数据管理/物料档案管理/分页查询主数据物料--物料查询组件使用"
+  material_groups_retrieve:
+    url: "/v2/api/tenants/{tenant_id}/mdm/materials/material-groups"
+    type: "get"
+    description: "主数据管理/物料档案管理/获取主数据物料信息"
+  material_unit_groups_retrieve:
+    url: "/v2/api/tenants/{tenant_id}/mdm/measure-unit-groups/list"
+    type: "get"
+    description: "主数据管理/物料档案管理/获取计量单位组信息"
+  material_units_retrieve_by_measure_unit_groups:
+    url: "/v2/api/tenants/{tenant_id}/mdm/measure-unit-groups/{id}/measure-units"
+    type: "get"
+    description: "主数据管理/物料档案管理/管理计量单位组-获取单位组内所有计量单位"
+  material_unit_groups_page:
+    url: "/v2/api/tenants/{tenant_id}/mdm/measure-unit-groups/page"
+    type: "get"
+    description: "主数据管理/物料档案管理/计量单位组分页"
+  create:
+    url: "/v2/api/tenants/{tenant_id}/mdm/materials"
+    type: "post"
+    description: "主数据管理/物料档案管理/新增主数据物料"

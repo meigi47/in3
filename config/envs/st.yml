@@ -1,0 +1,10 @@
+host: https://in3-staging.industics.com
+api-server: https://apiv3-staging.industics.com
+login_info:
+  tenant_name: sgeg
+  tenant_id: "10030"
+  username: corp:koumiao@sgeg #koumiao/ind123.
+  password: Ind123.
+  login_token: "basic OGI4MGJmMTNhYjQ2MTFlYTgzNTYwMDBjMjliYTczNDA6ZDYyMjNjNjEwMmVjNDdkY2I4YTk3OTc2MTlkZGU3NTg="
+
+

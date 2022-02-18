@@ -1,0 +1,20 @@
+
+produce_manage:
+  get_area:
+    url: /v2/api/tenants/{tenant_id}/areas/page
+    type: "get"
+    description: "生产管理/查询区域"
+  get_route:
+    url: /v2/api/tenants/{tenant_id}/routes/page
+    type: "get"
+    description: 生产管理/查询工艺路线
+area:
+  retrieve_areas:
+    url: /v2/api/tenants/{tenant_id}/areas
+    type: "get"
+    description: "批量查询区域"
+route:
+  retrieve_routes:
+    url: /v2/api/tenants/{tenant_id}/routes
+    type: "get"
+    description: "批量获取工艺"

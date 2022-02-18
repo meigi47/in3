@@ -1,0 +1,3999 @@
+definitions:
+  ActFlowConfigVO:
+    active:
+      case_alias: null
+      type: boolean
+    bizType:
+      case_alias: null
+      type: string
+    flowCode:
+      case_alias: null
+      type: string
+    flowName:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    moduleName:
+      case_alias: null
+      type: string
+    processKey:
+      case_alias: null
+      type: string
+  ActivitiApprovalRequestVO:
+    assignee:
+      case_alias: null
+      type: string
+    assignee_user_ids:
+      case_alias: null
+      items:
+        type: string
+      type: array
+  ActivitiDetailVO:
+    approved:
+      case_alias: null
+      type: string
+    bizType:
+      case_alias: null
+      type: string
+    ccInfo:
+      $ref: '#/definitions/CcDTO'
+      case_alias: null
+    data:
+      case_alias: null
+      type: object
+    id:
+      case_alias: null
+      type: string
+    nextUserTask:
+      $ref: '#/definitions/ActivityUserTaskVO'
+      case_alias: null
+    process:
+      $ref: '#/definitions/ActivitiProcessDetailDataVO'
+      case_alias: null
+    processDefinitionName:
+      case_alias: null
+      type: string
+    tasks:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ActivitiTaskDetailDataVO'
+      type: array
+    userTasks:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ActivityUserTaskVO'
+      type: array
+  ActivitiLaneVO:
+    name:
+      case_alias: null
+      type: string
+    user_tasks:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ActivityUserTaskVO'
+      type: array
+  ActivitiProcessDetailDataVO:
+    approved:
+      case_alias: null
+      type: string
+    businessKey:
+      case_alias: null
+      type: string
+    endTime:
+      case_alias: null
+      format: date-time
+      type: string
+    flowCode:
+      case_alias: null
+      type: string
+    processDefinitionName:
+      case_alias: null
+      type: string
+    processId:
+      case_alias: null
+      type: string
+    startUserId:
+      case_alias: null
+      type: string
+  ActivitiProcessDetailVO:
+    code:
+      case_alias: null
+      type: string
+    data:
+      $ref: '#/definitions/ActivitiProcessDetailDataVO'
+      case_alias: null
+    message:
+      case_alias: null
+      type: string
+  ActivitiTaskDetailDataVO:
+    approveForm:
+      case_alias: null
+      type: string
+    approved:
+      case_alias: null
+      type: string
+    businessKey:
+      case_alias: null
+      type: string
+    end_time:
+      case_alias: null
+      format: date-time
+      type: string
+    executionId:
+      case_alias: null
+      type: string
+    flowCode:
+      case_alias: null
+      type: string
+    processDefinitionId:
+      case_alias: null
+      type: string
+    processDefinitionKey:
+      case_alias: null
+      type: string
+    processDefinitionName:
+      case_alias: null
+      type: string
+    processInstanceId:
+      case_alias: null
+      type: string
+    remark:
+      case_alias: null
+      type: string
+    start_time:
+      case_alias: null
+      format: date-time
+      type: string
+    taskAssignee:
+      case_alias: null
+      type: string
+    taskAssigneeName:
+      case_alias: null
+      type: string
+    taskCreateTime:
+      case_alias: null
+      format: date-time
+      type: string
+    taskEndTime:
+      case_alias: null
+      format: date-time
+      type: string
+    taskId:
+      case_alias: null
+      type: string
+    taskName:
+      case_alias: null
+      type: string
+  ActivityApproveForm:
+    model:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    value:
+      case_alias: null
+      type: string
+  ActivityTaskConfigCreationRequest:
+    approveAllowChangeAssignee:
+      case_alias: null
+      description: 是否可审批时指定审批人，0：否，1：是
+      type: boolean
+    approveDeptLevel:
+      case_alias: null
+      description: 组织架构，0：不启用，1：当前部门负责人，2：上级部门负责人，3/4/5/6：向上3/4/5/6级负责人
+      type: string
+    approveNoticeType:
+      case_alias: null
+      description: NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉
+      type: string
+    approveRoles:
+      case_alias: null
+      description: 指定角色，可多选，关联role id，逗号隔开
+      type: string
+    approveTags:
+      case_alias: null
+      description: 指定角色，可多选，关联tag id，逗号隔开
+      type: string
+    approveUsers:
+      case_alias: null
+      description: 指定审批人，可多选，关联user id，逗号隔开
+      type: string
+    attachmentVisible:
+      case_alias: null
+      description: 是否可查看附件，0：不可，1：可查看
+      type: boolean
+    flowCode:
+      case_alias: null
+      description: flow code
+      type: string
+    id:
+      case_alias: null
+      format: int64
+      type: integer
+    passAllowChangeNoticeType:
+      case_alias: null
+      description: 通过通知人通知方式是否可选，0：否，1：是
+      type: boolean
+    passCcAllowChangeAssignee:
+      case_alias: null
+      description: 是否可审批时指定通过的抄送人，0：否，1：是
+      type: boolean
+    passCcAllowChangeNoticeType:
+      case_alias: null
+      description: 是否开放选择通过通知方式
+      type: boolean
+    passCcNoticeType:
+      case_alias: null
+      description: 通过抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉
+      type: string
+    passCcRoles:
+      case_alias: null
+      description: 审批通过抄送角色，可多选，关联role id，逗号隔开
+      type: string
+    passCcTags:
+      case_alias: null
+      description: 审批通过抄送角色，可多选，关联tag id，逗号隔开
+      type: string
+    passCcUsers:
+      case_alias: null
+      description: 审批通过抄送人，关联user id，可多选，逗号隔开
+      type: string
+    rejectAllowChangeNoticeType:
+      case_alias: null
+      description: 退回通知人通知方式是否可选，0：否，1：是
+      type: boolean
+    rejectCcAllowChangeAssignee:
+      case_alias: null
+      description: 是否可审批时指定退回的抄送人，0：否，1：是
+      type: boolean
+    rejectCcAllowChangeNoticeType:
+      case_alias: null
+      description: 是否开放选择退回通知方式
+      type: boolean
+    rejectCcNoticeType:
+      case_alias: null
+      description: 退回抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉
+      type: string
+    rejectCcRoles:
+      case_alias: null
+      description: 审批退回抄送角色，可多选，关联role id，逗号隔开
+      type: string
+    rejectCcTags:
+      case_alias: null
+      description: 审批退回抄送角色，可多选，关联tag id，逗号隔开
+      type: string
+    rejectCcUsers:
+      case_alias: null
+      description: 审批退回抄送人，关联user id，可多选，逗号隔开
+      type: string
+    taskId:
+      case_alias: null
+      description: task id
+      type: string
+    taskName:
+      case_alias: null
+      description: task name
+      type: string
+    tenantId:
+      case_alias: null
+      description: 租户ID
+      type: string
+  ActivityTaskConfigVO:
+    allApproveUsers:
+      case_alias: null
+      description: allUserIds为true时返回，所有审批人Id，包括approveUsers、approveDeptLevel下所有的用户id，approveRoles下所有的用户id
+      items:
+        $ref: '#/definitions/UserVO'
+      type: array
+    allPassCcUsers:
+      case_alias: null
+      description: allUserIds为true时返回，所有通过时的抄送人id，passCcUsers、passCcRoles下所有的用户id
+      items:
+        $ref: '#/definitions/UserVO'
+      type: array
+    allRejectCcUsers:
+      case_alias: null
+      description: allUserIds为true时返回，所有拒绝时的抄送人id，rejectCcUsers、rejectCcRoles下所有的用户id
+      items:
+        $ref: '#/definitions/UserVO'
+      type: array
+    approveAllowChangeAssignee:
+      case_alias: null
+      description: 是否可审批时指定审批人，0：否，1：是
+      type: boolean
+    approveDeptLevel:
+      case_alias: null
+      description: 组织架构，0：不启用，1：当前部门负责人，2：上级部门负责人，3/4/5/6：向上3/4/5/6级负责人
+      type: string
+    approveFrame:
+      $ref: '#/definitions/Frame'
+      case_alias: null
+      description: 审批动态表单
+    approveNoticeType:
+      case_alias: null
+      description: NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉
+      type: string
+    approveRoles:
+      case_alias: null
+      description: 指定角色，可多选，关联role id，逗号隔开
+      type: string
+    approveTags:
+      case_alias: null
+      description: 指定角色，可多选，关联tag id，逗号隔开
+      type: string
+    approveUsers:
+      case_alias: null
+      description: 指定审批人，可多选，关联user id，逗号隔开
+      type: string
+    assignee:
+      case_alias: null
+      description: 候选人称号
+      type: string
+    attachmentVisible:
+      case_alias: null
+      description: 是否可查看附件，0：不可，1：可查看
+      type: boolean
+    flowCode:
+      case_alias: null
+      description: flow code
+      type: string
+    id:
+      case_alias: null
+      format: int64
+      type: integer
+    multiple_assignee:
+      case_alias: null
+      type: boolean
+    passAllowChangeNoticeType:
+      case_alias: null
+      description: 通过通知人通知方式是否可选，0：否，1：是
+      type: boolean
+    passCcAllowChangeAssignee:
+      case_alias: null
+      description: 是否可审批时指定通过的抄送人，0：否，1：是
+      type: boolean
+    passCcAllowChangeNoticeType:
+      case_alias: null
+      description: 是否开放选择通过通知方式
+      type: boolean
+    passCcNoticeType:
+      case_alias: null
+      description: 通过抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉
+      type: string
+    passCcRoles:
+      case_alias: null
+      description: 审批通过抄送角色，可多选，关联role id，逗号隔开
+      type: string
+    passCcTags:
+      case_alias: null
+      description: 审批通过抄送角色，可多选，关联tag id，逗号隔开
+      type: string
+    passCcUsers:
+      case_alias: null
+      description: 审批通过抄送人，关联user id，可多选，逗号隔开
+      type: string
+    rejectAllowChangeNoticeType:
+      case_alias: null
+      description: 退回通知人通知方式是否可选，0：否，1：是
+      type: boolean
+    rejectCcAllowChangeAssignee:
+      case_alias: null
+      description: 是否可审批时指定退回的抄送人，0：否，1：是
+      type: boolean
+    rejectCcAllowChangeNoticeType:
+      case_alias: null
+      description: 是否开放选择退回通知方式
+      type: boolean
+    rejectCcNoticeType:
+      case_alias: null
+      description: 退回抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉
+      type: string
+    rejectCcRoles:
+      case_alias: null
+      description: 审批退回抄送角色，可多选，关联role id，逗号隔开
+      type: string
+    rejectCcTags:
+      case_alias: null
+      description: 审批退回抄送角色，可多选，关联tag id，逗号隔开
+      type: string
+    rejectCcUsers:
+      case_alias: null
+      description: 审批退回抄送人，关联user id，可多选，逗号隔开
+      type: string
+    taskId:
+      case_alias: null
+      description: task id
+      type: string
+    taskName:
+      case_alias: null
+      description: task name
+      type: string
+    tenantId:
+      case_alias: null
+      description: 租户ID
+      type: string
+  ActivityUserTaskVO:
+    approve_form:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ActivityApproveForm'
+      type: array
+    approved:
+      case_alias: null
+      type: string
+    assignee:
+      case_alias: null
+      type: string
+    assignee_user_id:
+      case_alias: null
+      type: string
+    assignee_user_name:
+      case_alias: null
+      type: string
+    attachments:
+      case_alias: null
+      items:
+        $ref: '#/definitions/OsmObjectVO'
+      type: array
+    business_key:
+      case_alias: null
+      type: string
+    end_time:
+      case_alias: null
+      format: date-time
+      type: string
+    key:
+      case_alias: null
+      type: string
+    lane_name:
+      case_alias: null
+      type: string
+    multiple_assignee:
+      case_alias: null
+      type: boolean
+    name:
+      case_alias: null
+      type: string
+    process_definition_key:
+      case_alias: null
+      type: string
+    process_definition_name:
+      case_alias: null
+      type: string
+    remark:
+      case_alias: null
+      type: string
+    start_time:
+      case_alias: null
+      format: date-time
+      type: string
+    task_id:
+      case_alias: null
+      type: string
+    user_task_id:
+      case_alias: null
+      type: string
+  ApprovalRequest:
+    approveForm:
+      case_alias: null
+      type: string
+    approveForms:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ApproveForm'
+      type: array
+    approved:
+      case_alias: null
+      type: boolean
+    attachments:
+      case_alias: null
+      items:
+        $ref: '#/definitions/OsmUploadVO'
+      type: array
+    bizType:
+      case_alias: null
+      type: string
+    processId:
+      case_alias: null
+      type: string
+    processVariables:
+      case_alias: null
+      type: object
+    remark:
+      case_alias: null
+      type: string
+    taskConfig:
+      $ref: '#/definitions/TaskApproveRequest'
+      case_alias: null
+    taskVariables:
+      case_alias: null
+      type: object
+  ApproveForm:
+    model:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    value:
+      case_alias: null
+      type: string
+  AssetDTO:
+    activate:
+      case_alias: null
+      type: string
+    assetModel:
+      case_alias: null
+      type: string
+    assetName:
+      case_alias: null
+      type: string
+    assetNo:
+      case_alias: null
+      type: string
+    assetType:
+      case_alias: null
+      type: string
+    attachments:
+      case_alias: null
+      items:
+        $ref: '#/definitions/OsmObjectVO'
+      type: array
+    description:
+      case_alias: null
+      type: string
+    equipmentList:
+      case_alias: null
+      items:
+        $ref: '#/definitions/EquipmentDTO'
+      type: array
+    id:
+      case_alias: null
+      type: string
+    importantLevel:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+  AssetVO:
+    activate:
+      case_alias: null
+      type: string
+    assetModel:
+      case_alias: null
+      type: string
+    assetName:
+      case_alias: null
+      type: string
+    assetNo:
+      case_alias: null
+      type: string
+    assetType:
+      case_alias: null
+      type: string
+    attachments:
+      case_alias: null
+      items:
+        $ref: '#/definitions/OsmObjectVO'
+      type: array
+    description:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    importantLevel:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+  BarCodeCreateRequest:
+    category:
+      case_alias: null
+      type: string
+    codeType:
+      case_alias: null
+      type: string
+    params:
+      case_alias: null
+      type: string
+  BarCodeDetailVO:
+    category:
+      case_alias: null
+      type: string
+    code:
+      case_alias: null
+      type: string
+    codeType:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    params:
+      case_alias: null
+      type: string
+  BarCodeListVO:
+    category:
+      case_alias: null
+      type: string
+    code:
+      case_alias: null
+      type: string
+    codeType:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+  BarCodePrintRequest:
+    category:
+      case_alias: null
+      type: string
+    codeType:
+      case_alias: null
+      type: string
+    params:
+      case_alias: null
+      type: string
+    printParams:
+      additionalProperties:
+        type: string
+      case_alias: null
+      type: object
+    quantity:
+      case_alias: null
+      exclusiveMaximum: false
+      exclusiveMinimum: false
+      format: int32
+      maximum: 10
+      minimum: 1
+      type: integer
+    temp:
+      case_alias: null
+      type: boolean
+    templateCode:
+      case_alias: null
+      type: string
+  BizIdPrintVO:
+    bizId:
+      case_alias: null
+      type: string
+    bizType:
+      case_alias: null
+      type: string
+  BpmMsgBodyPoRequest:
+    brand:
+      case_alias: null
+      type: string
+    contractName:
+      case_alias: null
+      type: string
+    contractNo:
+      case_alias: null
+      type: string
+    itemId:
+      case_alias: null
+      type: string
+    itemNumc:
+      case_alias: null
+      format: int32
+      type: integer
+    itemRemark:
+      case_alias: null
+      type: string
+    materialDesc:
+      case_alias: null
+      type: string
+    materialName:
+      case_alias: null
+      type: string
+    materialNo:
+      case_alias: null
+      type: string
+    materialUnit:
+      case_alias: null
+      type: string
+    msgId:
+      case_alias: null
+      type: string
+    orderedAt:
+      case_alias: null
+      format: date-time
+      type: string
+    orderedByEmpNo:
+      case_alias: null
+      type: string
+    orderedByMobile:
+      case_alias: null
+      type: string
+    orderedByName:
+      case_alias: null
+      type: string
+    originalCurrencyName:
+      case_alias: null
+      type: string
+    originalCurrencyNo:
+      case_alias: null
+      type: string
+    paymentCycle:
+      case_alias: null
+      type: string
+    paymentInfo:
+      case_alias: null
+      type: string
+    paymentType:
+      case_alias: null
+      type: string
+    paymentTypeName:
+      case_alias: null
+      type: string
+    poAprvStatus:
+      case_alias: null
+      type: string
+    poId:
+      case_alias: null
+      type: string
+    poNo:
+      case_alias: null
+      type: string
+    poRemark:
+      case_alias: null
+      type: string
+    poStatus:
+      case_alias: null
+      type: string
+    poStatusCode:
+      case_alias: null
+      type: string
+    poTotalPrice:
+      case_alias: null
+      type: number
+    poTotalQty:
+      case_alias: null
+      type: number
+    poTotalTaxPrice:
+      case_alias: null
+      type: number
+    purchaseQty:
+      case_alias: null
+      type: number
+    purchaseType:
+      case_alias: null
+      type: string
+    purchaseTypeName:
+      case_alias: null
+      type: string
+    requiredDeliveryDate:
+      case_alias: null
+      format: date
+      type: string
+    soName:
+      case_alias: null
+      type: string
+    soNo:
+      case_alias: null
+      type: string
+    supplierName:
+      case_alias: null
+      type: string
+    supplierOrgCode:
+      case_alias: null
+      type: string
+    taxRate:
+      case_alias: null
+      type: number
+    tenantId:
+      case_alias: null
+      type: string
+    totalPrice:
+      case_alias: null
+      type: number
+    totalTaxPrice:
+      case_alias: null
+      type: number
+    unitPrice:
+      case_alias: null
+      type: number
+    unitTaxPrice:
+      case_alias: null
+      type: number
+    url:
+      case_alias: null
+      type: string
+  BpmMsgCreateRequestOfBpmMsgBodyPoRequest:
+    actionType:
+      case_alias: null
+      type: string
+    applyAt:
+      case_alias: null
+      format: date-time
+      type: string
+    applyUserEmpNo:
+      case_alias: null
+      type: string
+    applyUserName:
+      case_alias: null
+      type: string
+    aprvNode:
+      case_alias: null
+      type: string
+    aprvNodeName:
+      case_alias: null
+      type: string
+    aprvUserEmpNo:
+      case_alias: null
+      type: string
+    aprvUserName:
+      case_alias: null
+      type: string
+    bizId:
+      case_alias: null
+      type: string
+    bizNo:
+      case_alias: null
+      type: string
+    bizType:
+      case_alias: null
+      type: string
+    bodies:
+      case_alias: null
+      items:
+        $ref: '#/definitions/BpmMsgBodyPoRequest'
+      type: array
+    msgId:
+      case_alias: null
+      type: string
+    processId:
+      case_alias: null
+      type: string
+    serviceClient:
+      case_alias: null
+      type: string
+    taskId:
+      case_alias: null
+      type: string
+  CcDTO:
+    allPassCcUsers:
+      case_alias: null
+      description: allUserIds为true时返回，所有通过时的抄送人id，passCcUsers、passCcRoles下所有的用户id
+      items:
+        $ref: '#/definitions/UserVO'
+      type: array
+    allRejectCcUsers:
+      case_alias: null
+      description: allUserIds为true时返回，所有拒绝时的抄送人id，rejectCcUsers、rejectCcRoles下所有的用户id
+      items:
+        $ref: '#/definitions/UserVO'
+      type: array
+    passCcAllowChangeAssignee:
+      case_alias: null
+      description: 是否可审批时指定通过的抄送人，0：否，1：是
+      type: boolean
+    passCcAllowChangeNoticeType:
+      case_alias: null
+      description: 是否开放选择通过通知方式
+      type: boolean
+    passCcNoticeType:
+      case_alias: null
+      description: 通过抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉
+      type: string
+    passCcRoles:
+      case_alias: null
+      description: 审批通过抄送角色，可多选，关联role id，逗号隔开
+      type: string
+    passCcTags:
+      case_alias: null
+      description: 审批通过抄送角色，可多选，关联tag id，逗号隔开
+      type: string
+    passCcUsers:
+      case_alias: null
+      description: 审批通过抄送人，关联user id，可多选，逗号隔开
+      type: string
+    rejectAllowChangeNoticeType:
+      case_alias: null
+      description: 退回通知人通知方式是否可选，0：否，1：是
+      type: boolean
+    rejectCcAllowChangeAssignee:
+      case_alias: null
+      description: 是否可审批时指定退回的抄送人，0：否，1：是
+      type: boolean
+    rejectCcAllowChangeNoticeType:
+      case_alias: null
+      description: 是否开放选择退回通知方式
+      type: boolean
+    rejectCcNoticeType:
+      case_alias: null
+      description: 退回抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉
+      type: string
+    rejectCcRoles:
+      case_alias: null
+      description: 审批退回抄送角色，可多选，关联role id，逗号隔开
+      type: string
+    rejectCcTags:
+      case_alias: null
+      description: 审批退回抄送角色，可多选，关联tag id，逗号隔开
+      type: string
+    rejectCcUsers:
+      case_alias: null
+      description: 审批退回抄送人，关联user id，可多选，逗号隔开
+      type: string
+  DisplayDecimalConfigVO:
+    displayIndicator:
+      case_alias: null
+      format: int32
+      type: integer
+    id:
+      case_alias: null
+      type: string
+    usedField:
+      case_alias: null
+      type: string
+  EquipmentClassVO:
+    category:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    equipClassName:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+  EquipmentCountUpdateRequest:
+    activateTime:
+      case_alias: null
+      format: int32
+      type: integer
+    maintainCount:
+      case_alias: null
+      format: int32
+      type: integer
+    repairCount:
+      case_alias: null
+      format: int32
+      type: integer
+    usageCount:
+      case_alias: null
+      format: int32
+      type: integer
+  EquipmentDTO:
+    activateTime:
+      case_alias: null
+      format: int32
+      type: integer
+    assetDepre:
+      case_alias: null
+      type: number
+    assetId:
+      case_alias: null
+      type: string
+    assetName:
+      case_alias: null
+      type: string
+    assetNo:
+      case_alias: null
+      type: string
+    assetVO:
+      $ref: '#/definitions/AssetVO'
+      case_alias: null
+    assetValue:
+      case_alias: null
+      type: number
+    attachments:
+      case_alias: null
+      items:
+        $ref: '#/definitions/OsmObjectVO'
+      type: array
+    collect:
+      case_alias: null
+      type: boolean
+    columnA:
+      case_alias: null
+      type: string
+    columnB:
+      case_alias: null
+      type: string
+    columnC:
+      case_alias: null
+      type: string
+    columnD:
+      case_alias: null
+      type: string
+    columnE:
+      case_alias: null
+      type: string
+    columnF:
+      case_alias: null
+      type: string
+    columnG:
+      case_alias: null
+      type: string
+    columnH:
+      case_alias: null
+      type: string
+    columnI:
+      case_alias: null
+      type: string
+    columnJ:
+      case_alias: null
+      type: string
+    columnK:
+      case_alias: null
+      type: string
+    columnL:
+      case_alias: null
+      type: string
+    columnM:
+      case_alias: null
+      type: string
+    columnN:
+      case_alias: null
+      type: string
+    columnO:
+      case_alias: null
+      type: string
+    columnP:
+      case_alias: null
+      type: string
+    columnQ:
+      case_alias: null
+      type: string
+    columnR:
+      case_alias: null
+      type: string
+    columnS:
+      case_alias: null
+      type: string
+    columnT:
+      case_alias: null
+      type: string
+    commissioningDate:
+      case_alias: null
+      example: yyyy-MM-dd
+      type: string
+    contactPhone:
+      case_alias: null
+      type: string
+    contacter:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    defaultRegionId:
+      case_alias: null
+      type: string
+    defaultRegionName:
+      case_alias: null
+      type: string
+    defaultRegionNo:
+      case_alias: null
+      type: string
+    defaultRegionType:
+      case_alias: null
+      type: string
+    defaultWarehouseId:
+      case_alias: null
+      type: string
+    defaultWarehouseName:
+      case_alias: null
+      type: string
+    defaultWarehouseNo:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    epStatus:
+      case_alias: null
+      type: string
+    epType:
+      case_alias: null
+      type: string
+    equipAssetNo:
+      case_alias: null
+      type: string
+    equipName:
+      case_alias: null
+      type: string
+    equipNo:
+      case_alias: null
+      type: string
+    equipmentClasses:
+      case_alias: null
+      items:
+        $ref: '#/definitions/EquipmentClassVO'
+      type: array
+    id:
+      case_alias: null
+      type: string
+    importantLevel:
+      case_alias: null
+      type: string
+    latestUsageRecord:
+      $ref: '#/definitions/EquipmentUsageRecordVO'
+      case_alias: null
+    maintainCount:
+      case_alias: null
+      format: int32
+      type: integer
+    maintainFullname:
+      case_alias: null
+      type: string
+    maintainName:
+      case_alias: null
+      type: string
+    maintainStatus:
+      case_alias: null
+      type: string
+    maintainUserId:
+      case_alias: null
+      type: string
+    manufacturer:
+      case_alias: null
+      type: string
+    model:
+      case_alias: null
+      type: string
+    principalFullname:
+      case_alias: null
+      type: string
+    principalName:
+      case_alias: null
+      type: string
+    principalUserId:
+      case_alias: null
+      type: string
+    purchaseDate:
+      case_alias: null
+      example: yyyy-MM-dd
+      type: string
+    purchaserFullname:
+      case_alias: null
+      type: string
+    purchaserName:
+      case_alias: null
+      type: string
+    purchaserUserId:
+      case_alias: null
+      type: string
+    regionId:
+      case_alias: null
+      type: string
+    regionName:
+      case_alias: null
+      type: string
+    regionNo:
+      case_alias: null
+      type: string
+    regionType:
+      case_alias: null
+      type: string
+    repairCount:
+      case_alias: null
+      format: int32
+      type: integer
+    repairFullname:
+      case_alias: null
+      type: string
+    repairName:
+      case_alias: null
+      type: string
+    repairStatus:
+      case_alias: null
+      type: string
+    repairUserId:
+      case_alias: null
+      type: string
+    revert:
+      case_alias: null
+      type: boolean
+    supplierFullname:
+      case_alias: null
+      type: string
+    supplierName:
+      case_alias: null
+      type: string
+    supplierUserId:
+      case_alias: null
+      type: string
+    transStatus:
+      case_alias: null
+      type: string
+    transfer:
+      case_alias: null
+      type: boolean
+    usageCount:
+      case_alias: null
+      format: int32
+      type: integer
+    warehouseId:
+      case_alias: null
+      type: string
+    warehouseName:
+      case_alias: null
+      type: string
+    warehouseNo:
+      case_alias: null
+      type: string
+  EquipmentLocationUpdateRequest:
+    regionId:
+      case_alias: null
+      type: string
+    regionType:
+      case_alias: null
+      type: string
+  EquipmentStatusUpdateRequest:
+    epStatus:
+      case_alias: null
+      type: string
+  EquipmentUsageRecordVO:
+    actionType:
+      case_alias: null
+      type: string
+    enabled:
+      case_alias: null
+      type: boolean
+    endTime:
+      case_alias: null
+      format: date-time
+      type: string
+    equipId:
+      case_alias: null
+      format: int64
+      type: integer
+    linkId:
+      case_alias: null
+      type: string
+    linkType:
+      case_alias: null
+      type: string
+    material:
+      $ref: '#/definitions/MdMaterialVO'
+      case_alias: null
+    refId:
+      case_alias: null
+      type: string
+    refType:
+      case_alias: null
+      type: string
+    remark:
+      case_alias: null
+      type: string
+    startTime:
+      case_alias: null
+      format: date-time
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+    usageCount:
+      case_alias: null
+      format: int64
+      type: integer
+    userId:
+      case_alias: null
+      type: string
+    userName:
+      case_alias: null
+      type: string
+  ExternalBpmCreateRequest:
+    applyUserId:
+      case_alias: null
+      type: string
+    assignee:
+      case_alias: null
+      type: string
+    assigneeId:
+      case_alias: null
+      type: string
+    assigneeName:
+      case_alias: null
+      type: string
+    businessKey:
+      case_alias: null
+      type: string
+    flowCode:
+      case_alias: null
+      type: string
+    processId:
+      case_alias: null
+      type: string
+    taskId:
+      case_alias: null
+      type: string
+  Field:
+    columns:
+      case_alias: null
+      items:
+        $ref: '#/definitions/Frame'
+      type: array
+    key:
+      case_alias: null
+      type: string
+    model:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    options:
+      $ref: '#/definitions/Options'
+      case_alias: null
+    rules:
+      case_alias: null
+      items:
+        $ref: '#/definitions/Rule'
+      type: array
+    syncModel:
+      case_alias: null
+      type: string
+    tableColumns:
+      case_alias: null
+      items:
+        $ref: '#/definitions/Field'
+      type: array
+    tabs:
+      case_alias: null
+      items:
+        $ref: '#/definitions/Frame'
+      type: array
+    type:
+      case_alias: null
+      type: string
+  FlowCodeRequest:
+    dbName:
+      case_alias: null
+      type: string
+    processKeyFlowCodeMap:
+      additionalProperties:
+        type: string
+      case_alias: null
+      type: object
+  Frame:
+    list:
+      case_alias: null
+      items:
+        $ref: '#/definitions/Field'
+      type: array
+  FwOaRequest:
+    assignee:
+      case_alias: null
+      type: string
+    businessKey:
+      case_alias: null
+      type: string
+    flowCode:
+      case_alias: null
+      type: string
+    taskId:
+      case_alias: null
+      type: string
+  LongIdBulkQueryRequest:
+    bizIds:
+      case_alias: null
+      items:
+        format: int64
+        type: integer
+      type: array
+  MdDimensionVO:
+    dimensionLetter:
+      case_alias: null
+      type: string
+    dimensionName:
+      case_alias: null
+      type: string
+    ecurrIndex:
+      case_alias: null
+      type: number
+    id:
+      case_alias: null
+      type: string
+    lengIndex:
+      case_alias: null
+      type: number
+    lightIndex:
+      case_alias: null
+      type: number
+    massIndex:
+      case_alias: null
+      type: number
+    molequIndex:
+      case_alias: null
+      type: number
+    siUnit:
+      case_alias: null
+      type: string
+    tempIndex:
+      case_alias: null
+      type: number
+    timeIndex:
+      case_alias: null
+      type: number
+  MdMaterialVO:
+    abcIndicator:
+      case_alias: null
+      type: string
+    assemblyScrapPercent:
+      case_alias: null
+      type: number
+    authGroup:
+      case_alias: null
+      type: string
+    autoPoAllowedIndicator:
+      case_alias: null
+      type: boolean
+    availabilityCheckGroup:
+      case_alias: null
+      type: string
+    backFlushIndicator:
+      case_alias: null
+      type: boolean
+    backwardConsumptionPeriod:
+      case_alias: null
+      type: number
+    batchManageReqIndicator:
+      case_alias: null
+      type: boolean
+    bomNodeCount:
+      case_alias: null
+      format: int32
+      type: integer
+    brand:
+      case_alias: null
+      type: string
+    brandId:
+      case_alias: null
+      type: string
+    cccNo:
+      case_alias: null
+      type: string
+    checkFlag:
+      case_alias: null
+      type: boolean
+    checkTypeCodes:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    clientLevelDeleteIndicator:
+      case_alias: null
+      type: boolean
+    consumptionMode:
+      case_alias: null
+      type: string
+    createdBy:
+      case_alias: null
+      type: string
+    createdByName:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    customerNo:
+      case_alias: null
+      type: string
+    dependentReqIndicator:
+      case_alias: null
+      type: boolean
+    dimensionUnit:
+      case_alias: null
+      type: string
+    dimensionUnitVO:
+      $ref: '#/definitions/MdMeasureUnitVO'
+      case_alias: null
+    fixedLotSize:
+      case_alias: null
+      type: number
+    forwardConsumptionPeriod:
+      case_alias: null
+      type: number
+    goodsIssueType:
+      case_alias: null
+      type: string
+    grossWeight:
+      case_alias: null
+      type: number
+    height:
+      case_alias: null
+      type: number
+    id:
+      case_alias: null
+      type: string
+    industrySector:
+      case_alias: null
+      type: string
+    issueStorageLocation:
+      case_alias: null
+      type: string
+    issueStorageLocationId:
+      case_alias: null
+      type: string
+    issueUnit:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedByName:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    lastModifyDate:
+      case_alias: null
+      format: date
+      type: string
+    locked:
+      case_alias: null
+      type: boolean
+    lotSize:
+      case_alias: null
+      type: number
+    lotSizeType:
+      case_alias: null
+      type: string
+    lowLevelCode:
+      case_alias: null
+      type: string
+    materialCategory:
+      case_alias: null
+      type: string
+    materialDesc:
+      case_alias: null
+      type: string
+    materialGroup:
+      case_alias: null
+      type: string
+    materialGroupCode:
+      case_alias: null
+      type: string
+    materialId:
+      case_alias: null
+      type: string
+    materialLength:
+      case_alias: null
+      type: number
+    materialName:
+      case_alias: null
+      type: string
+    materialNo:
+      case_alias: null
+      type: string
+    materialProdUnit:
+      case_alias: null
+      type: string
+    materialPurchaseUnit:
+      case_alias: null
+      type: string
+    materialRequisitionUnit:
+      case_alias: null
+      type: string
+    materialSaleUnit:
+      case_alias: null
+      type: string
+    materialType:
+      case_alias: null
+      type: string
+    materialUnit:
+      case_alias: null
+      type: string
+    materialUnitCode:
+      case_alias: null
+      type: string
+    materialUnitGroup:
+      case_alias: null
+      type: string
+    maxLotSize:
+      case_alias: null
+      type: number
+    measureUnit:
+      $ref: '#/definitions/MdMeasureUnitVO'
+      case_alias: null
+    measureUnitGroup:
+      $ref: '#/definitions/MdMeasureUnitGroupVO'
+      case_alias: null
+    metalTexture:
+      case_alias: null
+      type: string
+    mfrMaterialNo:
+      case_alias: null
+      type: string
+    minLotSize:
+      case_alias: null
+      type: number
+    minRemainShelfLife:
+      case_alias: null
+      type: number
+    mrpController:
+      case_alias: null
+      type: string
+    mrpGroup:
+      case_alias: null
+      type: string
+    mrpType:
+      case_alias: null
+      type: string
+    mrpTypeName:
+      case_alias: null
+      type: string
+    negativeStockAllowedIndicator:
+      case_alias: null
+      type: boolean
+    netWeight:
+      case_alias: null
+      type: number
+    oldMaterialNo:
+      case_alias: null
+      type: string
+    orderUnit:
+      case_alias: null
+      type: string
+    overDeliveryUpperLimit:
+      case_alias: null
+      type: number
+    pickingStorageLocationId:
+      case_alias: null
+      type: string
+    pickingType:
+      case_alias: null
+      type: string
+    plannedLeadTime:
+      case_alias: null
+      type: number
+    planningStrategyGroup:
+      case_alias: null
+      type: string
+    planningTimeFence:
+      case_alias: null
+      type: number
+    plantLevelDeleteIndicator:
+      case_alias: null
+      type: boolean
+    ppcPlanningCalendar:
+      case_alias: null
+      type: string
+    procurementType:
+      case_alias: null
+      type: string
+    prodMeasureUnit:
+      $ref: '#/definitions/MdMeasureUnitVO'
+      case_alias: null
+    prodUnit:
+      case_alias: null
+      type: string
+    purchaseGroup:
+      case_alias: null
+      type: string
+    purchaseMeasureUnit:
+      $ref: '#/definitions/MdMeasureUnitVO'
+      case_alias: null
+    qualityGroupCode:
+      case_alias: null
+      type: string
+    receiptLeadTime:
+      case_alias: null
+      type: number
+    receiptStorageLocationId:
+      case_alias: null
+      type: string
+    requisitionMeasureUnit:
+      $ref: '#/definitions/MdMeasureUnitVO'
+      case_alias: null
+    ropValue:
+      case_alias: null
+      type: number
+    roundingValue:
+      case_alias: null
+      type: number
+    safetyPeriod:
+      case_alias: null
+      type: number
+    safetyStock:
+      case_alias: null
+      type: number
+    saleMeasureUnit:
+      $ref: '#/definitions/MdMeasureUnitVO'
+      case_alias: null
+    selfMakeInboundStorageLocationId:
+      case_alias: null
+      type: string
+    serviceIndicator:
+      case_alias: null
+      type: boolean
+    sourceListReqIndicator:
+      case_alias: null
+      type: boolean
+    spProcurementType:
+      case_alias: null
+      type: string
+    stockLowerLimit:
+      case_alias: null
+      type: number
+    stockUpperLimit:
+      case_alias: null
+      type: number
+    supplierName:
+      case_alias: null
+      type: string
+    takeCorrectionFactorsIndicator:
+      case_alias: null
+      type: boolean
+    tenantId:
+      case_alias: null
+      type: string
+    totalReplenishLeadTime:
+      case_alias: null
+      type: number
+    totalShelfLife:
+      case_alias: null
+      type: number
+    tx:
+      case_alias: null
+      type: string
+    underDeliveryUpperLimit:
+      case_alias: null
+      type: number
+    unlimitedOverDeliveryIndicator:
+      case_alias: null
+      type: boolean
+    valid:
+      case_alias: null
+      type: boolean
+    validFromDate:
+      case_alias: null
+      format: date
+      type: string
+    validLabel:
+      case_alias: null
+      type: string
+    validToDate:
+      case_alias: null
+      format: date
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+    volume:
+      case_alias: null
+      type: number
+    volumeUnit:
+      case_alias: null
+      type: string
+    volumeUnitVO:
+      $ref: '#/definitions/MdMeasureUnitVO'
+      case_alias: null
+    weightUnit:
+      case_alias: null
+      type: string
+    weightUnitVO:
+      $ref: '#/definitions/MdMeasureUnitVO'
+      case_alias: null
+    width:
+      case_alias: null
+      type: number
+  MdMeasureUnitGroupVO:
+    createdBy:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    defaultGroup:
+      case_alias: null
+      type: boolean
+    enable:
+      case_alias: null
+      type: boolean
+    id:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    unitGroupCategory:
+      case_alias: null
+      type: string
+    unitGroupName:
+      case_alias: null
+      type: string
+    unitGroupNo:
+      case_alias: null
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  MdMeasureUnitVO:
+    additiveConstant:
+      case_alias: null
+      type: number
+    createdBy:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    denominator:
+      case_alias: null
+      type: number
+    dimension:
+      $ref: '#/definitions/MdDimensionVO'
+      case_alias: null
+    dimensionId:
+      case_alias: null
+      type: string
+    displayDecimal:
+      case_alias: null
+      format: int32
+      type: integer
+    enable:
+      case_alias: null
+      type: boolean
+    exponent:
+      case_alias: null
+      type: number
+    id:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    numerator:
+      case_alias: null
+      type: number
+    roundingDecimal:
+      case_alias: null
+      format: int32
+      type: integer
+    siUnit:
+      case_alias: null
+      type: string
+    unitCode:
+      case_alias: null
+      type: string
+    unitDesc:
+      case_alias: null
+      type: string
+    unitGroups:
+      case_alias: null
+      items:
+        $ref: '#/definitions/MdMeasureUnitGroupVO'
+      type: array
+    unitName:
+      case_alias: null
+      type: string
+    unitNo:
+      case_alias: null
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  NewInstanceVO:
+    id:
+      case_alias: null
+      type: string
+  Option:
+    description:
+      case_alias: null
+      type: string
+    label:
+      case_alias: null
+      type: string
+    value:
+      case_alias: null
+      type: string
+  Options:
+    acceptType:
+      case_alias: null
+      type: string
+    afterClick:
+      case_alias: null
+      type: string
+    allowTypes:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    codeDefKey:
+      case_alias: null
+      type: string
+    controls:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    dataBind:
+      case_alias: null
+      type: boolean
+    dataType:
+      case_alias: null
+      type: string
+    defaultValue:
+      case_alias: null
+      type: string
+    disabled:
+      case_alias: null
+      type: boolean
+    editable:
+      case_alias: null
+      type: boolean
+    flowCode:
+      case_alias: null
+      type: string
+    format:
+      case_alias: null
+      type: string
+    hidden:
+      case_alias: null
+      type: boolean
+    limit:
+      case_alias: null
+      format: int32
+      type: integer
+    limitSize:
+      case_alias: null
+      format: int32
+      type: integer
+    max:
+      case_alias: null
+      format: int32
+      type: integer
+    min:
+      case_alias: null
+      format: int32
+      type: integer
+    multiple:
+      case_alias: null
+      type: boolean
+    options:
+      case_alias: null
+      items:
+        $ref: '#/definitions/Option'
+      type: array
+    osmKey:
+      case_alias: null
+      type: string
+    pattern:
+      case_alias: null
+      type: string
+    readonly:
+      case_alias: null
+      type: boolean
+    remote:
+      case_alias: null
+      type: boolean
+    remoteFunc:
+      case_alias: null
+      type: string
+    remoteOption:
+      case_alias: null
+      type: string
+    remoteOptions:
+      case_alias: null
+      items:
+        $ref: '#/definitions/Option'
+      type: array
+    remoteType:
+      case_alias: null
+      type: string
+    required:
+      case_alias: null
+      type: boolean
+    ruleControls:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    step:
+      case_alias: null
+      format: int32
+      type: integer
+    timestamp:
+      case_alias: null
+      type: boolean
+    validateData:
+      case_alias: null
+      type: boolean
+    validateKeys:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    width:
+      case_alias: null
+      type: string
+  OsmObjectVO:
+    bizType:
+      case_alias: null
+      type: string
+    bizValue:
+      case_alias: null
+      type: string
+    createdBy:
+      case_alias: null
+      type: string
+    createdByName:
+      case_alias: null
+      type: string
+    deleted:
+      case_alias: null
+      type: boolean
+    id:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedByName:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    name:
+      case_alias: null
+      type: string
+    ossKey:
+      case_alias: null
+      type: string
+    previewObjectId:
+      case_alias: null
+      type: string
+    public:
+      case_alias: null
+      format: int32
+      type: integer
+    signature:
+      $ref: '#/definitions/OssSignature'
+      case_alias: null
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    tagId:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      type: string
+  OsmUploadVO:
+    id:
+      case_alias: null
+      type: string
+  OssSignature:
+    expireTime:
+      case_alias: null
+      format: date-time
+      type: string
+    origin:
+      case_alias: null
+      type: string
+    pdf:
+      case_alias: null
+      type: string
+    standard:
+      case_alias: null
+      type: string
+    thumbnail:
+      case_alias: null
+      type: string
+  PageOfEntityObject:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/EntityObject'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfTemplateListVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/TemplateListVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PrivilegeVO:
+    appId:
+      case_alias: null
+      format: int32
+      type: integer
+    builtin:
+      case_alias: null
+      type: boolean
+    code:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    operation:
+      case_alias: null
+      format: int32
+      type: integer
+    parentId:
+      case_alias: null
+      type: string
+    resource:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+    url:
+      case_alias: null
+      type: string
+    visible:
+      case_alias: null
+      type: boolean
+  ProcessStartRequest:
+    approvalRequests:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ActivitiApprovalRequestVO'
+      type: array
+    bizCode:
+      case_alias: null
+      type: string
+    businessId:
+      case_alias: null
+      type: string
+    businessKey:
+      case_alias: null
+      type: string
+    businessName:
+      case_alias: null
+      type: string
+    businessNo:
+      case_alias: null
+      type: string
+    flowCode:
+      case_alias: null
+      type: string
+    flowName:
+      case_alias: null
+      type: string
+    startUserId:
+      case_alias: null
+      type: string
+    varsMap:
+      case_alias: null
+      type: object
+  RoleTagVO:
+    id:
+      case_alias: null
+      type: string
+    roleId:
+      case_alias: null
+      type: string
+    tag:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+  RoleVO:
+    appId:
+      case_alias: null
+      format: int32
+      type: integer
+    builtin:
+      case_alias: null
+      type: boolean
+    code:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    tags:
+      case_alias: null
+      items:
+        $ref: '#/definitions/RoleTagVO'
+      type: array
+    tenantId:
+      case_alias: null
+      type: string
+  Rule:
+    message:
+      case_alias: null
+      type: string
+    pattern:
+      case_alias: null
+      type: string
+    required:
+      case_alias: null
+      type: boolean
+    trigger:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    type:
+      case_alias: null
+      type: string
+    validatorKey:
+      case_alias: null
+      type: string
+  Sort:
+    empty:
+      case_alias: null
+      type: boolean
+    sorted:
+      case_alias: null
+      type: boolean
+    unsorted:
+      case_alias: null
+      type: boolean
+  StringNoBulkQueryRequest:
+    bizNos:
+      case_alias: null
+      items:
+        type: string
+      type: array
+  TaskApproveRequest:
+    approveNoticeType:
+      case_alias: null
+      description: 审批人通知方式
+      items:
+        type: string
+      type: array
+    assignees:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ActivitiApprovalRequestVO'
+      type: array
+    passCcNoticeType:
+      case_alias: null
+      description: 通过抄送人通知方式
+      items:
+        type: string
+      type: array
+    passCcUsers:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    rejectCcNoticeType:
+      case_alias: null
+      description: 退回抄送人通知方式
+      items:
+        type: string
+      type: array
+    rejectCcUsers:
+      case_alias: null
+      items:
+        type: string
+      type: array
+  TaskCompleteRequest:
+    approved:
+      case_alias: null
+      type: boolean
+    aprvAt:
+      case_alias: null
+      type: string
+    aprvBy:
+      case_alias: null
+      type: string
+    aprvByName:
+      case_alias: null
+      type: string
+    aprvRemark:
+      case_alias: null
+      type: string
+    bizType:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    processId:
+      case_alias: null
+      type: string
+  TaskResultVO:
+    completed:
+      case_alias: null
+      type: boolean
+    errMsg:
+      case_alias: null
+      type: string
+  TemplateDetailVO:
+    defaulted:
+      case_alias: null
+      type: boolean
+    id:
+      case_alias: null
+      format: int64
+      type: integer
+    publicized:
+      case_alias: null
+      type: boolean
+    qrCodeConfig:
+      case_alias: null
+      type: string
+    templateCode:
+      case_alias: null
+      type: string
+    templateContent:
+      case_alias: null
+      type: string
+    templateName:
+      case_alias: null
+      type: string
+    templatePlaceholder:
+      case_alias: null
+      type: string
+    templateType:
+      case_alias: null
+      type: string
+    templateUrl:
+      case_alias: null
+      type: string
+  TemplateListVO:
+    defaulted:
+      case_alias: null
+      type: boolean
+    id:
+      case_alias: null
+      format: int64
+      type: integer
+    publicized:
+      case_alias: null
+      type: boolean
+    templateCode:
+      case_alias: null
+      type: string
+    templateName:
+      case_alias: null
+      type: string
+    templateType:
+      case_alias: null
+      type: string
+  TemplateRenderRequest:
+    barCode:
+      $ref: '#/definitions/BarCodeCreateRequest'
+      case_alias: null
+    platform:
+      case_alias: null
+      type: string
+    renderParams:
+      additionalProperties:
+        type: string
+      case_alias: null
+      type: object
+    temp:
+      case_alias: null
+      type: boolean
+  TemplateRenderVO:
+    result:
+      case_alias: null
+      type: string
+    template:
+      $ref: '#/definitions/TemplateDetailVO'
+      case_alias: null
+  TenantOrgUserVO:
+    avatar:
+      case_alias: null
+      type: string
+    birthday:
+      case_alias: null
+      format: date
+      type: string
+    description:
+      case_alias: null
+      type: string
+    email:
+      case_alias: null
+      type: string
+    empNo:
+      case_alias: null
+      type: string
+    fullname:
+      case_alias: null
+      type: string
+    gender:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    mobile:
+      case_alias: null
+      type: string
+    orgId:
+      case_alias: null
+      type: string
+    orgRole:
+      case_alias: null
+      format: int32
+      type: integer
+    organizations:
+      case_alias: null
+      items:
+        $ref: '#/definitions/TenantOrgVO'
+      type: array
+    privileges:
+      case_alias: null
+      items:
+        $ref: '#/definitions/PrivilegeVO'
+      type: array
+    roles:
+      case_alias: null
+      items:
+        $ref: '#/definitions/RoleVO'
+      type: array
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+    tags:
+      case_alias: null
+      items:
+        $ref: '#/definitions/TenantTagVO'
+      type: array
+    telephone:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+    title:
+      case_alias: null
+      type: string
+    username:
+      case_alias: null
+      type: string
+  TenantOrgVO:
+    description:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    level:
+      case_alias: null
+      format: int32
+      type: integer
+    name:
+      case_alias: null
+      type: string
+    orgNo:
+      case_alias: null
+      type: string
+    parent:
+      $ref: '#/definitions/TenantOrgVO'
+      case_alias: null
+    parentId:
+      case_alias: null
+      type: string
+    path:
+      case_alias: null
+      type: string
+    sequence:
+      case_alias: null
+      format: int32
+      type: integer
+    tenantId:
+      case_alias: null
+      type: string
+    wxDepartId:
+      case_alias: null
+      type: string
+    wxParentDepartId:
+      case_alias: null
+      type: string
+  TenantTagVO:
+    id:
+      case_alias: null
+      type: string
+    tagName:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+  TenantUserVO:
+    avatar:
+      case_alias: null
+      type: string
+    birthday:
+      case_alias: null
+      format: date
+      type: string
+    description:
+      case_alias: null
+      type: string
+    email:
+      case_alias: null
+      type: string
+    empNo:
+      case_alias: null
+      type: string
+    fullname:
+      case_alias: null
+      type: string
+    gender:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    mobile:
+      case_alias: null
+      type: string
+    organizations:
+      case_alias: null
+      items:
+        $ref: '#/definitions/TenantOrgVO'
+      type: array
+    privileges:
+      case_alias: null
+      items:
+        $ref: '#/definitions/PrivilegeVO'
+      type: array
+    roles:
+      case_alias: null
+      items:
+        $ref: '#/definitions/RoleVO'
+      type: array
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+    tags:
+      case_alias: null
+      items:
+        $ref: '#/definitions/TenantTagVO'
+      type: array
+    telephone:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+    title:
+      case_alias: null
+      type: string
+    username:
+      case_alias: null
+      type: string
+  UserVO:
+    id:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    roleId:
+      case_alias: null
+      type: string
+    tagId:
+      case_alias: null
+      type: string
+paths:
+  /v2/api/cr/apvc/current:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+  /v2/api/private/apvc/workflows/refresh-old-business-key:
+    post:
+    - case_alias: null
+      description: request
+      in: body
+      name: request
+      required: true
+      schema:
+        $ref: '#/definitions/FlowCodeRequest'
+  /v2/api/private/tenants/{tenant_id}/apvc/workflows/configs:
+    get:
+    - case_alias: null
+      description: flow_code
+      in: query
+      name: flow_code
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/apvc/workflows/processes:
+    post:
+    - case_alias: null
+      description: startRequest
+      in: body
+      name: startRequest
+      required: true
+      schema:
+        $ref: '#/definitions/ProcessStartRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/apvc/workflows/startFwOa:
+    post:
+    - case_alias: null
+      description: request
+      in: body
+      name: request
+      required: true
+      schema:
+        $ref: '#/definitions/FwOaRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/assets/batch-get-assets-by-ids:
+    post:
+    - case_alias: null
+      description: param1
+      in: body
+      name: param1
+      required: true
+      schema:
+        $ref: '#/definitions/LongIdBulkQueryRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/assets/batch-get-assets-by-nos:
+    post:
+    - case_alias: null
+      description: param1
+      in: body
+      name: param1
+      required: true
+      schema:
+        $ref: '#/definitions/StringNoBulkQueryRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/assets/detail/batch-get-assets-by-ids:
+    post:
+    - case_alias: null
+      description: param1
+      in: body
+      name: param1
+      required: true
+      schema:
+        $ref: '#/definitions/LongIdBulkQueryRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/assets/detail/{id}:
+    get:
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/assets/{id}:
+    get:
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/bpm-messages:
+    post:
+    - case_alias: null
+      description: createRequest
+      in: body
+      name: createRequest
+      required: true
+      schema:
+        $ref: '#/definitions/ExternalBpmCreateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/bpm-messages/purchase-orders:
+    post:
+    - case_alias: null
+      description: param1
+      in: body
+      name: param1
+      required: true
+      schema:
+        $ref: '#/definitions/BpmMsgCreateRequestOfBpmMsgBodyPoRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/bpm-messages/purchase-orders/items:
+    post:
+    - case_alias: null
+      description: business_key
+      in: query
+      name: business_key
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/by-no:
+    get:
+    - case_alias: null
+      description: equip_no
+      in: query
+      name: equip_no
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/equipments/active-time/refresh:
+    put:
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/equipments/batch-get-eqps-by-asset-ids:
+    post:
+    - case_alias: null
+      description: param1
+      in: body
+      name: param1
+      required: true
+      schema:
+        $ref: '#/definitions/LongIdBulkQueryRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/equipments/by-nos:
+    post:
+    - case_alias: null
+      collectionFormat: multi
+      description: equip_nos
+      in: query
+      items:
+        type: string
+      name: equip_nos
+      required: true
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/equipments/query-all-eqps-by-asset-id:
+    get:
+    - case_alias: null
+      description: asset_id
+      format: int64
+      in: query
+      name: asset_id
+      required: true
+      type: integer
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/equipments/query-all-eqps-by-ids:
+    post:
+    - case_alias: null
+      description: param1
+      in: body
+      name: param1
+      required: true
+      schema:
+        $ref: '#/definitions/LongIdBulkQueryRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/equipments/{id}:
+    get:
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/equipments/{id}/count:
+    put:
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: param2
+      in: body
+      name: param2
+      required: true
+      schema:
+        $ref: '#/definitions/EquipmentCountUpdateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/equipments/{id}/location:
+    put:
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: param2
+      in: body
+      name: param2
+      required: true
+      schema:
+        $ref: '#/definitions/EquipmentLocationUpdateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/equipments/{id}/status:
+    put:
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: param2
+      in: body
+      name: param2
+      required: true
+      schema:
+        $ref: '#/definitions/EquipmentStatusUpdateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/mdm/display-decimals/list:
+    get:
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/mdm/materials/bulk-get:
+    post:
+    - case_alias: null
+      description: param1
+      in: body
+      name: param1
+      required: true
+      schema:
+        items:
+          type: string
+        type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/mdm/materials/bulk-get-ids:
+    post:
+    - case_alias: null
+      description: param1
+      in: body
+      name: param1
+      required: true
+      schema:
+        items:
+          type: string
+        type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/measure-unit-groups:
+    post:
+    - case_alias: null
+      description: param1
+      in: body
+      name: param1
+      required: true
+      schema:
+        items:
+          type: string
+        type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/measure-units:
+    post:
+    - case_alias: null
+      description: param1
+      in: body
+      name: param1
+      required: true
+      schema:
+        items:
+          type: string
+        type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/templates/template-content:
+    get:
+    - case_alias: null
+      description: biz_id
+      in: query
+      name: biz_id
+      required: false
+      type: string
+    - case_alias: null
+      description: biz_type
+      in: query
+      name: biz_type
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/cc-tasks/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: flow_code
+      in: query
+      items:
+        type: string
+      name: flow_code
+      required: true
+      type: array
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: po_id
+      in: query
+      name: po_id
+      required: false
+      type: string
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/configs:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: flow_code
+      in: query
+      name: flow_code
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/configs/{task_id}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: flow_code
+      in: query
+      name: flow_code
+      required: true
+      type: string
+    - case_alias: null
+      description: task_id
+      in: path
+      name: task_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/handled-tasks/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: business_id
+      in: query
+      items:
+        type: string
+      name: business_id
+      required: false
+      type: array
+    - case_alias: null
+      collectionFormat: multi
+      description: flow_code
+      in: query
+      items:
+        type: string
+      name: flow_code
+      required: false
+      type: array
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/my-process/{process_id}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: process_id
+      in: path
+      name: process_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/my-start-processes/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: business_id
+      in: query
+      items:
+        type: string
+      name: business_id
+      required: false
+      type: array
+    - case_alias: null
+      collectionFormat: multi
+      description: flow_code
+      in: query
+      items:
+        type: string
+      name: flow_code
+      required: false
+      type: array
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/orgs/{org_id}/managers:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: org_id
+      in: path
+      name: org_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/process-detail/{process_id}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: process_id
+      in: path
+      name: process_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/processes/all-user-tasks-behind:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      default: false
+      description: all_user_ids
+      in: query
+      name: all_user_ids
+      required: false
+      type: boolean
+    - case_alias: null
+      description: flow_code
+      in: query
+      name: flow_code
+      required: true
+      type: string
+    - case_alias: null
+      description: org_id
+      in: query
+      name: org_id
+      required: true
+      type: string
+    - case_alias: null
+      description: process_id
+      in: query
+      name: process_id
+      required: false
+      type: string
+    - case_alias: null
+      description: task_id
+      in: query
+      name: task_id
+      required: false
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/processes/next-user-tasks:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      default: false
+      description: all_user_ids
+      in: query
+      name: all_user_ids
+      required: false
+      type: boolean
+    - case_alias: null
+      description: flow_code
+      in: query
+      name: flow_code
+      required: true
+      type: string
+    - case_alias: null
+      description: org_id
+      in: query
+      name: org_id
+      required: true
+      type: string
+    - case_alias: null
+      description: process_id
+      in: query
+      name: process_id
+      required: false
+      type: string
+    - case_alias: null
+      description: task_id
+      in: query
+      name: task_id
+      required: false
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/processes/user-tasks:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: flow_code
+      in: query
+      name: flow_code
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/processes/user-tasks/{user_task_id}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      default: false
+      description: all_user_ids
+      in: query
+      name: all_user_ids
+      required: false
+      type: boolean
+    - case_alias: null
+      description: flow_code
+      in: query
+      name: flow_code
+      required: true
+      type: string
+    - case_alias: null
+      description: org_id
+      in: query
+      name: org_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: user_task_id
+      in: path
+      name: user_task_id
+      required: true
+      type: string
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: creationRequest
+      in: body
+      name: creationRequest
+      required: true
+      schema:
+        $ref: '#/definitions/ActivityTaskConfigCreationRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: user_task_id
+      in: path
+      name: user_task_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/tasks/count:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: flow_code
+      in: query
+      items:
+        type: string
+      name: flow_code
+      required: false
+      type: array
+    - case_alias: null
+      description: po_id
+      in: query
+      name: po_id
+      required: false
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/tasks/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: business_id
+      in: query
+      items:
+        type: string
+      name: business_id
+      required: false
+      type: array
+    - case_alias: null
+      collectionFormat: multi
+      description: flow_code
+      in: query
+      items:
+        type: string
+      name: flow_code
+      required: false
+      type: array
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: current_user_id
+      in: query
+      name: current_user_id
+      required: false
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/tasks/{task_id}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: process_id
+      in: query
+      name: process_id
+      required: true
+      type: string
+    - case_alias: null
+      description: task_id
+      in: path
+      name: task_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apvc/workflows/tasks/{task_id}/handle:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: request
+      in: body
+      name: request
+      required: true
+      schema:
+        $ref: '#/definitions/ApprovalRequest'
+    - case_alias: null
+      description: task_id
+      in: path
+      name: task_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/bar-codes:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: createRequests
+      in: body
+      name: createRequests
+      required: true
+      schema:
+        $ref: '#/definitions/BarCodeCreateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/bar-codes/batch:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: barCodeCreateRequests
+      in: body
+      name: barCodeCreateRequests
+      required: true
+      schema:
+        items:
+          $ref: '#/definitions/BarCodeCreateRequest'
+        type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/bar-codes/batch-by-pdf:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: barCodePrintRequests
+      in: body
+      name: barCodePrintRequests
+      required: true
+      schema:
+        items:
+          $ref: '#/definitions/BarCodePrintRequest'
+        type: array
+    - case_alias: null
+      description: platform
+      in: query
+      name: platform
+      required: false
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/bar-codes/bulk:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: codes
+      in: body
+      name: codes
+      required: true
+      schema:
+        items:
+          type: string
+        type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/bar-codes/{code}/get-by-code:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: code
+      in: path
+      name: code
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/pdf-prints/by-biz-id:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: bizIdPrintVO
+      in: body
+      name: bizIdPrintVO
+      required: true
+      schema:
+        $ref: '#/definitions/BizIdPrintVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/templates/get-detail-by-biz-type:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: biz_type
+      in: query
+      name: biz_type
+      required: true
+      type: string
+    - case_alias: null
+      description: platform
+      in: query
+      name: platform
+      required: false
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/templates/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: q
+      in: query
+      name: q
+      required: false
+      type: string
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: template_code
+      in: query
+      name: template_code
+      required: false
+      type: string
+    - case_alias: null
+      description: template_name
+      in: query
+      name: template_name
+      required: false
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/templates/{template_type}/render-with-code:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: renderRequest
+      in: body
+      name: renderRequest
+      required: true
+      schema:
+        $ref: '#/definitions/TemplateRenderRequest'
+    - case_alias: null
+      description: template_type
+      in: path
+      name: template_type
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/openapi/tenants/{tenant_id}/apvc/workflows/external-approval/tasks/{task_id}/complete:
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: completeRequest
+      in: body
+      name: completeRequest
+      required: true
+      schema:
+        $ref: '#/definitions/TaskCompleteRequest'
+    - case_alias: null
+      description: task_id
+      in: path
+      name: task_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string

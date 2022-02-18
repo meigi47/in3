@@ -1,0 +1,65 @@
+
+work_order:
+  retrieve:
+    url: /v2/api/tenants/{tenant_id}/production-plans/query
+    type: post
+    description: 获取工单列表
+  get_detail: 
+    url: /v2/api/tenants/{tenant_id}/production-plans/{production_plan_id}
+    type: get
+    description: 获取工单详情
+  create:
+    url: /v2/api/tenants/{tenant_id}/production-plans
+    type: post
+    description: 新建生产工单   
+  release: 
+    url: /v2/api/tenants/{tenant_id}/production-plans/{production_plan_id}/release
+    type: post
+    description: 释放生产工单
+  finish_update:
+    url: /v2/api/tenants/{tenant_id}/production-plans/finish/update
+    type: post
+    description: 点击完工设置生产进度
+  finish_process:
+    url: /v2/api/tenants/{tenant_id}/mos/finish/process
+    #url: /v2/api/tenants/{tenant_id}/production-plans/finish/process
+    type: post
+    description: 生产工单完工
+  retrieve_bomm_tree:
+    url: /v2/api/tenants/{tenant_id}/production-plans/bom-tree/bulk
+    type: post
+    description: 批量获取主数据物料-BOM树
+  get_template_of_createWO:
+    url: /v2/api/tenants/{tenant_id}/excels/templates/batch-create
+    type: get
+    description: 获取批量导入开工单模板
+  get_template_of_updateBOM:
+    url: /v2/api/tenants/{tenant_id}/excels/templates/mo-bom/update
+    type: get
+    description: 获取批量更新BOM模板
+  mo_bom:
+    url: /v2/api/tenants/{tenant_id}/production-plans/mo-bom/{production_plan_id}
+    type: put
+    description: 同步工单BOM
+  get_detail_bulk_by_id:
+    url: /v2/api/tenants/{tenant_id}/production-plans/bulk-by-id
+    type: post
+    description: 批量获取工单详情
+  save_progress:
+    url: /v2/api/tenants/{tenant_id}/production-plans/finish/update
+    type: post
+    description: 保存生产进度
+  finish_check:
+    url: /v2/api/tenants/{tenant_id}/production-plans/finish/check
+    type: post
+    description: 完工检查
+demand_supply:
+  get_demand_supply:
+    url: /v2/api/tenants/{tenant_id}/demand-supplies
+    type: post
+    description: 获取MRP需求列表
+mrp_rules:
+  retrieve:
+    url: /v2/api/tenants/{tenant_id}/pp/mrp-rules
+    type: get
+    description: 获取MRP规则列表

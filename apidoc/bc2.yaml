@@ -1,0 +1,4499 @@
+swagger: '2.0'
+info:
+  description: iSim REST API
+  version: v1.0
+  title: isim REST API
+  termsOfService: Terms of service
+  contact:
+    name: Industics Ltd
+    url: 'http://support.industics.com'
+    email: support@industics.com
+  license:
+    name: License of API
+    url: API license URL
+host: 'localhost:33018'
+basePath: /mom/bc2
+tags:
+  - name: Activiti
+    description: Activiti Endpoint
+  - name: BC2-BARC - BAR-CODE API
+    description: Bar Code Endpoint
+  - name: BC2-TMPL - TEMPLATE API
+    description: Template Endpoint
+  - name: EXTERNAL APPROVAL
+    description: Open External Approval Endpoint
+  - name: PDF-Print
+    description: Pdf Print Endpoint
+  - name: PRIVATE-DATA-SYNC
+    description: Private Bpm Data Sync Endpoint
+  - name: Users APIs
+    description: 用户查询
+  - name: display-decimal-config-client
+    description: Display Decimal Config Client
+  - name: edsb-private-bpm-msg-feign-client
+    description: Edsb Private Bpm Msg Feign Client
+  - name: measure-unit-client
+    description: Measure Unit Client
+  - name: mm-client
+    description: Mm Client
+  - name: mm-private-bpm-msg-feign-client
+    description: Mm Private Bpm Msg Feign Client
+  - name: template
+    description: Private Template Endpoint
+schemes:
+  - http
+paths:
+  /v2/api/cr/apvc/current:
+    get:
+      tags:
+        - Users APIs
+      summary: getUserInfo
+      operationId: getUserInfoUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/apvc/workflows/refresh-old-business-key:
+    post:
+      tags:
+        - Activiti
+      summary: 刷新旧数据
+      operationId: refreshOldBusinessKeyUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/FlowCodeRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/apvc/workflows/configs':
+    get:
+      tags:
+        - Activiti
+      summary: 获取Configs
+      operationId: findOneActConfigUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ActFlowConfigVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/apvc/workflows/processes':
+    post:
+      tags:
+        - Activiti
+      summary: 开始审批流
+      operationId: startProcessUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: startRequest
+          description: startRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ProcessStartRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ActivitiProcessDetailVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/apvc/workflows/startFwOa':
+    post:
+      tags:
+        - Activiti
+      summary: 开始泛微OA审批流
+      operationId: startFwOaUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/FwOaRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/assets/batch-get-assets-by-ids':
+    post:
+      tags:
+        - mm-client
+      summary: 根据Ids查询资产
+      operationId: findAssetsByIdsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            $ref: '#/definitions/LongIdBulkQueryRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AssetDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/assets/batch-get-assets-by-nos':
+    post:
+      tags:
+        - mm-client
+      summary: 根据Nos查询资产
+      operationId: findAssetsByNosUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            $ref: '#/definitions/StringNoBulkQueryRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AssetDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/assets/detail/batch-get-assets-by-ids':
+    post:
+      tags:
+        - mm-client
+      summary: 根据Ids查询资产详情（包括下挂设备模具）
+      operationId: getAssetsDetailByIdsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            $ref: '#/definitions/LongIdBulkQueryRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AssetDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/assets/detail/{id}':
+    get:
+      tags:
+        - mm-client
+      summary: 根据id查询资产（包括下挂设备模具）
+      operationId: getAssetDetailUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AssetDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/assets/{id}':
+    get:
+      tags:
+        - mm-client
+      summary: 根据id查询资产
+      operationId: getAssetUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AssetDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/bpm-messages':
+    post:
+      tags:
+        - PRIVATE-DATA-SYNC
+      summary: createBpmMsg
+      operationId: createBpmMsgUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: createRequest
+          description: createRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ExternalBpmCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/bpm-messages/purchase-orders':
+    post:
+      tags:
+        - edsb-private-bpm-msg-feign-client
+      summary: createBpmPoMsg
+      operationId: createBpmPoMsgUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            $ref: '#/definitions/BpmMsgCreateRequestOfBpmMsgBodyPoRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/bpm-messages/purchase-orders/items':
+    post:
+      tags:
+        - mm-private-bpm-msg-feign-client
+      summary: BPME
+      operationId: findAllBpmPoMsgBodyUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: business_key
+          in: query
+          description: business_key
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BpmMsgBodyPoRequest'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/by-no':
+    get:
+      tags:
+        - mm-client
+      summary: 根据no查询设备
+      operationId: getEquipmentByNoUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: equip_no
+          in: query
+          description: equip_no
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EquipmentDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/equipments/active-time/refresh':
+    put:
+      tags:
+        - mm-client
+      summary: Job更新设备启用时长
+      operationId: refreshEquipmentActiveTimeUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/equipments/batch-get-eqps-by-asset-ids':
+    post:
+      tags:
+        - mm-client
+      summary: 批量根据资产id获取设备
+      operationId: findAllEqpsByAssetIdInUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            $ref: '#/definitions/LongIdBulkQueryRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EquipmentDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/equipments/by-nos':
+    post:
+      tags:
+        - mm-client
+      summary: 根据设备编号获取设备
+      operationId: getEquipmentsByNoUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: equip_nos
+          in: query
+          description: equip_nos
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EquipmentDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/equipments/query-all-eqps-by-asset-id':
+    get:
+      tags:
+        - mm-client
+      summary: 根据资产id获取设备
+      operationId: findAllEqpsByAssetIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: asset_id
+          in: query
+          description: asset_id
+          required: true
+          type: integer
+          format: int64
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EquipmentDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/equipments/query-all-eqps-by-ids':
+    post:
+      tags:
+        - mm-client
+      summary: 批量获取设备
+      operationId: findByEquipIdsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            $ref: '#/definitions/LongIdBulkQueryRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EquipmentDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/equipments/{id}':
+    get:
+      tags:
+        - mm-client
+      summary: 查看设备
+      operationId: getEquipmentUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EquipmentDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/equipments/{id}/count':
+    put:
+      tags:
+        - mm-client
+      summary: 修改设备count字段
+      operationId: updateEquipmentCountUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - in: body
+          name: param2
+          description: param2
+          required: true
+          schema:
+            $ref: '#/definitions/EquipmentCountUpdateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: true
+  '/v2/api/private/tenants/{tenant_id}/equipments/{id}/location':
+    put:
+      tags:
+        - mm-client
+      summary: 修改设备地点字段
+      operationId: updateEquipmentLocationUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - in: body
+          name: param2
+          description: param2
+          required: true
+          schema:
+            $ref: '#/definitions/EquipmentLocationUpdateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/equipments/{id}/status':
+    put:
+      tags:
+        - mm-client
+      summary: 修改设备状态字段
+      operationId: updateEquipmentStatusUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - in: body
+          name: param2
+          description: param2
+          required: true
+          schema:
+            $ref: '#/definitions/EquipmentStatusUpdateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/mdm/display-decimals/list':
+    get:
+      tags:
+        - display-decimal-config-client
+      summary: 小数位数显示配置列表
+      operationId: findAllDisplayDecimalConfigsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DisplayDecimalConfigVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/mdm/materials/bulk-get':
+    post:
+      tags:
+        - mm-client
+      summary: 批量获取物料
+      operationId: bulkGetMaterialsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MdMaterialVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/mdm/materials/bulk-get-ids':
+    post:
+      tags:
+        - mm-client
+      summary: 通过ids批量获取物料
+      operationId: bulkGetMaterialsByIdsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MdMaterialVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/measure-unit-groups':
+    post:
+      tags:
+        - measure-unit-client
+      summary: 获取计量单位组
+      operationId: getMeasureUnitGroupsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MdMeasureUnitGroupVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/measure-units':
+    post:
+      tags:
+        - measure-unit-client
+      summary: 获取计量单位
+      operationId: getMeasureUnitsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: param1
+          description: param1
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MdMeasureUnitVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/templates/template-content':
+    get:
+      tags:
+        - template
+      summary: 获取模板内容
+      operationId: getTemplateContentUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: biz_id
+          in: query
+          description: biz_id
+          required: false
+          type: string
+        - name: biz_type
+          in: query
+          description: biz_type
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/cc-tasks/page':
+    get:
+      tags:
+        - Activiti
+      summary: 查询抄送我的
+      operationId: queryCCTaskUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: po_id
+          in: query
+          description: po_id
+          required: false
+          type: string
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfEntityObject'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/configs':
+    get:
+      tags:
+        - Activiti
+      summary: 获取Configs
+      operationId: findConfigMapUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ActFlowConfigVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/configs/{task_id}':
+    get:
+      tags:
+        - Activiti
+      summary: 根据task_config_id获取task
+      operationId: getTaskConfigUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: true
+          type: string
+        - name: task_id
+          in: path
+          description: task_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ActivityTaskConfigVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/handled-tasks/page':
+    get:
+      tags:
+        - Activiti
+      summary: 查询我的已处理任务
+      operationId: queryHiTaskUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: business_id
+          in: query
+          description: business_id
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfEntityObject'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/my-process/{process_id}':
+    get:
+      tags:
+        - Activiti
+      summary: 查询任务
+      operationId: getMyProcessDetailUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: process_id
+          in: path
+          description: process_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ActivitiDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/my-start-processes/page':
+    get:
+      tags:
+        - Activiti
+      summary: 我的申请
+      operationId: queryProcessUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: business_id
+          in: query
+          description: business_id
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfEntityObject'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/orgs/{org_id}/managers':
+    get:
+      tags:
+        - Activiti
+      summary: 获取主管信息
+      operationId: getTaskConfigDetailUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: org_id
+          in: path
+          description: org_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantOrgUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/process-detail/{process_id}':
+    get:
+      tags:
+        - Activiti
+      summary: 查询任务
+      operationId: getProcessDetailUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: process_id
+          in: path
+          description: process_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ActivitiDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/processes/all-user-tasks-behind':
+    get:
+      tags:
+        - Activiti
+      summary: 下级审批节点配置详情
+      operationId: findAllUserTasksBehindUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: all_user_ids
+          in: query
+          description: all_user_ids
+          required: false
+          type: boolean
+          default: false
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: true
+          type: string
+        - name: org_id
+          in: query
+          description: org_id
+          required: true
+          type: string
+        - name: process_id
+          in: query
+          description: process_id
+          required: false
+          type: string
+        - name: task_id
+          in: query
+          description: task_id
+          required: false
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ActivityTaskConfigVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/processes/next-user-tasks':
+    get:
+      tags:
+        - Activiti
+      summary: 下级审批节点配置详情
+      operationId: findNextUserTasksUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: all_user_ids
+          in: query
+          description: all_user_ids
+          required: false
+          type: boolean
+          default: false
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: true
+          type: string
+        - name: org_id
+          in: query
+          description: org_id
+          required: true
+          type: string
+        - name: process_id
+          in: query
+          description: process_id
+          required: false
+          type: string
+        - name: task_id
+          in: query
+          description: task_id
+          required: false
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ActivityTaskConfigVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/processes/user-tasks':
+    get:
+      tags:
+        - Activiti
+      summary: 审批流详情
+      operationId: queryLanesUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ActivitiLaneVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/processes/user-tasks/{user_task_id}':
+    get:
+      tags:
+        - Activiti
+      summary: 获取审批节点详情
+      operationId: getTaskConfigDetailUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: all_user_ids
+          in: query
+          description: all_user_ids
+          required: false
+          type: boolean
+          default: false
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: true
+          type: string
+        - name: org_id
+          in: query
+          description: org_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_task_id
+          in: path
+          description: user_task_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ActivityTaskConfigVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - Activiti
+      summary: 新建/保存审批节点详情
+      operationId: saveTaskDetailUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: creationRequest
+          description: creationRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ActivityTaskConfigCreationRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_task_id
+          in: path
+          description: user_task_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/tasks/count':
+    get:
+      tags:
+        - Activiti
+      summary: 查询任务数量
+      operationId: countTaskUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: po_id
+          in: query
+          description: po_id
+          required: false
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int64
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/tasks/page':
+    get:
+      tags:
+        - Activiti
+      summary: 查询任务
+      operationId: queryTaskUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: business_id
+          in: query
+          description: business_id
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: flow_code
+          in: query
+          description: flow_code
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfEntityObject'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/tasks/{task_id}':
+    get:
+      tags:
+        - Activiti
+      summary: 查询任务
+      operationId: getTaskDetailUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: process_id
+          in: query
+          description: process_id
+          required: true
+          type: string
+        - name: task_id
+          in: path
+          description: task_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ActivitiDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apvc/workflows/tasks/{task_id}/handle':
+    post:
+      tags:
+        - Activiti
+      summary: 处理任务
+      operationId: completeTaskUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/ApprovalRequest'
+        - name: task_id
+          in: path
+          description: task_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/bar-codes':
+    post:
+      tags:
+        - BC2-BARC - BAR-CODE API
+      summary: BARCODE - CREATE - 创建条码
+      operationId: createBarCodesUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: createRequests
+          description: createRequests
+          required: true
+          schema:
+            $ref: '#/definitions/BarCodeCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/bar-codes/batch':
+    post:
+      tags:
+        - BC2-BARC - BAR-CODE API
+      summary: BARCODE - BATCH-CREATE - 批量创建条码
+      operationId: batchCreateBarCodesUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: barCodeCreateRequests
+          description: barCodeCreateRequests
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BarCodeCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BarCodeListVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/bar-codes/batch-by-pdf':
+    post:
+      tags:
+        - BC2-BARC - BAR-CODE API
+      summary: BARCODE - BATCH-CREATE - 批量创建条码到PDF
+      operationId: batchCreateBarCodesByPdfUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: barCodePrintRequests
+          description: barCodePrintRequests
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BarCodePrintRequest'
+        - name: platform
+          in: query
+          description: platform
+          required: false
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OsmObjectVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/bar-codes/bulk':
+    post:
+      tags:
+        - BC2-BARC - BAR-CODE API
+      summary: BARCODE - BULK-LIST - 通过code列表批量获取条码详情
+      operationId: bulkerGetBarCodeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: codes
+          description: codes
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BarCodeListVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/bar-codes/{code}/get-by-code':
+    get:
+      tags:
+        - BC2-BARC - BAR-CODE API
+      summary: BARCODE - DETAIL-BY-CODE - 通过code获取code详情
+      operationId: getBarCodeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: code
+          in: path
+          description: code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BarCodeDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/pdf-prints/by-biz-id':
+    post:
+      tags:
+        - PDF-Print
+      summary: 打印PDF单据
+      operationId: printPdfByBizIdUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: bizIdPrintVO
+          description: bizIdPrintVO
+          required: true
+          schema:
+            $ref: '#/definitions/BizIdPrintVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OsmObjectVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/templates/get-detail-by-biz-type':
+    get:
+      tags:
+        - BC2-TMPL - TEMPLATE API
+      summary: TEMPLATE - 根据业务类型获取模板详情
+      operationId: getTemplateDetailByBizTypeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: biz_type
+          in: query
+          description: biz_type
+          required: true
+          type: string
+        - name: platform
+          in: query
+          description: platform
+          required: false
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TemplateDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/templates/page':
+    get:
+      tags:
+        - BC2-TMPL - TEMPLATE API
+      summary: TEMPLATE-PAGE - 分页查询模板
+      operationId: queryTenantTemplatesUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: template_code
+          in: query
+          description: template_code
+          required: false
+          type: string
+        - name: template_name
+          in: query
+          description: template_name
+          required: false
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfTemplateListVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/templates/{template_type}/render-with-code':
+    post:
+      tags:
+        - BC2-TMPL - TEMPLATE API
+      summary: renderTemplateContent
+      operationId: renderTemplateContentUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: renderRequest
+          description: renderRequest
+          required: true
+          schema:
+            $ref: '#/definitions/TemplateRenderRequest'
+        - name: template_type
+          in: path
+          description: template_type
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TemplateRenderVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/openapi/tenants/{tenant_id}/apvc/workflows/external-approval/tasks/{task_id}/complete':
+    put:
+      tags:
+        - EXTERNAL APPROVAL
+      summary: 处理任务
+      operationId: completeTaskUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: completeRequest
+          description: completeRequest
+          required: true
+          schema:
+            $ref: '#/definitions/TaskCompleteRequest'
+        - name: task_id
+          in: path
+          description: task_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskResultVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+definitions:
+  ActFlowConfigVO:
+    type: object
+    properties:
+      active:
+        type: boolean
+      bizType:
+        type: string
+      flowCode:
+        type: string
+      flowName:
+        type: string
+      id:
+        type: string
+      moduleName:
+        type: string
+      processKey:
+        type: string
+    title: ActFlowConfigVO
+  ActivitiApprovalRequestVO:
+    type: object
+    properties:
+      assignee:
+        type: string
+      assignee_user_ids:
+        type: array
+        items:
+          type: string
+    title: ActivitiApprovalRequestVO
+  ActivitiDetailVO:
+    type: object
+    properties:
+      approved:
+        type: string
+      bizType:
+        type: string
+      ccInfo:
+        $ref: '#/definitions/CcDTO'
+      data:
+        type: object
+      id:
+        type: string
+      nextUserTask:
+        $ref: '#/definitions/ActivityUserTaskVO'
+      process:
+        $ref: '#/definitions/ActivitiProcessDetailDataVO'
+      processDefinitionName:
+        type: string
+      tasks:
+        type: array
+        items:
+          $ref: '#/definitions/ActivitiTaskDetailDataVO'
+      userTasks:
+        type: array
+        items:
+          $ref: '#/definitions/ActivityUserTaskVO'
+    title: ActivitiDetailVO
+  ActivitiLaneVO:
+    type: object
+    properties:
+      name:
+        type: string
+      user_tasks:
+        type: array
+        items:
+          $ref: '#/definitions/ActivityUserTaskVO'
+    title: ActivitiLaneVO
+  ActivitiProcessDetailDataVO:
+    type: object
+    properties:
+      approved:
+        type: string
+      businessKey:
+        type: string
+      endTime:
+        type: string
+        format: date-time
+      flowCode:
+        type: string
+      processDefinitionName:
+        type: string
+      processId:
+        type: string
+      startUserId:
+        type: string
+    title: ActivitiProcessDetailDataVO
+  ActivitiProcessDetailVO:
+    type: object
+    properties:
+      code:
+        type: string
+      data:
+        $ref: '#/definitions/ActivitiProcessDetailDataVO'
+      message:
+        type: string
+    title: ActivitiProcessDetailVO
+  ActivitiTaskDetailDataVO:
+    type: object
+    properties:
+      approveForm:
+        type: string
+      approved:
+        type: string
+      businessKey:
+        type: string
+      end_time:
+        type: string
+        format: date-time
+      executionId:
+        type: string
+      flowCode:
+        type: string
+      processDefinitionId:
+        type: string
+      processDefinitionKey:
+        type: string
+      processDefinitionName:
+        type: string
+      processInstanceId:
+        type: string
+      remark:
+        type: string
+      start_time:
+        type: string
+        format: date-time
+      taskAssignee:
+        type: string
+      taskAssigneeName:
+        type: string
+      taskCreateTime:
+        type: string
+        format: date-time
+      taskEndTime:
+        type: string
+        format: date-time
+      taskId:
+        type: string
+      taskName:
+        type: string
+    title: ActivitiTaskDetailDataVO
+  ActivityApproveForm:
+    type: object
+    properties:
+      model:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+    title: ActivityApproveForm
+  ActivityTaskConfigCreationRequest:
+    type: object
+    properties:
+      approveAllowChangeAssignee:
+        type: boolean
+        description: 是否可审批时指定审批人，0：否，1：是
+      approveDeptLevel:
+        type: string
+        description: 组织架构，0：不启用，1：当前部门负责人，2：上级部门负责人，3/4/5/6：向上3/4/5/6级负责人
+      approveNoticeType:
+        type: string
+        description: 'NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉'
+      approveRoles:
+        type: string
+        description: 指定角色，可多选，关联role id，逗号隔开
+      approveTags:
+        type: string
+        description: 指定角色，可多选，关联tag id，逗号隔开
+      approveUsers:
+        type: string
+        description: 指定审批人，可多选，关联user id，逗号隔开
+      attachmentVisible:
+        type: boolean
+        description: 是否可查看附件，0：不可，1：可查看
+      flowCode:
+        type: string
+        description: flow code
+      id:
+        type: integer
+        format: int64
+      passAllowChangeNoticeType:
+        type: boolean
+        description: 通过通知人通知方式是否可选，0：否，1：是
+      passCcAllowChangeAssignee:
+        type: boolean
+        description: 是否可审批时指定通过的抄送人，0：否，1：是
+      passCcAllowChangeNoticeType:
+        type: boolean
+        description: 是否开放选择通过通知方式
+      passCcNoticeType:
+        type: string
+        description: '通过抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉'
+      passCcRoles:
+        type: string
+        description: 审批通过抄送角色，可多选，关联role id，逗号隔开
+      passCcTags:
+        type: string
+        description: 审批通过抄送角色，可多选，关联tag id，逗号隔开
+      passCcUsers:
+        type: string
+        description: 审批通过抄送人，关联user id，可多选，逗号隔开
+      rejectAllowChangeNoticeType:
+        type: boolean
+        description: 退回通知人通知方式是否可选，0：否，1：是
+      rejectCcAllowChangeAssignee:
+        type: boolean
+        description: 是否可审批时指定退回的抄送人，0：否，1：是
+      rejectCcAllowChangeNoticeType:
+        type: boolean
+        description: 是否开放选择退回通知方式
+      rejectCcNoticeType:
+        type: string
+        description: '退回抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉'
+      rejectCcRoles:
+        type: string
+        description: 审批退回抄送角色，可多选，关联role id，逗号隔开
+      rejectCcTags:
+        type: string
+        description: 审批退回抄送角色，可多选，关联tag id，逗号隔开
+      rejectCcUsers:
+        type: string
+        description: 审批退回抄送人，关联user id，可多选，逗号隔开
+      taskId:
+        type: string
+        description: task id
+      taskName:
+        type: string
+        description: task name
+      tenantId:
+        type: string
+        description: 租户ID
+    title: ActivityTaskConfigCreationRequest
+  ActivityTaskConfigVO:
+    type: object
+    properties:
+      allApproveUsers:
+        type: array
+        description: >-
+          allUserIds为true时返回，所有审批人Id，包括approveUsers、approveDeptLevel下所有的用户id，approveRoles下所有的用户id
+        items:
+          $ref: '#/definitions/UserVO'
+      allPassCcUsers:
+        type: array
+        description: allUserIds为true时返回，所有通过时的抄送人id，passCcUsers、passCcRoles下所有的用户id
+        items:
+          $ref: '#/definitions/UserVO'
+      allRejectCcUsers:
+        type: array
+        description: allUserIds为true时返回，所有拒绝时的抄送人id，rejectCcUsers、rejectCcRoles下所有的用户id
+        items:
+          $ref: '#/definitions/UserVO'
+      approveAllowChangeAssignee:
+        type: boolean
+        description: 是否可审批时指定审批人，0：否，1：是
+      approveDeptLevel:
+        type: string
+        description: 组织架构，0：不启用，1：当前部门负责人，2：上级部门负责人，3/4/5/6：向上3/4/5/6级负责人
+      approveFrame:
+        description: 审批动态表单
+        $ref: '#/definitions/Frame'
+      approveNoticeType:
+        type: string
+        description: 'NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉'
+      approveRoles:
+        type: string
+        description: 指定角色，可多选，关联role id，逗号隔开
+      approveTags:
+        type: string
+        description: 指定角色，可多选，关联tag id，逗号隔开
+      approveUsers:
+        type: string
+        description: 指定审批人，可多选，关联user id，逗号隔开
+      assignee:
+        type: string
+        description: 候选人称号
+      attachmentVisible:
+        type: boolean
+        description: 是否可查看附件，0：不可，1：可查看
+      flowCode:
+        type: string
+        description: flow code
+      id:
+        type: integer
+        format: int64
+      multiple_assignee:
+        type: boolean
+      passAllowChangeNoticeType:
+        type: boolean
+        description: 通过通知人通知方式是否可选，0：否，1：是
+      passCcAllowChangeAssignee:
+        type: boolean
+        description: 是否可审批时指定通过的抄送人，0：否，1：是
+      passCcAllowChangeNoticeType:
+        type: boolean
+        description: 是否开放选择通过通知方式
+      passCcNoticeType:
+        type: string
+        description: '通过抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉'
+      passCcRoles:
+        type: string
+        description: 审批通过抄送角色，可多选，关联role id，逗号隔开
+      passCcTags:
+        type: string
+        description: 审批通过抄送角色，可多选，关联tag id，逗号隔开
+      passCcUsers:
+        type: string
+        description: 审批通过抄送人，关联user id，可多选，逗号隔开
+      rejectAllowChangeNoticeType:
+        type: boolean
+        description: 退回通知人通知方式是否可选，0：否，1：是
+      rejectCcAllowChangeAssignee:
+        type: boolean
+        description: 是否可审批时指定退回的抄送人，0：否，1：是
+      rejectCcAllowChangeNoticeType:
+        type: boolean
+        description: 是否开放选择退回通知方式
+      rejectCcNoticeType:
+        type: string
+        description: '退回抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉'
+      rejectCcRoles:
+        type: string
+        description: 审批退回抄送角色，可多选，关联role id，逗号隔开
+      rejectCcTags:
+        type: string
+        description: 审批退回抄送角色，可多选，关联tag id，逗号隔开
+      rejectCcUsers:
+        type: string
+        description: 审批退回抄送人，关联user id，可多选，逗号隔开
+      taskId:
+        type: string
+        description: task id
+      taskName:
+        type: string
+        description: task name
+      tenantId:
+        type: string
+        description: 租户ID
+    title: ActivityTaskConfigVO
+  ActivityUserTaskVO:
+    type: object
+    properties:
+      approve_form:
+        type: array
+        items:
+          $ref: '#/definitions/ActivityApproveForm'
+      approved:
+        type: string
+      assignee:
+        type: string
+      assignee_user_id:
+        type: string
+      assignee_user_name:
+        type: string
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmObjectVO'
+      business_key:
+        type: string
+      end_time:
+        type: string
+        format: date-time
+      key:
+        type: string
+      lane_name:
+        type: string
+      multiple_assignee:
+        type: boolean
+      name:
+        type: string
+      process_definition_key:
+        type: string
+      process_definition_name:
+        type: string
+      remark:
+        type: string
+      start_time:
+        type: string
+        format: date-time
+      task_id:
+        type: string
+      user_task_id:
+        type: string
+    title: ActivityUserTaskVO
+  ApprovalRequest:
+    type: object
+    properties:
+      approveForm:
+        type: string
+      approveForms:
+        type: array
+        items:
+          $ref: '#/definitions/ApproveForm'
+      approved:
+        type: boolean
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmUploadVO'
+      bizType:
+        type: string
+      processId:
+        type: string
+      processVariables:
+        type: object
+      remark:
+        type: string
+      taskConfig:
+        $ref: '#/definitions/TaskApproveRequest'
+      taskVariables:
+        type: object
+    title: ApprovalRequest
+  ApproveForm:
+    type: object
+    properties:
+      model:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+    title: ApproveForm
+  AssetDTO:
+    type: object
+    properties:
+      activate:
+        type: string
+      assetModel:
+        type: string
+      assetName:
+        type: string
+      assetNo:
+        type: string
+      assetType:
+        type: string
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmObjectVO'
+      description:
+        type: string
+      equipmentList:
+        type: array
+        items:
+          $ref: '#/definitions/EquipmentDTO'
+      id:
+        type: string
+      importantLevel:
+        type: string
+      tenantId:
+        type: string
+    title: AssetDTO
+  AssetVO:
+    type: object
+    properties:
+      activate:
+        type: string
+      assetModel:
+        type: string
+      assetName:
+        type: string
+      assetNo:
+        type: string
+      assetType:
+        type: string
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmObjectVO'
+      description:
+        type: string
+      id:
+        type: string
+      importantLevel:
+        type: string
+      tenantId:
+        type: string
+    title: AssetVO
+  BarCodeCreateRequest:
+    type: object
+    properties:
+      category:
+        type: string
+      codeType:
+        type: string
+      params:
+        type: string
+    title: BarCodeCreateRequest
+  BarCodeDetailVO:
+    type: object
+    properties:
+      category:
+        type: string
+      code:
+        type: string
+      codeType:
+        type: string
+      id:
+        type: string
+      params:
+        type: string
+    title: BarCodeDetailVO
+  BarCodeListVO:
+    type: object
+    properties:
+      category:
+        type: string
+      code:
+        type: string
+      codeType:
+        type: string
+      id:
+        type: string
+    title: BarCodeListVO
+  BarCodePrintRequest:
+    type: object
+    properties:
+      category:
+        type: string
+      codeType:
+        type: string
+      params:
+        type: string
+      printParams:
+        type: object
+        additionalProperties:
+          type: string
+      quantity:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 10
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      temp:
+        type: boolean
+      templateCode:
+        type: string
+    title: BarCodePrintRequest
+  BizIdPrintVO:
+    type: object
+    properties:
+      bizId:
+        type: string
+      bizType:
+        type: string
+    title: BizIdPrintVO
+  BpmMsgBodyPoRequest:
+    type: object
+    properties:
+      brand:
+        type: string
+      contractName:
+        type: string
+      contractNo:
+        type: string
+      itemId:
+        type: string
+      itemNumc:
+        type: integer
+        format: int32
+      itemRemark:
+        type: string
+      materialDesc:
+        type: string
+      materialName:
+        type: string
+      materialNo:
+        type: string
+      materialUnit:
+        type: string
+      msgId:
+        type: string
+      orderedAt:
+        type: string
+        format: date-time
+      orderedByEmpNo:
+        type: string
+      orderedByMobile:
+        type: string
+      orderedByName:
+        type: string
+      originalCurrencyName:
+        type: string
+      originalCurrencyNo:
+        type: string
+      paymentCycle:
+        type: string
+      paymentInfo:
+        type: string
+      paymentType:
+        type: string
+      paymentTypeName:
+        type: string
+      poAprvStatus:
+        type: string
+      poId:
+        type: string
+      poNo:
+        type: string
+      poRemark:
+        type: string
+      poStatus:
+        type: string
+      poStatusCode:
+        type: string
+      poTotalPrice:
+        type: number
+      poTotalQty:
+        type: number
+      poTotalTaxPrice:
+        type: number
+      purchaseQty:
+        type: number
+      purchaseType:
+        type: string
+      purchaseTypeName:
+        type: string
+      requiredDeliveryDate:
+        type: string
+        format: date
+      soName:
+        type: string
+      soNo:
+        type: string
+      supplierName:
+        type: string
+      supplierOrgCode:
+        type: string
+      taxRate:
+        type: number
+      tenantId:
+        type: string
+      totalPrice:
+        type: number
+      totalTaxPrice:
+        type: number
+      unitPrice:
+        type: number
+      unitTaxPrice:
+        type: number
+      url:
+        type: string
+    title: BpmMsgBodyPoRequest
+  BpmMsgCreateRequestOfBpmMsgBodyPoRequest:
+    type: object
+    properties:
+      actionType:
+        type: string
+      applyAt:
+        type: string
+        format: date-time
+      applyUserEmpNo:
+        type: string
+      applyUserName:
+        type: string
+      aprvNode:
+        type: string
+      aprvNodeName:
+        type: string
+      aprvUserEmpNo:
+        type: string
+      aprvUserName:
+        type: string
+      bizId:
+        type: string
+      bizNo:
+        type: string
+      bizType:
+        type: string
+      bodies:
+        type: array
+        items:
+          $ref: '#/definitions/BpmMsgBodyPoRequest'
+      msgId:
+        type: string
+      processId:
+        type: string
+      serviceClient:
+        type: string
+      taskId:
+        type: string
+    title: BpmMsgCreateRequestOfBpmMsgBodyPoRequest
+  CcDTO:
+    type: object
+    properties:
+      allPassCcUsers:
+        type: array
+        description: allUserIds为true时返回，所有通过时的抄送人id，passCcUsers、passCcRoles下所有的用户id
+        items:
+          $ref: '#/definitions/UserVO'
+      allRejectCcUsers:
+        type: array
+        description: allUserIds为true时返回，所有拒绝时的抄送人id，rejectCcUsers、rejectCcRoles下所有的用户id
+        items:
+          $ref: '#/definitions/UserVO'
+      passCcAllowChangeAssignee:
+        type: boolean
+        description: 是否可审批时指定通过的抄送人，0：否，1：是
+      passCcAllowChangeNoticeType:
+        type: boolean
+        description: 是否开放选择通过通知方式
+      passCcNoticeType:
+        type: string
+        description: '通过抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉'
+      passCcRoles:
+        type: string
+        description: 审批通过抄送角色，可多选，关联role id，逗号隔开
+      passCcTags:
+        type: string
+        description: 审批通过抄送角色，可多选，关联tag id，逗号隔开
+      passCcUsers:
+        type: string
+        description: 审批通过抄送人，关联user id，可多选，逗号隔开
+      rejectAllowChangeNoticeType:
+        type: boolean
+        description: 退回通知人通知方式是否可选，0：否，1：是
+      rejectCcAllowChangeAssignee:
+        type: boolean
+        description: 是否可审批时指定退回的抄送人，0：否，1：是
+      rejectCcAllowChangeNoticeType:
+        type: boolean
+        description: 是否开放选择退回通知方式
+      rejectCcNoticeType:
+        type: string
+        description: '退回抄送人通知方式，NOTIFICATION:站内信，EMAIL:邮件，WX_WORK:企业微信，DING_TALK:钉钉'
+      rejectCcRoles:
+        type: string
+        description: 审批退回抄送角色，可多选，关联role id，逗号隔开
+      rejectCcTags:
+        type: string
+        description: 审批退回抄送角色，可多选，关联tag id，逗号隔开
+      rejectCcUsers:
+        type: string
+        description: 审批退回抄送人，关联user id，可多选，逗号隔开
+    title: CcDTO
+  DisplayDecimalConfigVO:
+    type: object
+    properties:
+      displayIndicator:
+        type: integer
+        format: int32
+      id:
+        type: string
+      usedField:
+        type: string
+    title: DisplayDecimalConfigVO
+  EntityObject:
+    type: object
+    title: EntityObject
+  EquipmentClassVO:
+    type: object
+    properties:
+      category:
+        type: string
+      description:
+        type: string
+      equipClassName:
+        type: string
+      id:
+        type: string
+    title: EquipmentClassVO
+  EquipmentCountUpdateRequest:
+    type: object
+    properties:
+      activateTime:
+        type: integer
+        format: int32
+      maintainCount:
+        type: integer
+        format: int32
+      repairCount:
+        type: integer
+        format: int32
+      usageCount:
+        type: integer
+        format: int32
+    title: EquipmentCountUpdateRequest
+  EquipmentDTO:
+    type: object
+    properties:
+      activateTime:
+        type: integer
+        format: int32
+      assetDepre:
+        type: number
+      assetId:
+        type: string
+      assetName:
+        type: string
+      assetNo:
+        type: string
+      assetVO:
+        $ref: '#/definitions/AssetVO'
+      assetValue:
+        type: number
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmObjectVO'
+      collect:
+        type: boolean
+      columnA:
+        type: string
+      columnB:
+        type: string
+      columnC:
+        type: string
+      columnD:
+        type: string
+      columnE:
+        type: string
+      columnF:
+        type: string
+      columnG:
+        type: string
+      columnH:
+        type: string
+      columnI:
+        type: string
+      columnJ:
+        type: string
+      columnK:
+        type: string
+      columnL:
+        type: string
+      columnM:
+        type: string
+      columnN:
+        type: string
+      columnO:
+        type: string
+      columnP:
+        type: string
+      columnQ:
+        type: string
+      columnR:
+        type: string
+      columnS:
+        type: string
+      columnT:
+        type: string
+      commissioningDate:
+        type: string
+        example: yyyy-MM-dd
+      contactPhone:
+        type: string
+      contacter:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      defaultRegionId:
+        type: string
+      defaultRegionName:
+        type: string
+      defaultRegionNo:
+        type: string
+      defaultRegionType:
+        type: string
+      defaultWarehouseId:
+        type: string
+      defaultWarehouseName:
+        type: string
+      defaultWarehouseNo:
+        type: string
+      description:
+        type: string
+      epStatus:
+        type: string
+      epType:
+        type: string
+      equipAssetNo:
+        type: string
+      equipName:
+        type: string
+      equipNo:
+        type: string
+      equipmentClasses:
+        type: array
+        items:
+          $ref: '#/definitions/EquipmentClassVO'
+      id:
+        type: string
+      importantLevel:
+        type: string
+      latestUsageRecord:
+        $ref: '#/definitions/EquipmentUsageRecordVO'
+      maintainCount:
+        type: integer
+        format: int32
+      maintainFullname:
+        type: string
+      maintainName:
+        type: string
+      maintainStatus:
+        type: string
+      maintainUserId:
+        type: string
+      manufacturer:
+        type: string
+      model:
+        type: string
+      principalFullname:
+        type: string
+      principalName:
+        type: string
+      principalUserId:
+        type: string
+      purchaseDate:
+        type: string
+        example: yyyy-MM-dd
+      purchaserFullname:
+        type: string
+      purchaserName:
+        type: string
+      purchaserUserId:
+        type: string
+      regionId:
+        type: string
+      regionName:
+        type: string
+      regionNo:
+        type: string
+      regionType:
+        type: string
+      repairCount:
+        type: integer
+        format: int32
+      repairFullname:
+        type: string
+      repairName:
+        type: string
+      repairStatus:
+        type: string
+      repairUserId:
+        type: string
+      revert:
+        type: boolean
+      supplierFullname:
+        type: string
+      supplierName:
+        type: string
+      supplierUserId:
+        type: string
+      transStatus:
+        type: string
+      transfer:
+        type: boolean
+      usageCount:
+        type: integer
+        format: int32
+      warehouseId:
+        type: string
+      warehouseName:
+        type: string
+      warehouseNo:
+        type: string
+    title: EquipmentDTO
+  EquipmentLocationUpdateRequest:
+    type: object
+    properties:
+      regionId:
+        type: string
+      regionType:
+        type: string
+    title: EquipmentLocationUpdateRequest
+  EquipmentStatusUpdateRequest:
+    type: object
+    properties:
+      epStatus:
+        type: string
+    title: EquipmentStatusUpdateRequest
+  EquipmentUsageRecordVO:
+    type: object
+    properties:
+      actionType:
+        type: string
+      enabled:
+        type: boolean
+      endTime:
+        type: string
+        format: date-time
+      equipId:
+        type: integer
+        format: int64
+      linkId:
+        type: string
+      linkType:
+        type: string
+      material:
+        $ref: '#/definitions/MdMaterialVO'
+      refId:
+        type: string
+      refType:
+        type: string
+      remark:
+        type: string
+      startTime:
+        type: string
+        format: date-time
+      tenantId:
+        type: string
+      usageCount:
+        type: integer
+        format: int64
+      userId:
+        type: string
+      userName:
+        type: string
+    title: EquipmentUsageRecordVO
+  ExternalBpmCreateRequest:
+    type: object
+    properties:
+      applyUserId:
+        type: string
+      assignee:
+        type: string
+      assigneeId:
+        type: string
+      assigneeName:
+        type: string
+      businessKey:
+        type: string
+      flowCode:
+        type: string
+      processId:
+        type: string
+      taskId:
+        type: string
+    title: ExternalBpmCreateRequest
+  Field:
+    type: object
+    properties:
+      columns:
+        type: array
+        items:
+          $ref: '#/definitions/Frame'
+      key:
+        type: string
+      model:
+        type: string
+      name:
+        type: string
+      options:
+        $ref: '#/definitions/Options'
+      rules:
+        type: array
+        items:
+          $ref: '#/definitions/Rule'
+      syncModel:
+        type: string
+      tableColumns:
+        type: array
+        items:
+          $ref: '#/definitions/Field'
+      tabs:
+        type: array
+        items:
+          $ref: '#/definitions/Frame'
+      type:
+        type: string
+    title: Field
+  FlowCodeRequest:
+    type: object
+    properties:
+      dbName:
+        type: string
+      processKeyFlowCodeMap:
+        type: object
+        additionalProperties:
+          type: string
+    title: FlowCodeRequest
+  Frame:
+    type: object
+    properties:
+      list:
+        type: array
+        items:
+          $ref: '#/definitions/Field'
+    title: Frame
+  FwOaRequest:
+    type: object
+    properties:
+      assignee:
+        type: string
+      businessKey:
+        type: string
+      flowCode:
+        type: string
+      taskId:
+        type: string
+    title: FwOaRequest
+  LongIdBulkQueryRequest:
+    type: object
+    properties:
+      bizIds:
+        type: array
+        items:
+          type: integer
+          format: int64
+    title: LongIdBulkQueryRequest
+  MdDimensionVO:
+    type: object
+    properties:
+      dimensionLetter:
+        type: string
+      dimensionName:
+        type: string
+      ecurrIndex:
+        type: number
+      id:
+        type: string
+      lengIndex:
+        type: number
+      lightIndex:
+        type: number
+      massIndex:
+        type: number
+      molequIndex:
+        type: number
+      siUnit:
+        type: string
+      tempIndex:
+        type: number
+      timeIndex:
+        type: number
+    title: MdDimensionVO
+  MdMaterialVO:
+    type: object
+    properties:
+      abcIndicator:
+        type: string
+      assemblyScrapPercent:
+        type: number
+      authGroup:
+        type: string
+      autoPoAllowedIndicator:
+        type: boolean
+      availabilityCheckGroup:
+        type: string
+      backFlushIndicator:
+        type: boolean
+      backwardConsumptionPeriod:
+        type: number
+      batchManageReqIndicator:
+        type: boolean
+      bomNodeCount:
+        type: integer
+        format: int32
+      brand:
+        type: string
+      brandId:
+        type: string
+      cccNo:
+        type: string
+      checkFlag:
+        type: boolean
+      checkTypeCodes:
+        type: array
+        items:
+          type: string
+      clientLevelDeleteIndicator:
+        type: boolean
+      consumptionMode:
+        type: string
+      createdBy:
+        type: string
+      createdByName:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      customerNo:
+        type: string
+      dependentReqIndicator:
+        type: boolean
+      dimensionUnit:
+        type: string
+      dimensionUnitVO:
+        $ref: '#/definitions/MdMeasureUnitVO'
+      fixedLotSize:
+        type: number
+      forwardConsumptionPeriod:
+        type: number
+      goodsIssueType:
+        type: string
+      grossWeight:
+        type: number
+      height:
+        type: number
+      id:
+        type: string
+      industrySector:
+        type: string
+      issueStorageLocation:
+        type: string
+      issueStorageLocationId:
+        type: string
+      issueUnit:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedByName:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      lastModifyDate:
+        type: string
+        format: date
+      locked:
+        type: boolean
+      lotSize:
+        type: number
+      lotSizeType:
+        type: string
+      lowLevelCode:
+        type: string
+      materialCategory:
+        type: string
+      materialDesc:
+        type: string
+      materialGroup:
+        type: string
+      materialGroupCode:
+        type: string
+      materialId:
+        type: string
+      materialLength:
+        type: number
+      materialName:
+        type: string
+      materialNo:
+        type: string
+      materialProdUnit:
+        type: string
+      materialPurchaseUnit:
+        type: string
+      materialRequisitionUnit:
+        type: string
+      materialSaleUnit:
+        type: string
+      materialType:
+        type: string
+      materialUnit:
+        type: string
+      materialUnitCode:
+        type: string
+      materialUnitGroup:
+        type: string
+      maxLotSize:
+        type: number
+      measureUnit:
+        $ref: '#/definitions/MdMeasureUnitVO'
+      measureUnitGroup:
+        $ref: '#/definitions/MdMeasureUnitGroupVO'
+      metalTexture:
+        type: string
+      mfrMaterialNo:
+        type: string
+      minLotSize:
+        type: number
+      minRemainShelfLife:
+        type: number
+      mrpController:
+        type: string
+      mrpGroup:
+        type: string
+      mrpType:
+        type: string
+      mrpTypeName:
+        type: string
+      negativeStockAllowedIndicator:
+        type: boolean
+      netWeight:
+        type: number
+      oldMaterialNo:
+        type: string
+      orderUnit:
+        type: string
+      overDeliveryUpperLimit:
+        type: number
+      pickingStorageLocationId:
+        type: string
+      pickingType:
+        type: string
+      plannedLeadTime:
+        type: number
+      planningStrategyGroup:
+        type: string
+      planningTimeFence:
+        type: number
+      plantLevelDeleteIndicator:
+        type: boolean
+      ppcPlanningCalendar:
+        type: string
+      procurementType:
+        type: string
+      prodMeasureUnit:
+        $ref: '#/definitions/MdMeasureUnitVO'
+      prodUnit:
+        type: string
+      purchaseGroup:
+        type: string
+      purchaseMeasureUnit:
+        $ref: '#/definitions/MdMeasureUnitVO'
+      qualityGroupCode:
+        type: string
+      receiptLeadTime:
+        type: number
+      receiptStorageLocationId:
+        type: string
+      requisitionMeasureUnit:
+        $ref: '#/definitions/MdMeasureUnitVO'
+      ropValue:
+        type: number
+      roundingValue:
+        type: number
+      safetyPeriod:
+        type: number
+      safetyStock:
+        type: number
+      saleMeasureUnit:
+        $ref: '#/definitions/MdMeasureUnitVO'
+      selfMakeInboundStorageLocationId:
+        type: string
+      serviceIndicator:
+        type: boolean
+      sourceListReqIndicator:
+        type: boolean
+      spProcurementType:
+        type: string
+      stockLowerLimit:
+        type: number
+      stockUpperLimit:
+        type: number
+      supplierName:
+        type: string
+      takeCorrectionFactorsIndicator:
+        type: boolean
+      tenantId:
+        type: string
+      totalReplenishLeadTime:
+        type: number
+      totalShelfLife:
+        type: number
+      tx:
+        type: string
+      underDeliveryUpperLimit:
+        type: number
+      unlimitedOverDeliveryIndicator:
+        type: boolean
+      valid:
+        type: boolean
+      validFromDate:
+        type: string
+        format: date
+      validLabel:
+        type: string
+      validToDate:
+        type: string
+        format: date
+      version:
+        type: integer
+        format: int32
+      volume:
+        type: number
+      volumeUnit:
+        type: string
+      volumeUnitVO:
+        $ref: '#/definitions/MdMeasureUnitVO'
+      weightUnit:
+        type: string
+      weightUnitVO:
+        $ref: '#/definitions/MdMeasureUnitVO'
+      width:
+        type: number
+    title: MdMaterialVO
+  MdMeasureUnitGroupVO:
+    type: object
+    properties:
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      defaultGroup:
+        type: boolean
+      enable:
+        type: boolean
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      unitGroupCategory:
+        type: string
+      unitGroupName:
+        type: string
+      unitGroupNo:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: MdMeasureUnitGroupVO
+  MdMeasureUnitVO:
+    type: object
+    properties:
+      additiveConstant:
+        type: number
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      denominator:
+        type: number
+      dimension:
+        $ref: '#/definitions/MdDimensionVO'
+      dimensionId:
+        type: string
+      displayDecimal:
+        type: integer
+        format: int32
+      enable:
+        type: boolean
+      exponent:
+        type: number
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      numerator:
+        type: number
+      roundingDecimal:
+        type: integer
+        format: int32
+      siUnit:
+        type: string
+      unitCode:
+        type: string
+      unitDesc:
+        type: string
+      unitGroups:
+        type: array
+        items:
+          $ref: '#/definitions/MdMeasureUnitGroupVO'
+      unitName:
+        type: string
+      unitNo:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: MdMeasureUnitVO
+  NewInstanceVO:
+    type: object
+    properties:
+      id:
+        type: string
+    title: NewInstanceVO
+  Option:
+    type: object
+    properties:
+      description:
+        type: string
+      label:
+        type: string
+      value:
+        type: string
+    title: Option
+  Options:
+    type: object
+    properties:
+      acceptType:
+        type: string
+      afterClick:
+        type: string
+      allowTypes:
+        type: array
+        items:
+          type: string
+      codeDefKey:
+        type: string
+      controls:
+        type: array
+        items:
+          type: string
+      dataBind:
+        type: boolean
+      dataType:
+        type: string
+      defaultValue:
+        type: string
+      disabled:
+        type: boolean
+      editable:
+        type: boolean
+      flowCode:
+        type: string
+      format:
+        type: string
+      hidden:
+        type: boolean
+      limit:
+        type: integer
+        format: int32
+      limitSize:
+        type: integer
+        format: int32
+      max:
+        type: integer
+        format: int32
+      min:
+        type: integer
+        format: int32
+      multiple:
+        type: boolean
+      options:
+        type: array
+        items:
+          $ref: '#/definitions/Option'
+      osmKey:
+        type: string
+      pattern:
+        type: string
+      readonly:
+        type: boolean
+      remote:
+        type: boolean
+      remoteFunc:
+        type: string
+      remoteOption:
+        type: string
+      remoteOptions:
+        type: array
+        items:
+          $ref: '#/definitions/Option'
+      remoteType:
+        type: string
+      required:
+        type: boolean
+      ruleControls:
+        type: array
+        items:
+          type: string
+      step:
+        type: integer
+        format: int32
+      timestamp:
+        type: boolean
+      validateData:
+        type: boolean
+      validateKeys:
+        type: array
+        items:
+          type: string
+      width:
+        type: string
+    title: Options
+  OsmObjectVO:
+    type: object
+    properties:
+      bizType:
+        type: string
+      bizValue:
+        type: string
+      createdBy:
+        type: string
+      createdByName:
+        type: string
+      deleted:
+        type: boolean
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedByName:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      name:
+        type: string
+      ossKey:
+        type: string
+      previewObjectId:
+        type: string
+      public:
+        type: integer
+        format: int32
+      signature:
+        $ref: '#/definitions/OssSignature'
+      size:
+        type: integer
+        format: int32
+      tagId:
+        type: string
+      type:
+        type: string
+    title: OsmObjectVO
+  OsmUploadVO:
+    type: object
+    properties:
+      id:
+        type: string
+    title: OsmUploadVO
+  OssSignature:
+    type: object
+    properties:
+      expireTime:
+        type: string
+        format: date-time
+      origin:
+        type: string
+      pdf:
+        type: string
+      standard:
+        type: string
+      thumbnail:
+        type: string
+    title: OssSignature
+  PageOfEntityObject:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/EntityObject'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfEntityObject
+  PageOfTemplateListVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/TemplateListVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfTemplateListVO
+  PrivilegeVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      builtin:
+        type: boolean
+      code:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      operation:
+        type: integer
+        format: int32
+      parentId:
+        type: string
+      resource:
+        type: string
+      tenantId:
+        type: string
+      url:
+        type: string
+      visible:
+        type: boolean
+    title: PrivilegeVO
+  ProcessStartRequest:
+    type: object
+    properties:
+      approvalRequests:
+        type: array
+        items:
+          $ref: '#/definitions/ActivitiApprovalRequestVO'
+      bizCode:
+        type: string
+      businessId:
+        type: string
+      businessKey:
+        type: string
+      businessName:
+        type: string
+      businessNo:
+        type: string
+      flowCode:
+        type: string
+      flowName:
+        type: string
+      startUserId:
+        type: string
+      varsMap:
+        type: object
+    title: ProcessStartRequest
+  RoleTagVO:
+    type: object
+    properties:
+      id:
+        type: string
+      roleId:
+        type: string
+      tag:
+        type: string
+      tenantId:
+        type: string
+    title: RoleTagVO
+  RoleVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      builtin:
+        type: boolean
+      code:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/RoleTagVO'
+      tenantId:
+        type: string
+    title: RoleVO
+  Rule:
+    type: object
+    properties:
+      message:
+        type: string
+      pattern:
+        type: string
+      required:
+        type: boolean
+      trigger:
+        type: array
+        items:
+          type: string
+      type:
+        type: string
+      validatorKey:
+        type: string
+    title: Rule
+  Sort:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      sorted:
+        type: boolean
+      unsorted:
+        type: boolean
+    title: Sort
+  StringNoBulkQueryRequest:
+    type: object
+    properties:
+      bizNos:
+        type: array
+        items:
+          type: string
+    title: StringNoBulkQueryRequest
+  TaskApproveRequest:
+    type: object
+    properties:
+      approveNoticeType:
+        type: array
+        description: 审批人通知方式
+        items:
+          type: string
+      assignees:
+        type: array
+        items:
+          $ref: '#/definitions/ActivitiApprovalRequestVO'
+      passCcNoticeType:
+        type: array
+        description: 通过抄送人通知方式
+        items:
+          type: string
+      passCcUsers:
+        type: array
+        items:
+          type: string
+      rejectCcNoticeType:
+        type: array
+        description: 退回抄送人通知方式
+        items:
+          type: string
+      rejectCcUsers:
+        type: array
+        items:
+          type: string
+    title: TaskApproveRequest
+  TaskCompleteRequest:
+    type: object
+    required:
+      - lastModifiedDate
+    properties:
+      approved:
+        type: boolean
+      aprvAt:
+        type: string
+      aprvBy:
+        type: string
+      aprvByName:
+        type: string
+      aprvRemark:
+        type: string
+      bizType:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      processId:
+        type: string
+    title: TaskCompleteRequest
+  TaskResultVO:
+    type: object
+    properties:
+      completed:
+        type: boolean
+      errMsg:
+        type: string
+    title: TaskResultVO
+  TemplateDetailVO:
+    type: object
+    properties:
+      defaulted:
+        type: boolean
+      id:
+        type: integer
+        format: int64
+      publicized:
+        type: boolean
+      qrCodeConfig:
+        type: string
+      templateCode:
+        type: string
+      templateContent:
+        type: string
+      templateName:
+        type: string
+      templatePlaceholder:
+        type: string
+      templateType:
+        type: string
+      templateUrl:
+        type: string
+    title: TemplateDetailVO
+  TemplateListVO:
+    type: object
+    properties:
+      defaulted:
+        type: boolean
+      id:
+        type: integer
+        format: int64
+      publicized:
+        type: boolean
+      templateCode:
+        type: string
+      templateName:
+        type: string
+      templateType:
+        type: string
+    title: TemplateListVO
+  TemplateRenderRequest:
+    type: object
+    properties:
+      barCode:
+        $ref: '#/definitions/BarCodeCreateRequest'
+      platform:
+        type: string
+      renderParams:
+        type: object
+        additionalProperties:
+          type: string
+      temp:
+        type: boolean
+    title: TemplateRenderRequest
+  TemplateRenderVO:
+    type: object
+    properties:
+      result:
+        type: string
+      template:
+        $ref: '#/definitions/TemplateDetailVO'
+    title: TemplateRenderVO
+  TenantOrgUserVO:
+    type: object
+    properties:
+      avatar:
+        type: string
+      birthday:
+        type: string
+        format: date
+      description:
+        type: string
+      email:
+        type: string
+      empNo:
+        type: string
+      fullname:
+        type: string
+      gender:
+        type: string
+      id:
+        type: string
+      mobile:
+        type: string
+      orgId:
+        type: string
+      orgRole:
+        type: integer
+        format: int32
+      organizations:
+        type: array
+        items:
+          $ref: '#/definitions/TenantOrgVO'
+      privileges:
+        type: array
+        items:
+          $ref: '#/definitions/PrivilegeVO'
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/RoleVO'
+      status:
+        type: integer
+        format: int32
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/TenantTagVO'
+      telephone:
+        type: string
+      tenantId:
+        type: string
+      title:
+        type: string
+      username:
+        type: string
+    title: TenantOrgUserVO
+  TenantOrgVO:
+    type: object
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      level:
+        type: integer
+        format: int32
+      name:
+        type: string
+      orgNo:
+        type: string
+      parent:
+        $ref: '#/definitions/TenantOrgVO'
+      parentId:
+        type: string
+      path:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      wxDepartId:
+        type: string
+      wxParentDepartId:
+        type: string
+    title: TenantOrgVO
+  TenantTagVO:
+    type: object
+    properties:
+      id:
+        type: string
+      tagName:
+        type: string
+      tenantId:
+        type: string
+    title: TenantTagVO
+  TenantUserVO:
+    type: object
+    properties:
+      avatar:
+        type: string
+      birthday:
+        type: string
+        format: date
+      description:
+        type: string
+      email:
+        type: string
+      empNo:
+        type: string
+      fullname:
+        type: string
+      gender:
+        type: string
+      id:
+        type: string
+      mobile:
+        type: string
+      organizations:
+        type: array
+        items:
+          $ref: '#/definitions/TenantOrgVO'
+      privileges:
+        type: array
+        items:
+          $ref: '#/definitions/PrivilegeVO'
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/RoleVO'
+      status:
+        type: integer
+        format: int32
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/TenantTagVO'
+      telephone:
+        type: string
+      tenantId:
+        type: string
+      title:
+        type: string
+      username:
+        type: string
+    title: TenantUserVO
+  UserVO:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      roleId:
+        type: string
+      tagId:
+        type: string
+    title: UserVO

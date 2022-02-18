@@ -1,0 +1,1121 @@
+swagger: '2.0'
+info:
+  description: BPME REST API
+  version: 2.12.1.RELEASE
+  title: BPME REST API
+  termsOfService: Terms of service
+  contact:
+    name: Industics Ltd
+    url: 'http://support.industics.com'
+    email: support@industics.com
+  license:
+    name: License of API
+    url: API license URL
+host: 'localhost:30222'
+basePath: /bpme
+tags:
+  - name: 任务相关接口
+    description: Task Endpoint
+  - name: 启动流程实例
+    description: Process Endpoint
+  - name: 部署流程、删除流程
+    description: Deploy Endpoint
+schemes:
+  - http
+paths:
+  /v2/api/claim:
+    post:
+      tags:
+        - 任务相关接口
+      summary: 候选人签收任务
+      description: 候选人签收任务
+      operationId: claimUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: taskId
+          in: query
+          description: taskId
+          required: true
+          type: string
+        - name: userId
+          in: query
+          description: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/completeTask:
+    post:
+      tags:
+        - 任务相关接口
+      summary: 完成任务
+      description: 完成任务，任务进入下一个节点
+      operationId: completeTaskUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/CompleteTaskRequest'
+        - name: taskId
+          in: query
+          description: taskId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/countTaskByAssignee:
+    get:
+      tags:
+        - 任务相关接口
+      summary: 查询待办任务数量
+      description: 根据流程assignee查询当前人的个人任务数量
+      operationId: countTaskByAssigneeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: assignee
+          in: query
+          description: 代理人（当前用户）
+          required: false
+          type: string
+        - name: flowCode
+          in: query
+          description: flowCode
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/delegate:
+    post:
+      tags:
+        - 任务相关接口
+      summary: 委托其他人
+      description: 委托其他人
+      operationId: delegateUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: taskId
+          in: query
+          description: taskId
+          required: true
+          type: string
+        - name: userId
+          in: query
+          description: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/deleteProcess:
+    post:
+      tags:
+        - 部署流程、删除流程
+      summary: 根据部署ID删除流程
+      description: 根据部署ID删除流程
+      operationId: deleteProcessUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: deploymentId
+          in: query
+          description: 部署ID
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/deleteProcessById:
+    post:
+      tags:
+        - 启动流程实例
+      summary: 根据流程实例ID删除流程实例
+      description: 根据流程实例ID删除流程实例
+      operationId: deleteProcessInstanceByIdUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: processId
+          in: query
+          description: 流程实例ID
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/deleteProcessByKey:
+    post:
+      tags:
+        - 启动流程实例
+      summary: 根据流程实例key删除流程实例
+      description: 根据流程实例key删除流程实例
+      operationId: deleteProcessInstanceByKeyUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: processDefinitionKey
+          in: query
+          description: 流程实例Key
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/deploy:
+    post:
+      tags:
+        - 部署流程、删除流程
+      summary: 根据modelId部署流程
+      description: 根据modelId部署流程
+      operationId: deployUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: modelId
+          in: query
+          description: 设计的流程图模型ID
+          required: false
+          type: string
+        - name: processName
+          in: query
+          description: 设计的流程图名称
+          required: false
+          type: string
+        - name: tenantId
+          in: query
+          description: tenantId
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/findHiTaskByAssignee:
+    get:
+      tags:
+        - 任务相关接口
+      summary: 查询已完成任务
+      description: 根据流程assignee查询当前人的已完成任务
+      operationId: findHiTaskByAssigneeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: assignee
+          in: query
+          description: 代理人（当前用户）
+          required: false
+          type: string
+        - name: businessIds
+          in: query
+          description: businessIds
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: flowCode
+          in: query
+          description: flowCode
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: page
+          required: true
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: size
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/findTaskByAssignee:
+    get:
+      tags:
+        - 任务相关接口
+      summary: 查询待办任务
+      description: 根据流程assignee查询当前人的个人任务
+      operationId: findTaskByAssigneeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: assignee
+          in: query
+          description: 代理人（当前用户）
+          required: false
+          type: string
+        - name: businessIds
+          in: query
+          description: businessIds
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: flowCode
+          in: query
+          description: flowCode
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: page
+          required: true
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: size
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - 任务相关接口
+      summary: 查询待办任务
+      description: 根据流程assignee查询当前人的个人任务
+      operationId: findTaskByAssigneePostUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: assignee
+          in: query
+          description: 代理人（当前用户）
+          required: false
+          type: string
+        - name: flowCode
+          in: query
+          description: flowCode
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: page
+          required: true
+          type: integer
+          format: int32
+        - name: poId
+          in: query
+          description: poId
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: size
+          in: query
+          description: size
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/getActiveTasks:
+    get:
+      tags:
+        - 任务相关接口
+      summary: 获取流程当前活动任务节点
+      description: 获取当前活动任务节点
+      operationId: getActiveTasksUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: processId
+          in: query
+          description: processId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/getHiTasks:
+    get:
+      tags:
+        - 任务相关接口
+      summary: 获取流程所有任务节点
+      description: taskEndTime为null的代表审批中
+      operationId: getTaskUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: processId
+          in: query
+          description: processId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/getMyCCTasks:
+    get:
+      tags:
+        - 任务相关接口
+      summary: 获取抄送我的
+      description: 获取抄送我的
+      operationId: getMyCCProcessUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: flowCode
+          in: query
+          description: flowCode
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: page
+          required: true
+          type: integer
+          format: int32
+        - name: poId
+          in: query
+          description: poId
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: size
+          in: query
+          description: size
+          required: true
+          type: integer
+          format: int32
+        - name: userId
+          in: query
+          description: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/getProcess:
+    get:
+      tags:
+        - 启动流程实例
+      summary: 获取我的申请
+      description: 获取我的申请
+      operationId: getProcessUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: businessIds
+          in: query
+          description: businessIds
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: flowCode
+          in: query
+          description: flowCode
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: page
+          required: true
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: size
+          required: true
+          type: integer
+          format: int32
+        - name: userId
+          in: query
+          description: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/message:
+    post:
+      tags:
+        - 启动流程实例
+      summary: 触发消息事件
+      description: 触发一个流程的消息事件，并接收一些参数
+      operationId: signalUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: message
+          description: message
+          required: true
+          schema:
+            $ref: '#/definitions/ExecutionMessageVO'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/processes/all-user-tasks-behind:
+    get:
+      tags:
+        - 启动流程实例
+      summary: 获取后面的user tasks
+      description: 获取后面的user tasks，有可能是多个。如果是开始节点，不需要传task id。中间的节点，需传task id。
+      operationId: getAllUserTasksBehindUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: processId
+          in: query
+          description: processId
+          required: false
+          type: string
+        - name: processKey
+          in: query
+          description: processKey
+          required: true
+          type: string
+        - name: taskId
+          in: query
+          description: taskId
+          required: false
+          type: string
+        - name: tenantId
+          in: query
+          description: tenantId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/processes/next-user-tasks:
+    get:
+      tags:
+        - 启动流程实例
+      summary: 获取下个user tasks
+      description: 获取下个user tasks，有可能是多个。如果是开始节点，不需要传task id。中间的节点，需传task id。
+      operationId: getNextUserTasksUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: processId
+          in: query
+          description: processId
+          required: false
+          type: string
+        - name: processKey
+          in: query
+          description: processKey
+          required: true
+          type: string
+        - name: taskId
+          in: query
+          description: taskId
+          required: false
+          type: string
+        - name: tenantId
+          in: query
+          description: tenantId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/processes/user-tasks:
+    get:
+      tags:
+        - 启动流程实例
+      summary: 根据流程key获取用户节点信息
+      operationId: getProcessUserTasksUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: processKey
+          in: query
+          description: processKey
+          required: true
+          type: string
+        - name: tenantId
+          in: query
+          description: tenantId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/processes/{process_id}':
+    get:
+      tags:
+        - 启动流程实例
+      summary: 根据启动的流程ID获取详情
+      operationId: getProcessInstanceDetailsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: historic
+          in: query
+          description: historic
+          required: false
+          type: boolean
+        - name: process_id
+          in: path
+          description: process_id
+          required: true
+          type: string
+        - name: tenantId
+          in: query
+          description: tenantId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/resetAssignee:
+    post:
+      tags:
+        - 任务相关接口
+      summary: 变更审批人
+      description: 变更审批人
+      operationId: resetAssigneeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: taskAssigneeUserVOList
+          description: taskAssigneeUserVOList
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TaskAssigneeUserVO'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/resetRuVariables:
+    post:
+      tags:
+        - 任务相关接口
+      summary: 修改审批人变量
+      description: 修改审批人变量
+      operationId: resetRuVariablesUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: processId
+          in: query
+          description: processId
+          required: true
+          type: string
+        - in: body
+          name: taskAssigneeUserVOList
+          description: taskAssigneeUserVOList
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TaskAssigneeUserVO'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/searchById:
+    get:
+      tags:
+        - 启动流程实例
+      summary: 根据流程ID查询流程实例
+      description: 查询流程实例
+      operationId: searchByIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: processId
+          in: query
+          description: 流程实例ID
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/searchByKey:
+    post:
+      tags:
+        - 启动流程实例
+      summary: 根据流程key查询流程实例
+      description: 查询流程实例
+      operationId: searchProcessInstanceUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: processDefinitionKey
+          in: query
+          description: 流程key
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/searchHistoryById:
+    get:
+      tags:
+        - 启动流程实例
+      summary: 根据流程ID查询流程实例
+      description: 查询流程实例
+      operationId: searchHistoryByIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: processId
+          in: query
+          description: 流程实例ID
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/setAssignee:
+    post:
+      tags:
+        - 任务相关接口
+      summary: 设置Assignee
+      description: 设置Assignee
+      operationId: setAssigneeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: taskId
+          in: query
+          description: taskId
+          required: true
+          type: string
+        - name: userId
+          in: query
+          description: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/start:
+    post:
+      tags:
+        - 启动流程实例
+      summary: 根据流程key启动流程
+      description: 每一个流程有对应的一个key这个是某一个流程内固定的写在bpmn内的
+      operationId: startUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: startRequest
+          description: startRequest
+          required: true
+          schema:
+            $ref: '#/definitions/StartProcessRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RestMessage'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+definitions:
+  CompleteTaskRequest:
+    type: object
+    properties:
+      processVariables:
+        type: object
+      taskVariables:
+        type: object
+    title: CompleteTaskRequest
+  ExecutionMessageVO:
+    type: object
+    properties:
+      autoFinishTask:
+        type: boolean
+      executionId:
+        type: string
+      message:
+        type: string
+      variables:
+        type: object
+    title: ExecutionMessageVO
+  RestMessage:
+    type: object
+    properties:
+      code:
+        type: string
+        description: 状态码
+      data:
+        type: object
+        description: 返回的数据
+      message:
+        type: string
+        description: 错误信息
+    title: RestMessage
+    description: 返回响应数据
+  StartProcessRequest:
+    type: object
+    properties:
+      assignees:
+        type: object
+      bizCode:
+        type: string
+      businessId:
+        type: string
+      businessKey:
+        type: string
+      businessName:
+        type: string
+      businessNo:
+        type: string
+      flowCode:
+        type: string
+      flowName:
+        type: string
+      processKey:
+        type: string
+      processVariables:
+        type: object
+      startUserId:
+        type: string
+      taskVariables:
+        type: object
+      tenantId:
+        type: string
+    title: StartProcessRequest
+  TaskAssigneeUserVO:
+    type: object
+    properties:
+      assignee:
+        type: string
+      taskId:
+        type: string
+      userId:
+        type: string
+      userTaskId:
+        type: string
+    title: TaskAssigneeUserVO

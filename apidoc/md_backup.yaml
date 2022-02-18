@@ -1,0 +1,1514 @@
+swagger: '2.0'
+info:
+  description: MD REST API
+  version: v1.0
+  title: MD REST API
+  termsOfService: Terms of service
+  contact:
+    name: Industics Ltd
+    url: http://support.industics.com
+    email: support@industics.com
+  license:
+    name: License of API
+    url: API license URL
+host: localhost:33028
+basePath: /mom/md
+tags:
+  - name: ACCOUNT
+    description: Account Endpoint
+  - name: CONTACT
+    description: Account Contact Endpoint
+  - name: PRIVATE_ACCOUNT
+    description: Private Account Endpoint
+schemes:
+  - http
+paths:
+  /v2/api/private/tenants/{tenant_id}/account-contacts/bulk-get:
+    post:
+      tags:
+        - CONTACT
+      summary: 查询列表
+      operationId: bulkGetUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: contactIds
+          description: contactIds
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ContactVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/accounts:
+    post:
+      tags:
+        - PRIVATE_ACCOUNT
+      summary: 创建
+      operationId: createAccountUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: X-App-ID
+          in: header
+          required: true
+          type: string
+        - name: X-Operator-ID
+          in: header
+          required: true
+          type: string
+        - in: body
+          name: contractCreationVO
+          description: contractCreationVO
+          required: true
+          schema:
+            $ref: '#/definitions/AccountCreationVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/accounts/bulk-get-by-ids:
+    post:
+      tags:
+        - PRIVATE_ACCOUNT
+      summary: 根据id获得客户
+      operationId: bulkGetAccountsByIdsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: accountIds
+          description: accountIds
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AccountDetailVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/accounts/bulk-get-by-nos:
+    post:
+      tags:
+        - PRIVATE_ACCOUNT
+      summary: 根据no获得客户
+      operationId: bulkGetAccountsByNosUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: accountNos
+          description: accountNos
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AccountDetailVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/accounts/bulk-get-by-params:
+    get:
+      tags:
+        - PRIVATE_ACCOUNT
+      summary: 根据no获得客户
+      operationId: bulkGetAccountsByParamsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: account_level
+          in: query
+          description: account_level
+          required: false
+          type: string
+        - name: account_name
+          in: query
+          description: account_name
+          required: false
+          type: string
+        - name: account_region
+          in: query
+          description: account_region
+          required: false
+          type: string
+        - name: account_type
+          in: query
+          description: account_type
+          required: false
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AccountDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/accounts/template:
+    get:
+      tags:
+        - PRIVATE_ACCOUNT
+      summary: 获取导入客户的模板
+      operationId: getImportAccountTemplateUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+            format: byte
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/accounts/{account_id}:
+    get:
+      tags:
+        - PRIVATE_ACCOUNT
+      summary: 获取客户详情-根据客户ID
+      operationId: getAccountDetailByAccountIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: account_id
+          in: path
+          description: account_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - PRIVATE_ACCOUNT
+      summary: 更新
+      operationId: updateAccountUsingPUT_1
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: X-App-ID
+          in: header
+          required: true
+          type: string
+        - name: X-Operator-ID
+          in: header
+          required: true
+          type: string
+        - name: account_id
+          in: path
+          description: account_id
+          required: true
+          type: string
+        - in: body
+          name: contractUpdateVO
+          description: contractUpdateVO
+          required: true
+          schema:
+            $ref: '#/definitions/AccountUpdateVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/accounts/{account_no}/get-one-by-no:
+    get:
+      tags:
+        - PRIVATE_ACCOUNT
+      summary: 获取客户详情-根据客户编码
+      operationId: getAccountDetailByAccountNoUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: account_no
+          in: path
+          description: account_no
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/private/tenants/{tenant_id}/accounts/{org_code}/get-one-by-org-code:
+    get:
+      tags:
+        - PRIVATE_ACCOUNT
+      summary: 获取客户详情-根据组织机构代码
+      operationId: getAccountDetailByOrgCodeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: org_code
+          in: path
+          description: org_code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/account-contacts/page:
+    get:
+      tags:
+        - CONTACT
+      summary: 查询列表
+      operationId: queryVisitPageUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: account_id
+          in: query
+          description: account_id
+          required: false
+          type: string
+        - name: account_name
+          in: query
+          description: account_name
+          required: false
+          type: string
+        - name: fullname
+          in: query
+          description: fullname
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfContactVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/account-contacts/{contact_id}:
+    delete:
+      tags:
+        - CONTACT
+      summary: 删除联系人
+      operationId: updateCostUsingDELETE
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: contact_id
+          in: path
+          description: contact_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/accounts:
+    post:
+      tags:
+        - ACCOUNT
+      summary: 创建
+      operationId: createAccountUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: contractCreationVO
+          description: contractCreationVO
+          required: true
+          schema:
+            $ref: '#/definitions/AccountCreationVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/accounts/manual-no-enable:
+    get:
+      tags:
+        - ACCOUNT
+      summary: 是否允许手动编号
+      operationId: getAccountNoManualEnableUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/accounts/page:
+    get:
+      tags:
+        - ACCOUNT
+      summary: 查询列表
+      operationId: queryAccountPageUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: account_name
+          in: query
+          description: account_name
+          required: false
+          type: string
+        - name: account_no
+          in: query
+          description: account_no
+          required: false
+          type: string
+        - name: account_type
+          in: query
+          description: account_type
+          required: false
+          type: string
+        - name: keywords
+          in: query
+          description: keywords
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfAccountListItemVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/accounts/{account_id}:
+    get:
+      tags:
+        - ACCOUNT
+      summary: 获取详情
+      operationId: getAccountDetailUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: account_id
+          in: path
+          description: account_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AccountDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - ACCOUNT
+      summary: 更新
+      operationId: updateAccountUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: account_id
+          in: path
+          description: account_id
+          required: true
+          type: string
+        - in: body
+          name: contractUpdateVO
+          description: contractUpdateVO
+          required: true
+          schema:
+            $ref: '#/definitions/AccountUpdateVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/accounts/{account_id}/contact:
+    post:
+      tags:
+        - CONTACT
+      summary: 创建联系人
+      operationId: createContactUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: account_id
+          in: path
+          description: account_id
+          required: true
+          type: string
+        - in: body
+          name: contactSaveRequest
+          description: contactSaveRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ContactSaveRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/tenants/{tenant_id}/accounts/{account_id}/contacts/{contact_id}:
+    put:
+      tags:
+        - CONTACT
+      summary: 更新联系人
+      operationId: updateCostUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: account_id
+          in: path
+          description: account_id
+          required: true
+          type: string
+        - in: body
+          name: contactSaveRequest
+          description: contactSaveRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ContactSaveRequest'
+        - name: contact_id
+          in: path
+          description: contact_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+definitions:
+  AccountCreationVO:
+    type: object
+    properties:
+      accountInvoices:
+        type: array
+        items:
+          $ref: '#/definitions/AccountInvoiceVO'
+      accountLevel:
+        type: string
+      accountName:
+        type: string
+      accountNo:
+        type: string
+      accountPayments:
+        type: array
+        items:
+          $ref: '#/definitions/AccountPaymentVO'
+      accountShortName:
+        type: string
+      accountType:
+        type: string
+      acctClassificationLv1:
+        type: string
+      acctClassificationLv2:
+        type: string
+      address_vo:
+        $ref: '#/definitions/AddressSaveVO'
+      contactName:
+        type: string
+      email:
+        type: string
+      ext1:
+        type: string
+      ext2:
+        type: string
+      ext3:
+        type: string
+      ext4:
+        type: string
+      ext5:
+        type: string
+      extInfo:
+        $ref: '#/definitions/ExtInfoVO'
+      fax:
+        type: string
+      mobile:
+        type: string
+      orgCode:
+        type: string
+      parentAccountId:
+        type: string
+      paymentCurrencyNo:
+        type: string
+      region:
+        type: string
+      scope:
+        type: string
+      segment:
+        type: string
+      segmentCode:
+        type: string
+      telephone:
+        type: string
+    title: AccountCreationVO
+  AccountDetailVO:
+    type: object
+    properties:
+      accountInvoices:
+        type: array
+        items:
+          $ref: '#/definitions/AccountInvoiceVO'
+      accountLevel:
+        type: string
+      accountName:
+        type: string
+      accountNo:
+        type: string
+      accountPayments:
+        type: array
+        items:
+          $ref: '#/definitions/AccountPaymentVO'
+      accountShortName:
+        type: string
+      accountType:
+        type: string
+      acctClassificationLv1:
+        type: string
+      acctClassificationLv2:
+        type: string
+      addressId:
+        type: integer
+        format: int64
+      addressVO:
+        $ref: '#/definitions/AddressVO'
+      contactDetails:
+        type: array
+        items:
+          $ref: '#/definitions/ContactDetailVO'
+      contactName:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      email:
+        type: string
+      ext1:
+        type: string
+      ext2:
+        type: string
+      ext3:
+        type: string
+      ext4:
+        type: string
+      ext5:
+        type: string
+      extInfo:
+        $ref: '#/definitions/ExtInfoVO'
+      fax:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      mobile:
+        type: string
+      orgCode:
+        type: string
+      parentAccountId:
+        type: string
+      paymentCurrencyNo:
+        type: string
+      region:
+        type: string
+      scope:
+        type: string
+      segment:
+        type: string
+      segmentCode:
+        type: string
+      telephone:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: AccountDetailVO
+  AccountInvoiceVO:
+    type: object
+    properties:
+      accountId:
+        type: string
+      address:
+        type: string
+      bank:
+        type: string
+      bankNo:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      id:
+        type: string
+      invoiceName:
+        type: string
+      invoiceType:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      taxNo:
+        type: string
+      telephone:
+        type: string
+      tenantId:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: AccountInvoiceVO
+  AccountListItemVO:
+    type: object
+    properties:
+      accountLevel:
+        type: string
+      accountName:
+        type: string
+      accountNo:
+        type: string
+      accountShortName:
+        type: string
+      accountType:
+        type: string
+      accountTypeName:
+        type: string
+      acctClassificationLv1:
+        type: string
+      acctClassificationLv2:
+        type: string
+      address:
+        type: string
+      addressId:
+        type: integer
+        format: int64
+      city:
+        type: string
+      contactName:
+        type: string
+      country:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      email:
+        type: string
+      exchangeRate:
+        type: number
+      fax:
+        type: string
+      fullAddress:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      mobile:
+        type: string
+      orgCode:
+        type: string
+      originalCurrencyNo:
+        type: string
+      parentAccountId:
+        type: string
+      paymentCurrencyName:
+        type: string
+      paymentCurrencyNo:
+        type: string
+      province:
+        type: string
+      scope:
+        type: string
+      segment:
+        type: string
+      segmentCode:
+        type: string
+      telephone:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: AccountListItemVO
+  AccountPaymentVO:
+    type: object
+    properties:
+      accountId:
+        type: string
+      bank:
+        type: string
+      bankAddress:
+        type: string
+      bankNo:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      openBank:
+        type: string
+      tenantId:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: AccountPaymentVO
+  AccountUpdateVO:
+    type: object
+    properties:
+      accountInvoices:
+        type: array
+        items:
+          $ref: '#/definitions/AccountInvoiceVO'
+      accountLevel:
+        type: string
+      accountName:
+        type: string
+      accountNo:
+        type: string
+      accountPayments:
+        type: array
+        items:
+          $ref: '#/definitions/AccountPaymentVO'
+      accountShortName:
+        type: string
+      accountType:
+        type: string
+      acctClassificationLv1:
+        type: string
+      acctClassificationLv2:
+        type: string
+      address_vo:
+        $ref: '#/definitions/AddressSaveVO'
+      contactName:
+        type: string
+      email:
+        type: string
+      ext1:
+        type: string
+      ext2:
+        type: string
+      ext3:
+        type: string
+      ext4:
+        type: string
+      ext5:
+        type: string
+      extInfo:
+        $ref: '#/definitions/ExtInfoVO'
+      fax:
+        type: string
+      mobile:
+        type: string
+      orgCode:
+        type: string
+      parentAccountId:
+        type: string
+      paymentCurrencyNo:
+        type: string
+      region:
+        type: string
+      scope:
+        type: string
+      segment:
+        type: string
+      segmentCode:
+        type: string
+      telephone:
+        type: string
+    title: AccountUpdateVO
+  AddressSaveVO:
+    type: object
+    properties:
+      addressDetail:
+        type: string
+        minLength: 0
+        maxLength: 1024
+      city:
+        type: integer
+        format: int32
+      country:
+        type: integer
+        format: int32
+      district:
+        type: integer
+        format: int32
+      province:
+        type: integer
+        format: int32
+    title: AddressSaveVO
+  AddressVO:
+    type: object
+    properties:
+      addressDetail:
+        type: string
+      city:
+        type: integer
+        format: int32
+      country:
+        type: integer
+        format: int32
+      district:
+        type: integer
+        format: int32
+      fullAddress:
+        type: string
+      id:
+        type: string
+      province:
+        type: integer
+        format: int32
+    title: AddressVO
+  ContactDetailVO:
+    type: object
+    properties:
+      birthday:
+        type: string
+        format: date
+      email:
+        type: string
+      fullname:
+        type: string
+      gender:
+        type: string
+      hobby:
+        type: string
+      id:
+        type: string
+      jobTitle:
+        type: string
+      mobile:
+        type: string
+      positionType:
+        type: string
+      remark:
+        type: string
+      telephone:
+        type: string
+    title: ContactDetailVO
+  ContactSaveRequest:
+    type: object
+    properties:
+      birthday:
+        type: string
+        format: date
+      email:
+        type: string
+      fullname:
+        type: string
+      gender:
+        type: string
+      hobby:
+        type: string
+      jobTitle:
+        type: string
+      mobile:
+        type: string
+      positionType:
+        type: string
+      remark:
+        type: string
+      telephone:
+        type: string
+    title: ContactSaveRequest
+  ContactVO:
+    type: object
+    properties:
+      accountId:
+        type: string
+      accountName:
+        type: string
+      birthday:
+        type: string
+        format: date
+      email:
+        type: string
+      fullname:
+        type: string
+      gender:
+        type: string
+      hobby:
+        type: string
+      id:
+        type: string
+      jobTitle:
+        type: string
+      mobile:
+        type: string
+      positionType:
+        type: string
+      remark:
+        type: string
+      telephone:
+        type: string
+    title: ContactVO
+  ExtInfoVO:
+    type: object
+    properties:
+      ext1:
+        type: string
+      ext2:
+        type: string
+      ext3:
+        type: string
+      ext4:
+        type: string
+      ext5:
+        type: string
+      ext_1:
+        type: string
+      ext_2:
+        type: string
+      ext_3:
+        type: string
+      ext_4:
+        type: string
+      ext_5:
+        type: string
+    title: ExtInfoVO
+  NewInstanceVO:
+    type: object
+    properties:
+      id:
+        type: string
+    title: NewInstanceVO
+  PageOfAccountListItemVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/AccountListItemVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfAccountListItemVO
+  PageOfContactVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/ContactVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfContactVO
+  Sort:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      sorted:
+        type: boolean
+      unsorted:
+        type: boolean
+    title: Sort

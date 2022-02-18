@@ -1,0 +1,114 @@
+currency:
+  retrieve_tenent_available_currency:
+    url: "/v2/api/tenants/{tenant_id}/mdm/currency/all/available"
+    type: "get"
+    description: "查询租户币种"
+
+
+
+contract:
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/spm/contracts/pages"
+    type: "get"
+    description: "采购管理/合同管理/查询合同"
+    
+purchase_order:
+  create:
+    url: "/v2/api/tenants/{tenant_id}/spm/purchase-orders"
+    type: "post"
+    description: "采购管理/采购订单管理/手动创建PO"
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/spm/purchase-orders/pages"
+    type: "get"
+    description: "采购管理/采购订单管理/复合查询"
+  update:
+    url: "/v2/api/tenants/{tenant_id}/spm/purchase-orders/{po_id}"
+    type: "put"
+    description: "采购管理/采购订单管理/编辑PO"
+  get_detail:
+    url: "/v2/api/tenants/{tenant_id}/spm/purchase-orders/{po_id}"
+    type: "get"
+    description: "采购管理/采购订单管理/获取采购订单详情"
+  purchase_requirent_retrieve:
+    url: "/v2/api/tenants/{tenant_id}/spm/purchase-requirents/items/pages"
+    type: "get"
+    description: "采购管理/采购订单管理/获取采购申请单转换采购订单列表"
+  batch_create_selected:
+    url: /v2/api/tenants/{tenant_id}/spm/purchase-orders/batch-create-selected
+    type: post
+    description: 采购管理/采购申请管理/批量转换
+  create_and_submit:
+    url: /v2/api/tenants/{tenant_id}/spm/purchase-orders/create-and-submit-release
+    type: post
+    description: 创建采购订单并且提交
+
+purchase_requirent:
+  create:
+    url: "/v2/api/tenants/{tenant_id}/spm/purchase-requirents"
+    type: "post"
+    description: "采购管理/采购申请列表/新建采购申请单"
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/spm/purchase-requirents/items/pages"
+    type: "get"
+    description: "采购管理/采购申请列表/查询"
+  get_detail:
+    url: /v2/api/tenants/{tenant_id}/spm/purchase-requirents/{pr_id}
+    type: get
+    description: 采购管理/采购申请列表/获取采购申请详情
+  update:
+    url: /v2/api/tenants/{tenant_id}/spm/purchase-requirents/{pr_id}
+    type: put
+    description: 采购管理/采购申请列表/获取采购申请详情
+  export_excel:
+    url: /v2/api/tenants/{tenant_id}/spm/purchase-requirents/{pr_id}/export
+    type: get
+    description: 采购管理/采购申请列表/导出/编辑采购申请单 (采购管理/采购申请管理/导出/编辑采购申请单)
+  create_and_submit:
+    url: /v2/api/tenants/{tenant_id}/spm/purchase-requirents/create-and-submit
+    type: post
+    description: 生成采购申请单
+  retrieve_on_pr_manage:
+    url: "/v2/api/tenants/{tenant_id}/spm/purchase-requirents/pages"
+    type: "get"
+    description: "采购管理/采购申请管理/查询"
+
+material:
+  retrieve:
+    url: /v2/api/tenants/{tenant_id}/mdm/materials/selected/page
+    type: get
+    description: 获取物料
+
+  
+  # get_detail:
+  #   url:
+  #   type:
+  #   description: 获取物料详情
+
+supplier:
+  retrieve:
+    url: /v2/api/tenants/{tenant_id}/srm/suppliers/list
+    type: get
+    description: 查询供应商
+
+price_record:
+  retrieve: 
+    url: "/v2/api/tenants/{tenant_id}/spm/info-records/page"
+    type: "get"
+    description: "获取价格纪录"
+bom:
+  get_bom_material:
+    url: /v2/api/tenants/{tenant_id}/boms/materials/{material_id}
+    type: get
+    description: 获取物料Bom详情
+  get_boms_info:
+    url: /v2/api/tenants/{tenant_id}/boms/detail/list
+    type: post
+    description: 批量获取物料Bom详情-新
+  update_boms:
+    url: /v2/api/tenants/{tenant_id}/boms
+    type: put
+    description: 新增、修改物料BOM及模板
+  get_bom_material_new:
+    url: /v2/api/tenants/{tenant_id}/boms
+    type: get
+    description: 获取物料Bom详情-新

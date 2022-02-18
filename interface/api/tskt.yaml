@@ -1,0 +1,9 @@
+task: 
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/tasks/page"
+    type: "get"
+    description: "查询任务列表"
+  create:
+    url: "/v2/api/tenants/{tenant_id}/tasks"
+    type: "post"
+    description: "创建任务"

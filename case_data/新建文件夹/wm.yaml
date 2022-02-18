@@ -1,0 +1,222 @@
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:
+  - 工单创建需要数据:
+    - 工单:
+      - 创建信息:
+        - BOM:
+          - children: AUTO_PP_2{start_timestamp}
+            number: 1
+            parent: AUTO_PP_1{start_timestamp}
+          - children: AUTO_PP_3{start_timestamp}
+            number: 2
+            parent: AUTO_PP_1{start_timestamp}
+        - 计量单位组: 无固定换算单位组
+        - 交付物: 
+          - 物料编号: AUTO_PP_1{start_timestamp}
+            数量: "100"
+            计划完成时间: "2021-11-30T00:00:00"
+            计划上线时间: "2021-11-29T00:00:00"
+            未税总额: "10000.00"
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_1{start_timestamp}
+          物料描述: AUTO_PP_1{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_1{start_timestamp}
+          计量单位组: 无固定换算单位组
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_2{start_timestamp}
+          物料描述: AUTO_PP_2{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_2{start_timestamp}
+          计量单位组: 无固定换算单位组
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_3{start_timestamp}
+          物料描述: AUTO_PP_3{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_3{start_timestamp}
+          计量单位组: 无固定换算单位组
+      - 完工日期:
+        - finish_date: "2021-11-30"
+    - 工单:
+      - 创建信息:
+        - BOM:
+          - children: AUTO_PP_5{start_timestamp}
+            number: 1
+            parent: AUTO_PP_4{start_timestamp}
+          - children: AUTO_PP_6{start_timestamp}
+            number: 2
+            parent: AUTO_PP_4{start_timestamp}
+        - 计量单位组: 无固定换算单位组
+        - 交付物: 
+          - 物料编号: AUTO_PP_4{start_timestamp}
+            数量: "100"
+            计划完成时间: "2021-11-30T00:00:00"
+            计划上线时间: "2021-11-29T00:00:00"
+            未税总额: "10000.00"
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_4{start_timestamp}
+          物料描述: AUTO_PP_4{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_4{start_timestamp}
+          计量单位组: 无固定换算单位组
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_5{start_timestamp}
+          物料描述: AUTO_PP_5{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_5{start_timestamp}
+          计量单位组: 无固定换算单位组
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_6{start_timestamp}
+          物料描述: AUTO_PP_6{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_6{start_timestamp}
+          计量单位组: 无固定换算单位组
+      - 完工日期:
+        - finish_date: "2021-11-30"
+  - 入库需要数据:
+    - 库存类型: "非限制库存"
+    - 入库物料: 
+      - 入库数量: 45
+        交付物编号: AUTO_PP_1{start_timestamp}
+      - 入库数量: 100
+        交付物编号: AUTO_PP_4{start_timestamp}
+  期望校验数据:
+  - 交付物编号: AUTO_PP_1{start_timestamp}
+    入库数量: 45
+    库存类型: 非限制库存
+  - 交付物编号: AUTO_PP_4{start_timestamp}
+    入库数量: 100
+    库存类型: 非限制库存  
+  期望结果:
+  - 入库成功
+  标题: 参考工单入库申请单
+  步骤:
+  - 选择参考单据类型为”工单入库申请单"，选择参考的单据（已废弃的无法参考），选择库存类型，仓库，库存地点，移动原因，数量，然后提交。校验
+  测试用例集: 仓库管理/生产入库
+  测试集内顺序: 1
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:
+  - 工单创建需要数据:
+    - 工单:
+      - 创建信息:
+        - BOM:
+          - children: AUTO_PP_8{start_timestamp}
+            number: 1
+            parent: AUTO_PP_7{start_timestamp}
+          - children: AUTO_PP_9{start_timestamp}
+            number: 2
+            parent: AUTO_PP_7{start_timestamp}
+        - 计量单位组: 无固定换算单位组
+        - 交付物: 
+          - 物料编号: AUTO_PP_7{start_timestamp}
+            数量: "100"
+            计划完成时间: "2021-11-30T00:00:00"
+            计划上线时间: "2021-11-29T00:00:00"
+            未税总额: "10000.00"
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_7{start_timestamp}
+          物料描述: AUTO_PP_7{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_7{start_timestamp}
+          计量单位组: 无固定换算单位组
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_8{start_timestamp}
+          物料描述: AUTO_PP_8{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_8{start_timestamp}
+          计量单位组: 无固定换算单位组
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_9{start_timestamp}
+          物料描述: AUTO_PP_9{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_9{start_timestamp}
+          计量单位组: 无固定换算单位组
+      - 完工日期:
+        - finish_date: "2021-11-30"
+    - 工单:
+      - 创建信息:
+        - BOM:
+          - children: AUTO_PP_11{start_timestamp}
+            number: 1
+            parent: AUTO_PP_10{start_timestamp}
+          - children: AUTO_PP_12{start_timestamp}
+            number: 2
+            parent: AUTO_PP_10{start_timestamp}
+        - 计量单位组: 无固定换算单位组
+        - 交付物: 
+          - 物料编号: AUTO_PP_10{start_timestamp}
+            数量: "100"
+            计划完成时间: "2021-11-30T00:00:00"
+            计划上线时间: "2021-11-29T00:00:00"
+            未税总额: "10000.00"
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_10{start_timestamp}
+          物料描述: AUTO_PP_10{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_10{start_timestamp}
+          计量单位组: 无固定换算单位组
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_11{start_timestamp}
+          物料描述: AUTO_PP_11{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_11{start_timestamp}
+          计量单位组: 无固定换算单位组
+        - 启用日期: '2021-11-22T00:00:00'
+          失效日期: '2023-11-22T00:00:00'
+          提前期: '10'
+          物料名称: AUTO_PP_12{start_timestamp}
+          物料描述: AUTO_PP_12{start_timestamp}
+          物料类别: 其他
+          物料编号: AUTO_PP_12{start_timestamp}
+          计量单位组: 无固定换算单位组
+      - 完工日期:
+        - finish_date: "2021-11-30"
+  - 入库需要数据:
+    - 库存类型: "非限制库存"
+    - 入库物料: 
+        - 入库数量: 100
+          交付物编号: AUTO_PP_7{start_timestamp}
+        - 入库数量: 100
+          交付物编号: AUTO_PP_10{start_timestamp}
+  期望校验数据:
+  - 交付物编号: AUTO_PP_7{start_timestamp}
+    入库数量: 100
+    库存类型: 非限制库存
+  - 交付物编号: AUTO_PP_10{start_timestamp}
+    入库数量: 100
+    库存类型: 非限制库存 
+  期望结果:
+  - 入库成功
+  标题: 参考工单
+  步骤:
+  - 选择参考单据类型为"生产工单"，选择参考的单据（已废弃的无法参考），选择库存类型，仓库，库存地点，移动原因，数量，然后提交。校验
+  测试用例集: 仓库管理/生产入库
+  测试集内顺序: 2
+  需求: null

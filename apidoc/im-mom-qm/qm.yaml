@@ -1,0 +1,5929 @@
+swagger: '2.0'
+info:
+  description: iQAS REST API
+  version: v2.0
+  title: iQAS REST API
+  termsOfService: Terms of service
+  contact:
+    name: Industics Ltd
+    url: 'http://support.industics.com'
+    email: support@industics.com
+  license:
+    name: License of API
+    url: API license URL
+host: 'localhost:33019'
+basePath: /mom/qm
+tags:
+  - name: Feedback API
+    description: Check Result Feedback Endpoint
+  - name: MIGRATION
+    description: Private Migration Endpoint
+  - name: PRIVATE
+    description: Private Check Sheet Item Endpoint
+  - name: QM - CHECK - STANDARD
+    description: Check Standard Endpoint
+  - name: QM - CHECK-SHEET
+    description: Check Sheet Endpoint
+  - name: QM - CODE - DEF
+    description: Code Def Endpoint
+  - name: QM - INSPECTION-LOT
+    description: Inspection Lot Endpoint
+  - name: QM - INSPECTION-ORDER
+    description: Inspection Order Endpoint
+  - name: QM - INSPECTION-RESULT
+    description: Inspection Result Endpoint
+  - name: QM - MASTER - DATE
+    description: Master Data Endpoint
+  - name: QM - REJECT - ORDER
+    description: Reject Order Endpoint
+  - name: QM - RULE
+    description: Rule Endpoint
+  - name: QM - RULE - GROUP
+    description: Rule Group Endpoint
+  - name: QM - USAGE - DECISION
+    description: Usage Decision Endpoint
+  - name: USER APIs
+    description: User App Endpoint
+  - name: kanban-endpoint
+    description: Kanban Endpoint
+schemes:
+  - http
+paths:
+  /v2/api/private/tenants/check_sheet_items/setItemNumc:
+    put:
+      tags:
+        - PRIVATE
+      summary: 送检单旧数据刷行号
+      operationId: setCheckSheetItemNumcUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/check-sheets/sync-fields-from-inspection-lot':
+    put:
+      tags:
+        - MIGRATION
+      summary: 送检单同步检验批检验类型字段
+      operationId: syncInspectionLotFieldsToCheckSheetUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/inspection-lots/migration':
+    get:
+      tags:
+        - MIGRATION
+      summary: 检验批整体历史数据迁移
+      operationId: migrateInspectionLotUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: save
+          in: query
+          description: save
+          required: false
+          type: boolean
+          default: false
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - MIGRATION
+      summary: 检验批整体历史数据迁移 - 删除
+      operationId: inspectionHistoryDataResetUsingDELETE
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/inspection-lots/sync-fields-from-check-sheet':
+    put:
+      tags:
+        - MIGRATION
+      summary: 检验批同步送检单送检人/送检时间/送检部门字段
+      operationId: syncCheckSheetFieldsToInspectionLotUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/inspection-lots/usage-descitions/migration':
+    get:
+      tags:
+        - MIGRATION
+      summary: 检验批整体历史数据迁移
+      operationId: migrateUsageDecisionsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/inspection-orders/export':
+    post:
+      tags:
+        - PRIVATE
+      summary: exportAllInspectionOrders
+      operationId: exportAllInspectionOrdersUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: queryRequest
+          description: queryRequest
+          required: true
+          schema:
+            $ref: '#/definitions/InspectionOrderQueryRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/InspectionOrderExportVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/inspection-orders/list':
+    post:
+      tags:
+        - PRIVATE
+      summary: bulkInspectionOrders
+      operationId: bulkInspectionOrdersUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: ids
+          description: ids
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/InspectionOrderListItemVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/ref-types':
+    get:
+      tags:
+        - PRIVATE
+      summary: findRefTypeDefsByRefType
+      operationId: findRefTypeDefsByRefTypeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: ref_type
+          in: query
+          description: ref_type
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RefTypeDef'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/private/tenants/{tenant_id}/reject-orders/export':
+    post:
+      tags:
+        - PRIVATE
+      summary: exportAllRejectOrders
+      operationId: exportAllRejectOrdersUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: queryRequest
+          description: queryRequest
+          required: true
+          schema:
+            $ref: '#/definitions/RejectOrderQueryRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RejectOrderExportVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-results/{check_result_id}/sim-feedback':
+    get:
+      tags:
+        - Feedback API
+      summary: 获取SIM问题反馈列表
+      operationId: getCheckResultFeedbackUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_result_id
+          in: path
+          description: check_result_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SimIssueListVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-results/{check_result_id}/supplier-feedback':
+    post:
+      tags:
+        - Feedback API
+      summary: 创建供应商反馈
+      operationId: createSupplierFeedbackUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_result_id
+          in: path
+          description: check_result_id
+          required: true
+          type: string
+        - in: body
+          name: createRequest
+          description: createRequest
+          required: true
+          schema:
+            $ref: '#/definitions/SupplierFeedbackCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-results/{check_result_id}/supplier-feedback/list':
+    get:
+      tags:
+        - Feedback API
+      summary: 查询某检测结果的供应商反馈列表
+      operationId: getSupplierFeedbackVOUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_result_id
+          in: path
+          description: check_result_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SupplierFeedbackVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-sheets':
+    get:
+      tags:
+        - QM - CHECK-SHEET
+      summary: 分页查询送检单
+      operationId: searchCheckSheetUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_sheet_no
+          in: query
+          description: check_sheet_no
+          required: false
+          type: string
+        - name: check_type_code
+          in: query
+          description: check_type_code
+          required: false
+          type: string
+        - name: delivered_by
+          in: query
+          description: delivered_by
+          required: false
+          type: string
+        - name: delivered_org_id
+          in: query
+          description: delivered_org_id
+          required: false
+          type: string
+        - name: end_delivery_date
+          in: query
+          description: end_delivery_date
+          required: false
+          type: string
+          format: date
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: start_delivery_date
+          in: query
+          description: start_delivery_date
+          required: false
+          type: string
+          format: date
+        - name: statuses
+          in: query
+          description: statuses
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfCheckSheetListVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - QM - CHECK-SHEET
+      summary: 创建送检单
+      operationId: createCheckSheetUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: saveRequest
+          description: saveRequest
+          required: true
+          schema:
+            $ref: '#/definitions/CheckSheetSaveRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-sheets/by-no/{check_sheet_no}':
+    get:
+      tags:
+        - QM - CHECK-SHEET
+      summary: 查询送检单详情
+      operationId: getCheckSheetDetailByNoUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_sheet_no
+          in: path
+          description: check_sheet_no
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CheckSheetDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-sheets/items':
+    post:
+      tags:
+        - QM - CHECK-SHEET
+      summary: 分页查询送检行
+      operationId: searchCheckSheetItemUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - in: body
+          name: queryRequest
+          description: queryRequest
+          required: true
+          schema:
+            $ref: '#/definitions/CheckSheetItemQueryRequest'
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfCheckSheetItemListVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-sheets/lots':
+    get:
+      tags:
+        - QM - CHECK-SHEET
+      summary: 根据LotName获取送检单
+      operationId: searchCheckSheetUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: lot_name
+          in: query
+          description: lot_name
+          required: true
+          type: string
+        - name: ref_no
+          in: query
+          description: ref_no
+          required: true
+          type: string
+        - name: route_id
+          in: query
+          description: route_id
+          required: true
+          type: string
+        - name: route_step_id
+          in: query
+          description: route_step_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CheckSheetDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-sheets/measurements/parse':
+    post:
+      tags:
+        - QM - CHECK-SHEET
+      summary: 导入采样信息
+      operationId: parseMeasurementsUsingPOST
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: file
+          in: formData
+          description: file
+          required: true
+          type: file
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MeasurementParsedVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-sheets/measurements/parse-tmpl':
+    get:
+      tags:
+        - QM - CHECK-SHEET
+      summary: downloadParseMeasurementsTmpl
+      operationId: downloadParseMeasurementsTmplUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-sheets/{check_sheet_id}':
+    get:
+      tags:
+        - QM - CHECK-SHEET
+      summary: 查询送检单详情
+      operationId: getCheckSheetDetailUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_sheet_id
+          in: path
+          description: check_sheet_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CheckSheetDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-sheets/{check_sheet_id}/abandon':
+    put:
+      tags:
+        - QM - CHECK-SHEET
+      summary: 废弃送检单
+      operationId: abandonCheckSheetUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_sheet_id
+          in: path
+          description: check_sheet_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-sheets/{check_sheet_id}/export-pdf':
+    post:
+      tags:
+        - QM - CHECK-SHEET
+      summary: QYCO - EXPORT-PDF - 导出结果
+      operationId: batchCreateBarCodesByPdfUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_sheet_id
+          in: path
+          description: check_sheet_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OsmObjectVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-standards':
+    get:
+      tags:
+        - QM - CHECK - STANDARD
+      summary: 获取检验标准
+      operationId: getCheckStandardsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SelectOption'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-standards/calculate-qualified':
+    post:
+      tags:
+        - QM - CHECK - STANDARD
+      summary: 计算是否合格
+      operationId: isQualifiedUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: qualifiedCalculateRequest
+          description: qualifiedCalculateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/QualifiedCalculateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-standards/calculate-sample-qty':
+    post:
+      tags:
+        - QM - CHECK - STANDARD
+      summary: 计算抽检数量
+      operationId: calculateSampleSizeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: sampleSizeCalculateVO
+          description: sampleSizeCalculateVO
+          required: true
+          schema:
+            $ref: '#/definitions/SampleSizeCalculateVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int32
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-standards/calculate-sample-qty/by-rule-matrix/{matrix_id}':
+    get:
+      tags:
+        - QM - CHECK - STANDARD
+      summary: 计算抽检数量
+      operationId: calculateSampleSizeByMatrixUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_qty
+          in: query
+          description: check_qty
+          required: true
+          type: number
+        - name: matrix_id
+          in: path
+          description: matrix_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SampleSizeCalculateResultVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/check-standards/defect-levels':
+    get:
+      tags:
+        - QM - CHECK - STANDARD
+      summary: 缺陷等级
+      operationId: getDefectLevelsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SelectOption'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/code-defs':
+    get:
+      tags:
+        - QM - CODE - DEF
+      summary: findAllCodeDefs
+      operationId: findAllCodeDefsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: type
+          in: query
+          description: type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: array
+              items:
+                $ref: '#/definitions/CodeDefVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-lots':
+    post:
+      tags:
+        - QM - INSPECTION-LOT
+      summary: 创建检验批
+      operationId: createInspectionLotUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: createRequest
+          description: createRequest
+          required: true
+          schema:
+            $ref: '#/definitions/InspectionLotCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-lots/page':
+    get:
+      tags:
+        - QM - INSPECTION-LOT
+      summary: 获取检验批分页页面
+      operationId: queryInspectionLotPageUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_sheet_no
+          in: query
+          description: check_sheet_no
+          required: false
+          type: string
+        - name: check_type_codes
+          in: query
+          description: check_type_codes
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: delivered_by
+          in: query
+          description: delivered_by
+          required: false
+          type: string
+        - name: delivered_org_id
+          in: query
+          description: delivered_org_id
+          required: false
+          type: string
+        - name: end_delivery_date
+          in: query
+          description: end_delivery_date
+          required: false
+          type: string
+          format: date
+        - name: external_ref_no
+          in: query
+          description: external_ref_no
+          required: false
+          type: string
+        - name: inspection_lot_name
+          in: query
+          description: inspection_lot_name
+          required: false
+          type: string
+        - name: material_id
+          in: query
+          description: material_id
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: priority
+          in: query
+          description: priority
+          required: false
+          type: string
+        - name: ref_no
+          in: query
+          description: ref_no
+          required: false
+          type: string
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: start_delivery_date
+          in: query
+          description: start_delivery_date
+          required: false
+          type: string
+          format: date
+        - name: statuses
+          in: query
+          description: statuses
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfInspectionLotVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-lots/pass-all':
+    put:
+      tags:
+        - QM - INSPECTION-LOT
+      summary: 一键合格
+      operationId: passCheckSheetUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_sheet_id
+          in: query
+          description: check_sheet_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-lots/{flow_tracking_id}/re-check':
+    put:
+      tags:
+        - QM - INSPECTION-LOT
+      summary: 重新检验检验批
+      operationId: reCheckInspectionLotFlowTrackingUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: checkRequest
+          description: checkRequest
+          required: true
+          schema:
+            $ref: '#/definitions/InspectionLotCheckRequest'
+        - name: flow_tracking_id
+          in: path
+          description: flow_tracking_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-lots/{id}':
+    get:
+      tags:
+        - QM - INSPECTION-LOT
+      summary: 获取检验批详情
+      operationId: getInspectionLotUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/InspectionLotVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-lots/{id}/check':
+    post:
+      tags:
+        - QM - INSPECTION-LOT
+      summary: 开始检验-暂存或提交
+      operationId: startInspectionUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: checkRequest
+          description: checkRequest
+          required: true
+          schema:
+            $ref: '#/definitions/InspectionLotCheckRequest'
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-lots/{id}/close':
+    put:
+      tags:
+        - QM - INSPECTION-LOT
+      summary: 关闭检验批
+      operationId: closeInspectionLotUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-lots/{id}/partials':
+    get:
+      tags:
+        - QM - INSPECTION-LOT
+      summary: 获取检验批分批列表
+      operationId: findAllPartialsByLotIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/InspectionLotPartialVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-lots/{id}/usage-decisions/{usage_decision_id}/confirm':
+    post:
+      tags:
+        - QM - INSPECTION-LOT
+      summary: 提交使用决策
+      operationId: confirmUsageDecisionUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: usage_decision_id
+          in: path
+          description: usage_decision_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-orders':
+    get:
+      tags:
+        - QM - INSPECTION-ORDER
+      summary: 查询检测结果分页
+      operationId: findInspectionOrderUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_sheet_no
+          in: query
+          description: check_sheet_no
+          required: false
+          type: string
+        - name: check_type_code
+          in: query
+          description: check_type_code
+          required: false
+          type: string
+        - name: checked_by
+          in: query
+          description: checked_by
+          required: false
+          type: string
+        - name: delivered_by
+          in: query
+          description: delivered_by
+          required: false
+          type: string
+        - name: delivered_org_id
+          in: query
+          description: delivered_org_id
+          required: false
+          type: string
+        - name: end_check_date
+          in: query
+          description: end_check_date
+          required: false
+          type: string
+          format: date
+        - name: end_delivery_date
+          in: query
+          description: end_delivery_date
+          required: false
+          type: string
+          format: date
+        - name: inspection_lot_flow_tracking_id
+          in: query
+          description: inspection_lot_flow_tracking_id
+          required: false
+          type: integer
+          format: int64
+        - name: inspection_lot_id
+          in: query
+          description: inspection_lot_id
+          required: false
+          type: integer
+          format: int64
+        - name: inspection_lot_name
+          in: query
+          description: inspection_lot_name
+          required: false
+          type: string
+        - name: inspection_order_no
+          in: query
+          description: inspection_order_no
+          required: false
+          type: string
+        - name: material_id
+          in: query
+          description: material_id
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: qualified
+          in: query
+          description: qualified
+          required: false
+          type: boolean
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: source_lot_name
+          in: query
+          description: source_lot_name
+          required: false
+          type: string
+        - name: start_check_date
+          in: query
+          description: start_check_date
+          required: false
+          type: string
+          format: date
+        - name: start_delivery_date
+          in: query
+          description: start_delivery_date
+          required: false
+          type: string
+          format: date
+        - name: statuses
+          in: query
+          description: statuses
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfInspectionOrderListItemVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-orders/by-lot/{inspection_lot_id}':
+    get:
+      tags:
+        - QM - INSPECTION-ORDER
+      summary: 获取检验批下所有检验单
+      operationId: findAllInspectionOrdersByLotUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: inspection_lot_id
+          in: path
+          description: inspection_lot_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/InspectionOrderListItemVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-orders/get-reject-order-id':
+    get:
+      tags:
+        - QM - INSPECTION-ORDER
+      summary: 根据检验单ID查询不合格品单明细
+      operationId: getRejectOrderDetailByCheckResultUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: inspection_order_id
+          in: query
+          description: inspection_order_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RejectOrderDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-orders/{inspection_order_id}':
+    get:
+      tags:
+        - QM - INSPECTION-ORDER
+      summary: 查询检测结果
+      operationId: getCheckResultDetailUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: inspection_order_id
+          in: path
+          description: inspection_order_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/InspectionOrderDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - QM - INSPECTION-ORDER
+      summary: 更新 - 提交或暂存检测结果
+      operationId: updateInspectionUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: checkRequest
+          description: checkRequest
+          required: true
+          schema:
+            $ref: '#/definitions/InspectionLotCheckRequest'
+        - name: inspection_order_id
+          in: path
+          description: inspection_order_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-orders/{inspection_order_id}/export-pdf':
+    post:
+      tags:
+        - QM - INSPECTION-ORDER
+      summary: QYCO - EXPORT-PDF - 导出结果
+      operationId: batchCreateBarCodesByPdfUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: inspection_order_id
+          in: path
+          description: inspection_order_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OsmObjectVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-results/by-lot/{inspection_lot_id}':
+    get:
+      tags:
+        - QM - INSPECTION-RESULT
+      summary: 获取检验批检验结果
+      operationId: getByInspectionLotIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: inspection_lot_id
+          in: path
+          description: inspection_lot_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/InspectionResultVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/inspection-results/{id}':
+    put:
+      tags:
+        - QM - INSPECTION-RESULT
+      summary: 修改检验批检验结论
+      operationId: modifyInspectionConclusionUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: updateRequest
+          description: updateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/InspectionResultUpdateRequest'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/kanbans/check-result-statistic-v1':
+    post:
+      tags:
+        - kanban-endpoint
+      summary: queryCheckResultStatisticKanban
+      operationId: queryCheckResultStatisticKanbanUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: queryRequest
+          description: queryRequest
+          required: true
+          schema:
+            $ref: '#/definitions/CheckResultStatisticKanbanQueryRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CheckResultStatisticKanbanVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/master-data/check-type-defs':
+    get:
+      tags:
+        - QM - MASTER - DATE
+      summary: 获取检验类别
+      operationId: getAllCheckDefsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CheckTypeDef'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/master-data/ref-type-defs':
+    get:
+      tags:
+        - QM - MASTER - DATE
+      summary: 获取参考单据类型
+      operationId: getRefTypeDefsByCheckTypeCodeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_type_code
+          in: query
+          description: check_type_code
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RefTypeDef'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/reject-orders':
+    get:
+      tags:
+        - QM - REJECT - ORDER
+      summary: queryRejectOrderByPage
+      operationId: queryRejectOrderByPageUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_type_code
+          in: query
+          description: check_type_code
+          required: false
+          type: string
+        - name: checked_by
+          in: query
+          description: checked_by
+          required: false
+          type: string
+        - name: delivered_by
+          in: query
+          description: delivered_by
+          required: false
+          type: string
+        - name: delivered_org_id
+          in: query
+          description: delivered_org_id
+          required: false
+          type: string
+        - name: end_check_date
+          in: query
+          description: end_check_date
+          required: false
+          type: string
+          format: date
+        - name: end_delivery_date
+          in: query
+          description: end_delivery_date
+          required: false
+          type: string
+          format: date
+        - name: inspection_lot_name
+          in: query
+          description: inspection_lot_name
+          required: false
+          type: string
+        - name: inspection_order_no
+          in: query
+          description: inspection_order_no
+          required: false
+          type: string
+        - name: material_id
+          in: query
+          description: material_id
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: reject_order_no
+          in: query
+          description: reject_order_no
+          required: false
+          type: string
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: start_check_date
+          in: query
+          description: start_check_date
+          required: false
+          type: string
+          format: date
+        - name: start_delivery_date
+          in: query
+          description: start_delivery_date
+          required: false
+          type: string
+          format: date
+        - name: statuses
+          in: query
+          description: statuses
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfRejectOrderListItemVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/reject-orders/by-lot/{inspection_lot_id}':
+    get:
+      tags:
+        - QM - REJECT - ORDER
+      summary: 获取检验批下所有不合格品处理单
+      operationId: findAllRejectOrdersByLotUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: inspection_lot_id
+          in: path
+          description: inspection_lot_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RejectOrderListItemVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/reject-orders/{id}':
+    get:
+      tags:
+        - QM - REJECT - ORDER
+      summary: getRejectOrderDetail
+      operationId: getRejectOrderDetailUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: repair_code
+          in: query
+          description: repair_code
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RejectOrderDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - QM - REJECT - ORDER
+      summary: updateRejectOrder
+      operationId: updateRejectOrderUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: updateRequest
+          description: updateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/RejectOrderUpdateRequest'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/reject-orders/{order_id}/print-pdf':
+    post:
+      tags:
+        - QM - REJECT - ORDER
+      summary: 打印PDF
+      operationId: batchCreateBarCodesByPdfUsingPOST_2
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: order_id
+          in: path
+          description: order_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OsmObjectVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/rule-groups':
+    post:
+      tags:
+        - QM - RULE - GROUP
+      summary: 创建检验计划
+      operationId: createRuleGroupUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: createRequest
+          description: createRequest
+          required: true
+          schema:
+            $ref: '#/definitions/RuleGroupCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/rule-groups/page':
+    get:
+      tags:
+        - QM - RULE - GROUP
+      summary: 分页获取检验矩阵
+      operationId: findRuleGroupByPageUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_group
+          in: query
+          description: check_group
+          required: false
+          type: boolean
+        - name: check_group_code
+          in: query
+          description: check_group_code
+          required: false
+          type: string
+        - name: check_method_code
+          in: query
+          description: check_method_code
+          required: false
+          type: string
+        - name: check_standard_code
+          in: query
+          description: check_standard_code
+          required: false
+          type: string
+        - name: check_type_code
+          in: query
+          description: check_type_code
+          required: false
+          type: string
+        - name: general
+          in: query
+          description: general
+          required: false
+          type: boolean
+        - name: group_name
+          in: query
+          description: group_name
+          required: false
+          type: string
+        - name: material
+          in: query
+          description: material
+          required: false
+          type: boolean
+        - name: material_id
+          in: query
+          description: material_id
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfRuleGroupListItemVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/rule-groups/{group_id}':
+    get:
+      tags:
+        - QM - RULE - GROUP
+      summary: 获取检验计划详情
+      operationId: getRuleGroupDetailByIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: group_id
+          in: path
+          description: group_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RuleGroupDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - QM - RULE - GROUP
+      summary: 编辑检验计划
+      operationId: updateRuleGroupUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: group_id
+          in: path
+          description: group_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: updateRequest
+          description: updateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/RuleGroupUpdateRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/rule-groups/{group_id}/rule-matrices':
+    put:
+      tags:
+        - QM - RULE - GROUP
+      summary: 编辑检验计划影响范围
+      operationId: updateRuleGroupMatrixUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: group_id
+          in: path
+          description: group_id
+          required: true
+          type: string
+        - in: body
+          name: saveRequest
+          description: saveRequest
+          required: true
+          schema:
+            $ref: '#/definitions/RuleGroupMatrixSaveRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/rule-groups/{group_id}/status':
+    put:
+      tags:
+        - QM - RULE - GROUP
+      summary: 检验模版启用禁用
+      operationId: updateRuleMatrixStatusUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: group_id
+          in: path
+          description: group_id
+          required: true
+          type: string
+        - in: body
+          name: saveRequest
+          description: saveRequest
+          required: true
+          schema:
+            $ref: '#/definitions/RuleMatrixStatusRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/rule-matrices/by-group':
+    get:
+      tags:
+        - QM - RULE
+      summary: 搜索匹配的检验矩阵
+      operationId: findRuleMatrixByCheckGroupUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_group_code
+          in: query
+          description: check_group_code
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RuleMatrixOptionVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/rule-matrices/by-material':
+    get:
+      tags:
+        - QM - RULE
+      summary: 搜索匹配的检验矩阵
+      operationId: findRuleMatrixByMaterialUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: check_group_code
+          in: query
+          description: check_group_code
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: check_type_code
+          in: query
+          description: check_type_code
+          required: false
+          type: string
+        - name: material_id
+          in: query
+          description: material_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RuleMatrixOptionVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/rule-matrices/rules/{rule_id}/calculate-quantifiable-measure':
+    put:
+      tags:
+        - QM - RULE
+      summary: 计算定量分析采集结果
+      operationId: calculateQuantifiableMeasureUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - in: body
+          name: calculateRequest
+          description: calculateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/QuantifiableMeasureCalculateRequest'
+        - name: rule_id
+          in: path
+          description: rule_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/QuantifiableMeasureCalculateResultVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/rule-matrices/{matrix_id}':
+    get:
+      tags:
+        - QM - RULE
+      summary: 获取检验矩阵详情
+      operationId: getRuleMatrixDetailByIdUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: matrix_id
+          in: path
+          description: matrix_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RuleMatrixDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/supplier-feedback/{id}':
+    get:
+      tags:
+        - Feedback API
+      summary: 根据id获取供应商反馈
+      operationId: getSupplierFeedbackUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SupplierFeedbackVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - Feedback API
+      summary: 根据id修改供应商反馈
+      operationId: updateSupplierFeedbackUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: updateRequest
+          description: updateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/SupplierFeedbackVO'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - Feedback API
+      summary: 根据id删除供应商反馈
+      operationId: deleteSupplierFeedbackUsingDELETE
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/usage-decisions/by-lot/{inspection_lot_id}':
+    get:
+      tags:
+        - QM - USAGE - DECISION
+      summary: 获取检验批使用决策
+      operationId: getByInspectionLotIdUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+        - name: inspection_lot_id
+          in: path
+          description: inspection_lot_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UsageDecisionVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/users/current:
+    get:
+      tags:
+        - USER APIs
+      summary: getCurrentUser
+      operationId: getCurrentUserUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: T-Code
+          in: header
+          description: T-Code
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CurrentUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+definitions:
+  CheckResultDistributionVO:
+    type: object
+    properties:
+      byItemData:
+        type: array
+        items:
+          $ref: '#/definitions/LabelDecimalGroupListVO'
+      byQuantityData:
+        type: array
+        items:
+          $ref: '#/definitions/LabelDecimalGroupListVO'
+    title: CheckResultDistributionVO
+  CheckResultRateVO:
+    type: object
+    properties:
+      byItemData:
+        type: array
+        items:
+          $ref: '#/definitions/LabelDecimalGroupVO'
+      byQuantityData:
+        type: array
+        items:
+          $ref: '#/definitions/LabelDecimalGroupVO'
+    title: CheckResultRateVO
+  CheckResultStatisticKanbanQueryRequest:
+    type: object
+    properties:
+      areaId:
+        type: integer
+        format: int64
+      checkTypeCode:
+        type: string
+      checkedDateFrom:
+        type: string
+        format: date
+      checkedDateTo:
+        type: string
+        format: date
+      groupBy:
+        type: string
+      lineId:
+        type: integer
+        format: int64
+    title: CheckResultStatisticKanbanQueryRequest
+  CheckResultStatisticKanbanVO:
+    type: object
+    properties:
+      checkResultDistribution:
+        $ref: '#/definitions/CheckResultDistributionVO'
+      checkResultRate:
+        $ref: '#/definitions/CheckResultRateVO'
+    title: CheckResultStatisticKanbanVO
+  CheckSheetDetailVO:
+    type: object
+    properties:
+      checkSheetItems:
+        type: array
+        items:
+          $ref: '#/definitions/CheckSheetItemListVO'
+      checkSheetNo:
+        type: string
+      checkTypeCode:
+        type: string
+      checkTypeName:
+        type: string
+      createdBy:
+        type: string
+      createdByName:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      deliveredAt:
+        type: string
+        format: date-time
+      deliveredBy:
+        type: string
+      deliveredByName:
+        type: string
+      deliveredOrgId:
+        type: string
+      deliveredOrgName:
+        type: string
+      externalRefNo:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      operationId:
+        type: string
+      operationName:
+        type: string
+      refId:
+        type: string
+      refNo:
+        type: string
+      refType:
+        type: string
+      refTypeName:
+        type: string
+      routeId:
+        type: string
+      routeName:
+        type: string
+      routeRev:
+        type: string
+      routeStepId:
+        type: string
+      routeStepName:
+        type: string
+      status:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: CheckSheetDetailVO
+  CheckSheetItemListVO:
+    type: object
+    properties:
+      checkSheetId:
+        type: string
+      checkSheetNo:
+        type: string
+      checkTypeCode:
+        type: string
+      checkTypeName:
+        type: string
+      createdBy:
+        type: string
+      createdByName:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      deliveredAt:
+        type: string
+        format: date-time
+      deliveredBy:
+        type: string
+      deliveredByName:
+        type: string
+      deliveredOrgId:
+        type: string
+      deliveredOrgName:
+        type: string
+      externalRefNo:
+        type: string
+      id:
+        type: string
+      inspectionLotId:
+        type: string
+      itemNumc:
+        type: integer
+        format: int32
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      material:
+        $ref: '#/definitions/MaterialVO'
+      materialId:
+        type: string
+      operationId:
+        type: string
+      operationName:
+        type: string
+      priority:
+        type: integer
+        format: int32
+      priorityName:
+        type: string
+      quantId:
+        type: string
+      quantityCompleted:
+        type: number
+      quantityInspection:
+        type: string
+      quantityOpen:
+        type: number
+      quantityQualified:
+        type: number
+      quantityUnqualified:
+        type: number
+      refId:
+        type: string
+      refItemId:
+        type: string
+      refItemNumc:
+        type: integer
+        format: int32
+      refNo:
+        type: string
+      refType:
+        type: string
+      refTypeName:
+        type: string
+      remark:
+        type: string
+      routeId:
+        type: string
+      routeName:
+        type: string
+      routeRev:
+        type: string
+      routeStepId:
+        type: string
+      routeStepName:
+        type: string
+      so:
+        $ref: '#/definitions/SalesOrderDetailVO'
+      soId:
+        type: string
+      sourceLotName:
+        type: string
+      status:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: CheckSheetItemListVO
+  CheckSheetItemQueryRequest:
+    type: object
+    properties:
+      checkSheetItemStatuses:
+        type: array
+        items:
+          type: string
+      checkSheetNo:
+        type: string
+      checkTypeCode:
+        type: string
+      deliveredBy:
+        type: string
+      deliveredOrgId:
+        type: string
+      endDeliveryDate:
+        type: string
+        format: date
+      externalRefNo:
+        type: string
+      materialId:
+        type: string
+      priority:
+        type: integer
+        format: int32
+      refNo:
+        type: string
+      soIds:
+        type: array
+        items:
+          type: string
+      startDeliveryDate:
+        type: string
+        format: date
+    title: CheckSheetItemQueryRequest
+  CheckSheetListVO:
+    type: object
+    properties:
+      checkSheetNo:
+        type: string
+      checkTypeCode:
+        type: string
+      checkTypeName:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      deliveredAt:
+        type: string
+        format: date-time
+      deliveredBy:
+        type: string
+      deliveredByName:
+        type: string
+      deliveredOrgId:
+        type: string
+      deliveredOrgName:
+        type: string
+      externalRefNo:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      refId:
+        type: string
+      refNo:
+        type: string
+      refType:
+        type: string
+      status:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: CheckSheetListVO
+  CheckSheetSaveItemRequest:
+    type: object
+    properties:
+      id:
+        type: string
+      lotName:
+        type: string
+      materialNo:
+        type: string
+      priority:
+        type: integer
+        format: int32
+      quantId:
+        type: integer
+        format: int64
+      quantityInspection:
+        type: number
+      refItemId:
+        type: string
+      refItemNumc:
+        type: integer
+        format: int32
+      remark:
+        type: string
+      soId:
+        type: string
+    title: CheckSheetSaveItemRequest
+  CheckSheetSaveRequest:
+    type: object
+    required:
+      - checkSheetItems
+    properties:
+      checkSheetItems:
+        type: array
+        items:
+          $ref: '#/definitions/CheckSheetSaveItemRequest'
+      checkSheetNo:
+        type: string
+      checkTypeCode:
+        type: string
+      deliveredBy:
+        type: string
+      deliveredDate:
+        type: string
+        format: date-time
+      deliveredOrgId:
+        type: string
+      externalRefNo:
+        type: string
+      operationId:
+        type: integer
+        format: int64
+      refId:
+        type: string
+      refNo:
+        type: string
+      refType:
+        type: string
+      routeId:
+        type: integer
+        format: int64
+      routeName:
+        type: string
+      routeRev:
+        type: string
+      routeStepId:
+        type: integer
+        format: int64
+      routeStepName:
+        type: string
+    title: CheckSheetSaveRequest
+  CheckTypeDef:
+    type: object
+    properties:
+      code:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      deleted:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      name:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: CheckTypeDef
+  CodeDefVO:
+    type: object
+    properties:
+      code:
+        type: string
+      deleted:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      parentCode:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      status:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      type:
+        type: string
+    title: CodeDefVO
+  CurrentUserVO:
+    type: object
+    properties:
+      admin:
+        type: boolean
+      avatar:
+        type: string
+      birthday:
+        type: string
+        format: date
+      description:
+        type: string
+      email:
+        type: string
+      empNo:
+        type: string
+      fullname:
+        type: string
+      gender:
+        type: string
+      id:
+        type: string
+      mobile:
+        type: string
+      organizations:
+        type: array
+        items:
+          $ref: '#/definitions/TenantOrgVO'
+      privileges:
+        type: array
+        items:
+          $ref: '#/definitions/PrivilegeVO'
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/RoleVO'
+      status:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      title:
+        type: string
+      username:
+        type: string
+    title: CurrentUserVO
+  InspectionLotCheckDetailRequest:
+    type: object
+    properties:
+      actualAverageMeasurement:
+        type: number
+      actualMaxMeasurement:
+        type: number
+      actualMeasurements:
+        type: array
+        items:
+          type: string
+      actualMinMeasurement:
+        type: number
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmUploadVO'
+      id:
+        type: string
+      issueRemark:
+        type: string
+      qualified:
+        type: boolean
+      quantityQualified:
+        type: number
+      quantitySampling:
+        type: number
+      quantityUnqualified:
+        type: number
+      ruleId:
+        type: string
+    title: InspectionLotCheckDetailRequest
+  InspectionLotCheckRequest:
+    type: object
+    properties:
+      checkQty:
+        type: number
+      checkRequestDetails:
+        type: array
+        items:
+          $ref: '#/definitions/InspectionLotCheckDetailRequest'
+      materialId:
+        type: string
+      qualified:
+        type: boolean
+      quantityCheckQualified:
+        type: number
+      quantityCheckUnqualified:
+        type: number
+      quantitySampling:
+        type: number
+      quantitySamplingQualified:
+        type: number
+      quantitySamplingUnqualified:
+        type: number
+      ruleMatrixId:
+        type: string
+      standardDesc:
+        type: string
+      status:
+        type: string
+    title: InspectionLotCheckRequest
+  InspectionLotCreateRequest:
+    type: object
+    properties:
+      checkTypeCode:
+        type: string
+      deliveredAt:
+        type: string
+        format: date-time
+      deliveredBy:
+        type: string
+      deliveredOrgId:
+        type: string
+      externalRefNo:
+        type: string
+      materialNo:
+        type: string
+      priority:
+        type: integer
+        format: int32
+      quantId:
+        type: integer
+        format: int64
+      quantityInspection:
+        type: number
+      refId:
+        type: string
+      refItemId:
+        type: string
+      refItemNumc:
+        type: integer
+        format: int32
+      refNo:
+        type: string
+      refType:
+        type: string
+      routeId:
+        type: integer
+        format: int64
+      routeName:
+        type: string
+      routeRev:
+        type: string
+      routeStepId:
+        type: integer
+        format: int64
+      routeStepName:
+        type: string
+      soId:
+        type: string
+      sourceLotName:
+        type: string
+    title: InspectionLotCreateRequest
+  InspectionLotPartialVO:
+    type: object
+    properties:
+      id:
+        type: string
+      inspectionConclusion:
+        type: string
+      inspectionLotId:
+        type: string
+      quantity:
+        type: number
+      quantityInspection:
+        type: number
+      quantityQualified:
+        type: number
+      quantityUnqualified:
+        type: number
+      status:
+        type: string
+    title: InspectionLotPartialVO
+  InspectionLotVO:
+    type: object
+    properties:
+      checkSheetId:
+        type: string
+      checkSheetNo:
+        type: string
+      checkTypeCode:
+        type: string
+      createdBy:
+        type: string
+      createdByName:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      deliveredAt:
+        type: string
+        format: date-time
+      deliveredBy:
+        type: string
+      deliveredByName:
+        type: string
+      deliveredOrgId:
+        type: string
+      deliveredOrgName:
+        type: string
+      externalRefNo:
+        type: string
+      flowTrackingId:
+        type: string
+      id:
+        type: string
+      inspectionLotFlowTrackingId:
+        type: integer
+        format: int64
+      inspectionLotName:
+        type: string
+      material:
+        $ref: '#/definitions/MaterialVO'
+      materialId:
+        type: string
+      priority:
+        type: integer
+        format: int32
+      quantId:
+        type: string
+      quantityCompleted:
+        type: number
+      quantityInspection:
+        type: number
+      quantityOpen:
+        type: number
+      quantityQualified:
+        type: number
+      quantityUnQualified:
+        type: number
+      refId:
+        type: string
+      refItemId:
+        type: string
+      refItemNumc:
+        type: integer
+        format: int32
+      refNo:
+        type: string
+      refType:
+        type: string
+      routeId:
+        type: string
+      routeName:
+        type: string
+      routeRev:
+        type: string
+      routeStepId:
+        type: string
+      routeStepName:
+        type: string
+      so:
+        $ref: '#/definitions/SalesOrderDetailVO'
+      soId:
+        type: string
+      sourceLotName:
+        type: string
+      specialStock:
+        type: boolean
+      specialStockType:
+        type: string
+      status:
+        type: string
+    title: InspectionLotVO
+  InspectionOrderDetailVO:
+    type: object
+    properties:
+      checkMethodCode:
+        type: string
+      checkMethodName:
+        type: string
+      checkSheetId:
+        type: string
+      checkSheetNo:
+        type: string
+      checkStandardCode:
+        type: string
+      checkStandardName:
+        type: string
+      checkTypeCode:
+        type: string
+      checkTypeName:
+        type: string
+      checkedAt:
+        type: string
+        format: date-time
+      checkedAtToDate:
+        type: string
+        format: date
+      checkedBy:
+        type: string
+      checkedByName:
+        type: string
+      deliveredAt:
+        type: string
+        format: date-time
+      deliveredAtToDate:
+        type: string
+        format: date
+      deliveredBy:
+        type: string
+      deliveredByName:
+        type: string
+      deliveredOrgId:
+        type: string
+      deliveredOrgName:
+        type: string
+      externalRefNo:
+        type: string
+      id:
+        type: string
+      inspectionLotFlowTrackingId:
+        type: string
+      inspectionLotId:
+        type: string
+      inspectionLotName:
+        type: string
+      inspectionOrderNo:
+        type: string
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/InspectionOrderItemDetailVO'
+      material:
+        $ref: '#/definitions/MaterialVO'
+      materialId:
+        type: string
+      operationId:
+        type: string
+      operationName:
+        type: string
+      priority:
+        type: integer
+        format: int32
+      qualified:
+        type: boolean
+      qualifiedLotName:
+        type: string
+      quantId:
+        type: string
+      quantityCheckQualified:
+        type: number
+      quantityCheckUnqualified:
+        type: number
+      quantityInspection:
+        type: number
+      quantityOrder:
+        type: number
+      quantitySampling:
+        type: number
+      quantitySamplingQualified:
+        type: number
+      quantitySamplingUnqualified:
+        type: number
+      refId:
+        type: string
+      refNo:
+        type: string
+      refType:
+        type: string
+      routeId:
+        type: string
+      routeName:
+        type: string
+      routeRev:
+        type: string
+      routeStepId:
+        type: string
+      routeStepName:
+        type: string
+      ruleGroupId:
+        type: string
+      ruleGroupName:
+        type: string
+      ruleMatrixId:
+        type: string
+      so:
+        $ref: '#/definitions/SalesOrderDetailVO'
+      soId:
+        type: string
+      sourceLotName:
+        type: string
+      standardDesc:
+        type: string
+      status:
+        type: string
+      tenantId:
+        type: string
+      treatmentContent:
+        type: string
+      treatmentDate:
+        type: string
+        format: date-time
+      treatmentStatus:
+        type: string
+      treatmentTypeCode:
+        type: string
+      treatmentTypeName:
+        type: string
+      unqualifiedLotName:
+        type: string
+    title: InspectionOrderDetailVO
+  InspectionOrderExportVO:
+    type: object
+    properties:
+      checkMethodCode:
+        type: string
+      checkMethodName:
+        type: string
+      checkSheetNo:
+        type: string
+      checkStandardCode:
+        type: string
+      checkStandardName:
+        type: string
+      checkTypeCode:
+        type: string
+      checkTypeName:
+        type: string
+      checkedAt:
+        type: string
+        format: date-time
+      checkedBy:
+        type: string
+      checkedByName:
+        type: string
+      contractName:
+        type: string
+      contractNo:
+        type: string
+      deliveredAt:
+        type: string
+        format: date
+      deliveredBy:
+        type: string
+      deliveredByName:
+        type: string
+      deliveredOrgId:
+        type: string
+      deliveredOrgName:
+        type: string
+      externalRefNo:
+        type: string
+      id:
+        type: string
+      inspectionLotName:
+        type: string
+      inspectionOrderNo:
+        type: string
+      materialDesc:
+        type: string
+      materialId:
+        type: string
+      materialName:
+        type: string
+      materialNo:
+        type: string
+      qualified:
+        type: boolean
+      qualifiedLabel:
+        type: string
+      quantityCheckQualified:
+        type: number
+      quantityCheckUnqualified:
+        type: number
+      quantityOrder:
+        type: number
+      refNo:
+        type: string
+      refType:
+        type: string
+      refTypeName:
+        type: string
+      soId:
+        type: string
+      soName:
+        type: string
+      soNo:
+        type: string
+    title: InspectionOrderExportVO
+  InspectionOrderItemDetailVO:
+    type: object
+    properties:
+      actualAverageMeasurement:
+        type: number
+      actualMaxMeasurement:
+        type: number
+      actualMeasurement:
+        type: string
+      actualMeasurements:
+        type: array
+        items:
+          type: string
+      actualMinMeasurement:
+        type: number
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmObjectVO'
+      id:
+        type: string
+      issueRemark:
+        type: string
+      qualified:
+        type: boolean
+      qualifiedName:
+        type: string
+      quantityQualified:
+        type: integer
+        format: int32
+      quantitySampling:
+        type: integer
+        format: int32
+      quantityUnqualified:
+        type: integer
+        format: int32
+      rule:
+        $ref: '#/definitions/RuleDetailVO'
+    title: InspectionOrderItemDetailVO
+  InspectionOrderListItemVO:
+    type: object
+    properties:
+      checkMethodCode:
+        type: string
+      checkMethodName:
+        type: string
+      checkSheetNo:
+        type: string
+      checkTypeCode:
+        type: string
+      checkTypeName:
+        type: string
+      checkedAt:
+        type: string
+        format: date-time
+      checkedBy:
+        type: string
+      checkedByName:
+        type: string
+      deliveredAt:
+        type: string
+        format: date-time
+      deliveredBy:
+        type: string
+      deliveredByName:
+        type: string
+      deliveredOrgId:
+        type: string
+      deliveredOrgName:
+        type: string
+      externalRefNo:
+        type: string
+      id:
+        type: string
+      inspectionLotFlowTrackingId:
+        type: string
+      inspectionLotId:
+        type: string
+      inspectionLotName:
+        type: string
+      inspectionOrderNo:
+        type: string
+      material:
+        $ref: '#/definitions/MaterialVO'
+      materialId:
+        type: string
+      priority:
+        type: integer
+        format: int32
+      qualified:
+        type: boolean
+      qualifiedLotName:
+        type: string
+      refId:
+        type: string
+      refNo:
+        type: string
+      sourceLotName:
+        type: string
+      status:
+        type: string
+      unqualifiedLotName:
+        type: string
+    title: InspectionOrderListItemVO
+  InspectionOrderQueryRequest:
+    type: object
+    properties:
+      checkSheetNo:
+        type: string
+      checkTypeCode:
+        type: string
+      checkedBy:
+        type: string
+      deliveredBy:
+        type: string
+      deliveredOrgId:
+        type: string
+      endCheckDate:
+        type: string
+        format: date
+      endDeliveryDate:
+        type: string
+        format: date
+      inspectionLotFlowTrackingId:
+        type: integer
+        format: int64
+      inspectionLotId:
+        type: integer
+        format: int64
+      inspectionLotName:
+        type: string
+      inspectionOrderNo:
+        type: string
+      materialId:
+        type: string
+      qualified:
+        type: boolean
+      sourceLotName:
+        type: string
+      startCheckDate:
+        type: string
+        format: date
+      startDeliveryDate:
+        type: string
+        format: date
+      statuses:
+        type: array
+        items:
+          type: string
+    title: InspectionOrderQueryRequest
+  InspectionResultUpdateRequest:
+    type: object
+    properties:
+      inspectionConclusion:
+        type: string
+    title: InspectionResultUpdateRequest
+  InspectionResultVO:
+    type: object
+    properties:
+      id:
+        type: string
+      inspectionConclusion:
+        type: string
+      inspectionLotFlowTrackingId:
+        type: string
+      inspectionLotId:
+        type: string
+      quantityQualified:
+        type: number
+      quantityUnqualified:
+        type: number
+    title: InspectionResultVO
+  LabelDecimalGroupListVO:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/LabelDecimalGroupVO'
+      group:
+        type: string
+    title: LabelDecimalGroupListVO
+  LabelDecimalGroupVO:
+    type: object
+    properties:
+      group:
+        type: string
+      value:
+        type: number
+    title: LabelDecimalGroupVO
+  MaterialVO:
+    type: object
+    properties:
+      brand:
+        type: string
+      checkGroupName:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      materialDesc:
+        type: string
+      materialName:
+        type: string
+      materialNo:
+        type: string
+      materialUnit:
+        type: string
+      tenantId:
+        type: string
+      validFromDate:
+        type: string
+        format: date
+      validStatus:
+        type: string
+      validToDate:
+        type: string
+        format: date
+      version:
+        type: integer
+        format: int32
+    title: MaterialVO
+  MeasurementParsedVO:
+    type: object
+    properties:
+      hasError:
+        type: boolean
+      values:
+        type: array
+        items:
+          type: number
+    title: MeasurementParsedVO
+  NewInstanceVO:
+    type: object
+    properties:
+      newId:
+        type: string
+    title: NewInstanceVO
+  OsmObjectVO:
+    type: object
+    properties:
+      bizType:
+        type: string
+      bizValue:
+        type: string
+      createdBy:
+        type: string
+      createdByName:
+        type: string
+      deleted:
+        type: boolean
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedByName:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      name:
+        type: string
+      ossKey:
+        type: string
+      previewObjectId:
+        type: string
+      public:
+        type: integer
+        format: int32
+      signature:
+        $ref: '#/definitions/OssSignature'
+      size:
+        type: integer
+        format: int32
+      tagId:
+        type: string
+      type:
+        type: string
+    title: OsmObjectVO
+  OsmUploadVO:
+    type: object
+    properties:
+      id:
+        type: string
+    title: OsmUploadVO
+  OssSignature:
+    type: object
+    properties:
+      expireTime:
+        type: string
+        format: date-time
+      origin:
+        type: string
+      pdf:
+        type: string
+      standard:
+        type: string
+      thumbnail:
+        type: string
+    title: OssSignature
+  PageOfCheckSheetItemListVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/CheckSheetItemListVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfCheckSheetItemListVO
+  PageOfCheckSheetListVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/CheckSheetListVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfCheckSheetListVO
+  PageOfInspectionLotVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/InspectionLotVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfInspectionLotVO
+  PageOfInspectionOrderListItemVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/InspectionOrderListItemVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfInspectionOrderListItemVO
+  PageOfRejectOrderListItemVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/RejectOrderListItemVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfRejectOrderListItemVO
+  PageOfRuleGroupListItemVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/RuleGroupListItemVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfRuleGroupListItemVO
+  PrivilegeVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      builtin:
+        type: boolean
+      code:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      operation:
+        type: integer
+        format: int32
+      parentId:
+        type: string
+      resource:
+        type: string
+      tenantId:
+        type: string
+      url:
+        type: string
+      visible:
+        type: boolean
+    title: PrivilegeVO
+  QualifiedCalculateRequest:
+    type: object
+    required:
+      - checkQty
+      - checkStandardCode
+      - unqualifiedQty
+    properties:
+      ac:
+        type: number
+      aql:
+        type: number
+      checkLevel:
+        type: string
+      checkQty:
+        type: number
+      checkStandardCode:
+        type: string
+      re:
+        type: number
+      unqualifiedQty:
+        type: number
+    title: QualifiedCalculateRequest
+  QuantifiableMeasureCalculateRequest:
+    type: object
+    properties:
+      actualMeasurements:
+        type: array
+        items:
+          type: number
+    title: QuantifiableMeasureCalculateRequest
+  QuantifiableMeasureCalculateResultVO:
+    type: object
+    properties:
+      actualAverageMeasurement:
+        type: number
+      actualMaxMeasurement:
+        type: number
+      actualMinMeasurement:
+        type: number
+      qualifiedQty:
+        type: number
+      unqualifiedQty:
+        type: number
+    title: QuantifiableMeasureCalculateResultVO
+  RefTypeDef:
+    type: object
+    properties:
+      checkTypeCode:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      deleted:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      refType:
+        type: string
+      refTypeName:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: RefTypeDef
+  RejectOrderDetailVO:
+    type: object
+    properties:
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmObjectVO'
+      checkedAt:
+        type: string
+        format: date-time
+      checkedAtDate:
+        type: string
+        format: date
+      checkedBy:
+        type: string
+      checkedByName:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      deliveredAt:
+        type: string
+        format: date-time
+      deliveredAtDate:
+        type: string
+        format: date
+      deliveredBy:
+        type: string
+      deliveredByName:
+        type: string
+      deliveredOrgId:
+        type: string
+      deliveredOrgName:
+        type: string
+      id:
+        type: string
+      inspectionLotFlowTrakingId:
+        type: integer
+        format: int64
+      inspectionLotName:
+        type: string
+      inspectionOrderId:
+        type: string
+      inspectionOrderNo:
+        type: string
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/RejectOrderItemVO'
+      material:
+        $ref: '#/definitions/MaterialVO'
+      quantityRepair:
+        type: number
+      quantityUnqualified:
+        type: number
+      rejectOrderNo:
+        type: string
+      so:
+        $ref: '#/definitions/SalesOrderDetailVO'
+      status:
+        type: string
+    title: RejectOrderDetailVO
+  RejectOrderExportVO:
+    type: object
+    properties:
+      checkedAt:
+        type: string
+        format: date-time
+      checkedBy:
+        type: string
+      checkedByName:
+        type: string
+      contractName:
+        type: string
+      contractNo:
+        type: string
+      defectCode:
+        type: string
+      defectDesc:
+        type: string
+      defectName:
+        type: string
+      deliveredAt:
+        type: string
+        format: date
+      deliveredBy:
+        type: string
+      deliveredByName:
+        type: string
+      deliveredOrgId:
+        type: string
+      deliveredOrgName:
+        type: string
+      id:
+        type: string
+      inspectionLotName:
+        type: string
+      inspectionOrderNo:
+        type: string
+      materialDesc:
+        type: string
+      materialId:
+        type: string
+      materialName:
+        type: string
+      materialNo:
+        type: string
+      quantityCompleted:
+        type: number
+      quantityUnqualified:
+        type: number
+      rejectOrderNo:
+        type: string
+      remark:
+        type: string
+      repairCode:
+        type: string
+      repairDate:
+        type: string
+        format: date
+      repairName:
+        type: string
+      repairOrgId:
+        type: string
+      repairOrgName:
+        type: string
+      repairQty:
+        type: string
+      soId:
+        type: string
+      soName:
+        type: string
+      soNo:
+        type: string
+    title: RejectOrderExportVO
+  RejectOrderItemSaveRequest:
+    type: object
+    properties:
+      defectCode:
+        type: string
+      defectDesc:
+        type: string
+      id:
+        type: string
+      remark:
+        type: string
+      repairCode:
+        type: string
+      repairDate:
+        type: string
+        format: date
+      repairOrgId:
+        type: string
+      repairQty:
+        type: number
+    title: RejectOrderItemSaveRequest
+  RejectOrderItemVO:
+    type: object
+    properties:
+      defectCode:
+        type: string
+      defectCodeName:
+        type: string
+      defectDesc:
+        type: string
+      id:
+        type: string
+      itemNumc:
+        type: integer
+        format: int32
+      quantityCompleted:
+        type: number
+      quantityOpen:
+        type: number
+      remark:
+        type: string
+      repairCode:
+        type: string
+      repairCodeName:
+        type: string
+      repairDate:
+        type: string
+        format: date
+      repairOrgId:
+        type: string
+      repairOrgName:
+        type: string
+      repairQty:
+        type: number
+      soId:
+        type: string
+    title: RejectOrderItemVO
+  RejectOrderListItemVO:
+    type: object
+    properties:
+      checkedAt:
+        type: string
+        format: date-time
+      checkedBy:
+        type: string
+      checkedByName:
+        type: string
+      createdBy:
+        type: string
+      createdByName:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      deliveredAt:
+        type: string
+        format: date-time
+      deliveredBy:
+        type: string
+      deliveredByName:
+        type: string
+      deliveredOrgId:
+        type: string
+      deliveredOrgName:
+        type: string
+      id:
+        type: string
+      inspectionLotName:
+        type: string
+      inspectionOrderId:
+        type: string
+      inspectionOrderNo:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      material:
+        $ref: '#/definitions/MaterialVO'
+      materialId:
+        type: string
+      quantityRepair:
+        type: number
+      quantityUnqualified:
+        type: number
+      rejectOrderNo:
+        type: string
+      status:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: RejectOrderListItemVO
+  RejectOrderQueryRequest:
+    type: object
+    properties:
+      checkTypeCode:
+        type: string
+      checkedBy:
+        type: string
+      deliveredBy:
+        type: string
+      deliveredOrgId:
+        type: string
+      endCheckDate:
+        type: string
+        format: date
+      endDeliveryDate:
+        type: string
+        format: date
+      inspectionLotName:
+        type: string
+      inspectionOrderNo:
+        type: string
+      materialId:
+        type: string
+      rejectOrderNo:
+        type: string
+      startCheckDate:
+        type: string
+        format: date
+      startDeliveryDate:
+        type: string
+        format: date
+      statuses:
+        type: array
+        items:
+          type: string
+    title: RejectOrderQueryRequest
+  RejectOrderUpdateRequest:
+    type: object
+    properties:
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmUploadVO'
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/RejectOrderItemSaveRequest'
+      remark:
+        type: string
+      status:
+        type: string
+    title: RejectOrderUpdateRequest
+  RoleTagVO:
+    type: object
+    properties:
+      id:
+        type: string
+      roleId:
+        type: string
+      tag:
+        type: string
+      tenantId:
+        type: string
+    title: RoleTagVO
+  RoleVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      builtin:
+        type: boolean
+      code:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/RoleTagVO'
+      tenantId:
+        type: string
+    title: RoleVO
+  RuleDetailVO:
+    type: object
+    properties:
+      ac:
+        type: number
+      aql:
+        type: number
+      checkApproach:
+        type: string
+      checkLevel:
+        type: string
+      defectLevel:
+        type: string
+      destructiveCheck:
+        type: boolean
+      id:
+        type: string
+      lowerLimitValue:
+        type: number
+      qualityStandard:
+        type: string
+      quantifiableMeasure:
+        type: boolean
+      re:
+        type: number
+      ruleCategoryCode:
+        type: string
+      ruleCategoryName:
+        type: string
+      ruleName:
+        type: string
+      standardValue:
+        type: number
+      upperLimitValue:
+        type: number
+    title: RuleDetailVO
+  RuleGroupCreateRequest:
+    type: object
+    properties:
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmUploadVO'
+      checkMethodCode:
+        type: string
+      checkStandardCode:
+        type: string
+      groupName:
+        type: string
+      ruleMatrixCheckGroup:
+        $ref: '#/definitions/RuleMatrixCheckGroupVO'
+      ruleMatrixGeneral:
+        $ref: '#/definitions/RuleMatrixGeneralVO'
+      ruleMatrixMaterial:
+        $ref: '#/definitions/RuleMatrixMaterialVO'
+      rules:
+        type: array
+        items:
+          $ref: '#/definitions/RuleSaveRequest'
+      samplingQty:
+        type: number
+      standardDesc:
+        type: string
+    title: RuleGroupCreateRequest
+  RuleGroupDetailVO:
+    type: object
+    properties:
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmObjectVO'
+      checkMethodCode:
+        type: string
+      checkStandardCode:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      groupName:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      ruleMatrixCheckGroup:
+        $ref: '#/definitions/RuleMatrixCheckGroupVO'
+      ruleMatrixGeneral:
+        $ref: '#/definitions/RuleMatrixGeneralVO'
+      ruleMatrixMaterial:
+        $ref: '#/definitions/RuleMatrixMaterialVO'
+      rules:
+        type: array
+        items:
+          $ref: '#/definitions/RuleDetailVO'
+      samplingQty:
+        type: number
+      standardDesc:
+        type: string
+      validFromDate:
+        type: string
+        format: date
+      validLabel:
+        type: string
+      validToDate:
+        type: string
+        format: date
+      version:
+        type: integer
+        format: int32
+    title: RuleGroupDetailVO
+  RuleGroupListItemVO:
+    type: object
+    properties:
+      checkTypeCodes:
+        type: array
+        items:
+          type: string
+      createdBy:
+        type: string
+      createdByName:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      groupName:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      samplingQty:
+        type: number
+      standardDesc:
+        type: string
+      validFromDate:
+        type: string
+        format: date
+      validLabel:
+        type: string
+      validToDate:
+        type: string
+        format: date
+      version:
+        type: integer
+        format: int32
+    title: RuleGroupListItemVO
+  RuleGroupMatrixSaveRequest:
+    type: object
+    properties:
+      ruleMatrixCheckGroup:
+        $ref: '#/definitions/RuleMatrixCheckGroupVO'
+      ruleMatrixGeneral:
+        $ref: '#/definitions/RuleMatrixGeneralVO'
+      ruleMatrixMaterial:
+        $ref: '#/definitions/RuleMatrixMaterialVO'
+    title: RuleGroupMatrixSaveRequest
+  RuleGroupUpdateRequest:
+    type: object
+    properties:
+      attachments:
+        type: array
+        items:
+          $ref: '#/definitions/OsmUploadVO'
+      checkMethodCode:
+        type: string
+      checkStandardCode:
+        type: string
+      groupName:
+        type: string
+      rules:
+        type: array
+        items:
+          $ref: '#/definitions/RuleSaveRequest'
+      samplingQty:
+        type: number
+      standardDesc:
+        type: string
+    title: RuleGroupUpdateRequest
+  RuleMatrixCheckGroupItemVO:
+    type: object
+    properties:
+      checkGroupCode:
+        type: string
+      checkTypeCodes:
+        type: array
+        items:
+          type: string
+      id:
+        type: string
+    title: RuleMatrixCheckGroupItemVO
+  RuleMatrixCheckGroupVO:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/RuleMatrixCheckGroupItemVO'
+    title: RuleMatrixCheckGroupVO
+  RuleMatrixDetailVO:
+    type: object
+    properties:
+      checkGroup:
+        type: boolean
+      checkGroupCode:
+        type: string
+      checkTypeCode:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      general:
+        type: boolean
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      material:
+        type: boolean
+      materialId:
+        type: string
+      materialName:
+        type: string
+      materialNo:
+        type: string
+      matrixName:
+        type: string
+      ruleGroup:
+        $ref: '#/definitions/RuleGroupDetailVO'
+      ruleGroupId:
+        type: string
+      validFromDate:
+        type: string
+        format: date
+      validLabel:
+        type: string
+      validToDate:
+        type: string
+        format: date
+      version:
+        type: integer
+        format: int32
+    title: RuleMatrixDetailVO
+  RuleMatrixGeneralVO:
+    type: object
+    properties:
+      checkTypeCodes:
+        type: array
+        items:
+          type: string
+      id:
+        type: string
+    title: RuleMatrixGeneralVO
+  RuleMatrixMaterialItemVO:
+    type: object
+    properties:
+      checkTypeCodes:
+        type: array
+        items:
+          type: string
+      id:
+        type: string
+      material:
+        $ref: '#/definitions/MaterialVO'
+      materialId:
+        type: string
+    title: RuleMatrixMaterialItemVO
+  RuleMatrixMaterialVO:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/RuleMatrixMaterialItemVO'
+    title: RuleMatrixMaterialVO
+  RuleMatrixOptionVO:
+    type: object
+    properties:
+      checkGroup:
+        type: boolean
+      checkMethodCode:
+        type: string
+      checkStandardCode:
+        type: string
+      checkTypeCode:
+        type: string
+      checkTypeCodes:
+        type: array
+        items:
+          type: string
+      general:
+        type: boolean
+      groupId:
+        type: string
+      groupName:
+        type: string
+      id:
+        type: string
+      material:
+        type: boolean
+      materialId:
+        type: string
+      validFromDate:
+        type: string
+        format: date
+      validToDate:
+        type: string
+        format: date
+    title: RuleMatrixOptionVO
+  RuleMatrixStatusRequest:
+    type: object
+    properties:
+      ifUse:
+        type: boolean
+    title: RuleMatrixStatusRequest
+  RuleSaveRequest:
+    type: object
+    properties:
+      ac:
+        type: number
+      aql:
+        type: number
+      checkApproach:
+        type: string
+      checkLevel:
+        type: string
+      defectLevel:
+        type: string
+      destructiveCheck:
+        type: boolean
+      id:
+        type: string
+      lowerLimitValue:
+        type: number
+      qualityStandard:
+        type: string
+      quantifiableMeasure:
+        type: boolean
+      re:
+        type: number
+      ruleCategoryCode:
+        type: string
+      ruleName:
+        type: string
+      standardValue:
+        type: number
+      upperLimitValue:
+        type: number
+    title: RuleSaveRequest
+  SalesOrderDetailVO:
+    type: object
+    properties:
+      contractName:
+        type: string
+      contractNo:
+        type: string
+      id:
+        type: string
+      soName:
+        type: string
+      soNo:
+        type: string
+    title: SalesOrderDetailVO
+  SampleSizeCalculateResultVO:
+    type: object
+    properties:
+      ruleId:
+        type: string
+      sampleQty:
+        type: integer
+        format: int32
+    title: SampleSizeCalculateResultVO
+  SampleSizeCalculateVO:
+    type: object
+    required:
+      - aql
+      - checkQty
+    properties:
+      aql:
+        type: number
+      checkLevel:
+        type: string
+      checkQty:
+        type: number
+      checkStandardCode:
+        type: string
+    title: SampleSizeCalculateVO
+  SelectOption:
+    type: object
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    title: SelectOption
+  SimIssueListVO:
+    type: object
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      issueNo:
+        type: string
+      issueType:
+        type: string
+      issueTypeText:
+        type: string
+      lastCmtCpltDate:
+        type: string
+        format: date
+      reportedDate:
+        type: string
+        format: date
+      respUserFullname:
+        type: string
+      sim1PfDate:
+        type: string
+        format: date
+      sim2PfDate:
+        type: string
+        format: date
+      sim3PfDate:
+        type: string
+        format: date
+      sim5PfDate:
+        type: string
+        format: date
+      simLevel:
+        type: string
+      simLevelText:
+        type: string
+      sponsorFullname:
+        type: string
+      status:
+        type: integer
+        format: int32
+      statusText:
+        type: string
+      upgraded:
+        type: boolean
+      workUnitName:
+        type: string
+    title: SimIssueListVO
+  Sort:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      sorted:
+        type: boolean
+      unsorted:
+        type: boolean
+    title: Sort
+  SupplierFeedbackCreateRequest:
+    type: object
+    properties:
+      feedbackDate:
+        type: string
+        format: date
+      feedbackLevel:
+        type: string
+      proposeDate:
+        type: string
+        format: date
+      proposerId:
+        type: string
+      solution:
+        type: string
+    title: SupplierFeedbackCreateRequest
+  SupplierFeedbackVO:
+    type: object
+    properties:
+      checkResultId:
+        type: string
+      feedbackDate:
+        type: string
+        format: date
+      feedbackLevel:
+        type: string
+      feedbackLevelName:
+        type: string
+      id:
+        type: string
+      proposeDate:
+        type: string
+        format: date
+      proposerId:
+        type: string
+      proposerName:
+        type: string
+      solution:
+        type: string
+      supplierFeedbackNo:
+        type: string
+    title: SupplierFeedbackVO
+  TenantOrgVO:
+    type: object
+    properties:
+      description:
+        type: string
+      id:
+        type: string
+      level:
+        type: integer
+        format: int32
+      name:
+        type: string
+      parent:
+        $ref: '#/definitions/TenantOrgVO'
+      parentId:
+        type: string
+      path:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      wxDepartId:
+        type: string
+      wxParentDepartId:
+        type: string
+    title: TenantOrgVO
+  UsageDecisionVO:
+    type: object
+    properties:
+      id:
+        type: string
+      inspectionFlowTrackingId:
+        type: string
+      inspectionLotId:
+        type: string
+      quantityConcessionAccept:
+        type: number
+      quantityDowngrade:
+        type: number
+      quantityQualified:
+        type: number
+      quantityReject:
+        type: number
+      quantityReturn:
+        type: number
+      quantityRework:
+        type: number
+      quantityScrap:
+        type: number
+      quantitySort:
+        type: number
+    title: UsageDecisionVO

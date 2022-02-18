@@ -1,0 +1,14 @@
+code_def:
+  retrieve_tenent_code_defs:
+    url: "/v2/api/tenants/{tenant_id}/code-defs"
+    type: "get"
+    description: "查询租户codedef"
+oss:
+  get_callback_parms:
+    url: "/v2/api/public/tenants/{tenant_id}/oss/callback-parms"
+    type: "get"
+    description: "获取CALLBACK的参数信息"
+  get_post_policy:
+    url: "/v2/api/tenants/{tenant_id}/oss/post-policy"
+    type: "get"
+    description: "获取上传文件的签名目录"

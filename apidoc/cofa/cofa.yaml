@@ -1,0 +1,5279 @@
+swagger: '2.0'
+info:
+  description: PE REST API Documentation
+  version: 3.14.0.RELEASE
+  title: COFA API
+  termsOfService: Terms of service
+  contact:
+    name: Industics Ltd
+    url: 'http://support.industics.com'
+    email: support@industics.com
+  license:
+    name: License of API
+    url: API license URL
+host: 'localhost:33021'
+basePath: /cofa
+tags:
+  - name: ' MSG - NOTIFICATION'
+    description: Notification Proxy Endpoint
+  - name: COFA - SYS
+    description: Sys Endpoint
+  - name: COMMON - AREA
+    description: Area Proxy Endpoint
+  - name: COMMON - BIZ_WARNING
+    description: Biz Warning Proxy Endpoint
+  - name: 'COMMON - ESIGN '
+    description: Esign Proxy Endpoint
+  - name: COMMON - SERIAL_NUMBER
+    description: Serial Number Proxy Endpoint
+  - name: COMMON - SERIAL_NUMBER_CTRL
+    description: Serial Number Ctrl Proxy Endpoint
+  - name: EXTEND-FIELD
+    description: Extend Field Proxy Endpoint
+  - name: ID - ACCESS_LOG
+    description: Access Log Proxy Endpoint
+  - name: ID - APP
+    description: App Proxy Endpoint
+  - name: ID - CODE_DEF
+    description: Code Def Proxy Endpoint
+  - name: ID - CODE_DEF_MGR
+    description: Code Def Mgr Proxy Endpoint
+  - name: ID - CONFIG
+    description: Config Proxy Endpoint
+  - name: ID - EXTEND_COLUMN_DEF
+    description: Extend Column Def Proxy Endpoint
+  - name: ID - FE_FIELD_CONFIG
+    description: Fe Field Config Proxy Endpoint
+  - name: ID - MENU Mobile
+    description: Mobile Menu Proxy Endpoint
+  - name: ID - RELEASE
+    description: Release Endpoint
+  - name: ID - TAG
+    description: Tag Proxy Endpoint
+  - name: ID - TENANT_APP
+    description: Tenant App Proxy Endpoint
+  - name: ID - WECHAT
+    description: Wechat Proxy Endpoint
+  - name: OSM - FILES
+    description: Open Api Osm Endpoint
+  - name: OSM - OBJECTS
+    description: Osm Object Proxy Endpoint
+  - name: OSM - OSS
+    description: OSS Related Proxy APIs
+  - name: OSM - TAGS
+    description: Osm Object Tag Proxy Endpoint
+schemes:
+  - http
+paths:
+  '/v2/api/apps/{app_id}/users/{user_id}/access-logs':
+    post:
+      tags:
+        - ID - ACCESS_LOG
+      summary: 创建用户当前APP的访问日志
+      operationId: saveUserAppAccessLogUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/areas:
+    get:
+      tags:
+        - COMMON - AREA
+      summary: 获取全部地区信息
+      operationId: getAllAreasUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AreaVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/osm/tenants/{tenant_id}/files/list':
+    get:
+      tags:
+        - OSM - FILES
+      summary: 查询某目录的所有文件
+      operationId: findAllObjectsUnderSubPathUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: config_key
+          in: query
+          description: config_key
+          required: true
+          type: string
+        - name: sub_path
+          in: query
+          description: sub_path
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OsmObjectVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/osm/tenants/{tenant_id}/files/signature':
+    get:
+      tags:
+        - OSM - FILES
+      summary: 获取OssKey详情
+      operationId: getObjectVOUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: file_name
+          in: query
+          description: file_name
+          required: true
+          type: string
+        - name: oss_key
+          in: query
+          description: oss_key
+          required: true
+          type: string
+        - name: signature_expire_hours
+          in: query
+          description: signature_expire_hours
+          required: false
+          type: integer
+          format: int32
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OssSignature'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/apps/all:
+    get:
+      tags:
+        - ID - APP
+      summary: 查询所有的应用
+      operationId: findAllAppsUsingGET
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AppVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/public/tenants/all:
+    get:
+      tags:
+        - ID - TENANT_APP
+      summary: 查询所有的租户
+      operationId: findAllTenantsUsingGET
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/tenants/{tenant_id}/apps/{app_id}/m/menus':
+    get:
+      tags:
+        - ID - MENU Mobile
+      summary: 获取App移动菜单
+      operationId: findAllMobileMenusUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MenuVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/tenants/{tenant_id}/oss/callback-parms':
+    get:
+      tags:
+        - OSM - OSS
+      summary: 获取CALLBACK的参数信息
+      operationId: getCallbackParamsUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: file_name
+          in: query
+          description: file_name
+          required: true
+          type: string
+        - name: need_preview
+          in: query
+          description: need_preview
+          required: false
+          type: boolean
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/tenants/{tenant_id}/oss/post-policy':
+    get:
+      tags:
+        - OSM - OSS
+      summary: 获取上传文件的签名目录
+      operationId: getPostPolicyUsingGET_2
+      produces:
+        - application/json
+      parameters:
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: key
+          in: query
+          description: key
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/tenants/{tenant_id}/oss/presigned-url':
+    get:
+      tags:
+        - OSM - OSS
+      summary: 获取OSS的签名地址
+      operationId: getPresignedUrlUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: oss_key
+          in: query
+          description: oss_key
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/tenants/{tenant_id}/tenant-apps/all':
+    get:
+      tags:
+        - ID - TENANT_APP
+      summary: 查询租户所有的应用
+      operationId: findAllTenantAppsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantAppVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/public/tenants/{tenant_id}/users/{user_id}/apps/{app_id}/m/menus':
+    get:
+      tags:
+        - ID - MENU Mobile
+      summary: 获取用户的移动菜单信息
+      operationId: findAllUserMobileMenusUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: path
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MenuVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/releases/latest-release:
+    get:
+      tags:
+        - ID - RELEASE
+      summary: 查询最新的RELEASE信息
+      operationId: findLatestReleaseNoteUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReleaseVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/sys/sys-info:
+    get:
+      tags:
+        - COFA - SYS
+      summary: 获取服务器时间
+      operationId: getServerSysTimeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SystemInfo'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/admin/code-defs/code-types/page':
+    get:
+      tags:
+        - ID - CODE_DEF_MGR
+      summary: 分页查询codeType
+      operationId: findAllCodeTypesUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: code_def_type_like
+          in: query
+          description: code_def_type_like
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: type_name
+          in: query
+          description: type_name
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: type_name_like
+          in: query
+          description: type_name_like
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfCodeTypeDefVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/admin/code-defs/types/{type}':
+    get:
+      tags:
+        - ID - CODE_DEF_MGR
+      summary: findAllCodeDefByType
+      operationId: findAllCodeDefByTypeUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: type
+          in: path
+          description: type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CodeDefVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - ID - CODE_DEF_MGR
+      summary: 添加CodeDef
+      operationId: createTenantCodeDefUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: codeDefCreateVO
+          description: codeDefCreateVO
+          required: true
+          schema:
+            $ref: '#/definitions/CodeDefCreateVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: type
+          in: path
+          description: type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/admin/code-defs/{id}':
+    put:
+      tags:
+        - ID - CODE_DEF_MGR
+      summary: 更新CodeDef
+      operationId: updateTenantCodeDefUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: codeDefUpdateVO
+          description: codeDefUpdateVO
+          required: true
+          schema:
+            $ref: '#/definitions/CodeDefUpdateVO'
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - ID - CODE_DEF_MGR
+      summary: 禁用CodeDef
+      operationId: deleteCodeDefUsingDELETE
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/admin/code-defs/{id}/active':
+    put:
+      tags:
+        - ID - CODE_DEF_MGR
+      summary: 启用CodeDef
+      operationId: activeCodeDefUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/configs':
+    get:
+      tags:
+        - ID - CONFIG
+      summary: 获取租户Configs
+      operationId: findConfigsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: key_name
+          in: query
+          description: key_name
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              $ref: '#/definitions/ConfigItemVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/esign/configs':
+    get:
+      tags:
+        - 'COMMON - ESIGN '
+      summary: 获取电子签章配置
+      operationId: findAllEsignConfigsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: biz_type
+          in: query
+          description: biz_type
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EsignConfigVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/esign/esign-flows':
+    post:
+      tags:
+        - 'COMMON - ESIGN '
+      summary: createEsignFlow
+      operationId: createEsignFlowUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: X-Operator-ID
+          in: header
+          required: true
+          type: string
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - in: body
+          name: eSignStartRequest
+          description: eSignStartRequest
+          required: true
+          schema:
+            $ref: '#/definitions/EsignCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NewInstanceVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/esign/esign-flows/pages':
+    get:
+      tags:
+        - 'COMMON - ESIGN '
+      summary: 按照业务类型查询签章信息
+      operationId: findAllEsignFlowsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: biz_type
+          in: query
+          description: biz_type
+          required: true
+          type: string
+        - name: biz_value
+          in: query
+          description: biz_value
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfEsignFlowListItemVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/esign/esign-flows/{id}/refresh':
+    put:
+      tags:
+        - 'COMMON - ESIGN '
+      summary: 刷新电子签章状态
+      operationId: refreshEsignFlowStatusUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EsignFlowRefreshResultVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/esign/esign-user-flows/pages':
+    get:
+      tags:
+        - 'COMMON - ESIGN '
+      summary: 按照用户查询签章信息
+      operationId: findAllEsignFlowByUserUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: applicant
+          in: query
+          description: applicant
+          required: false
+          type: string
+        - name: biz_type
+          in: query
+          description: biz_type
+          required: false
+          type: string
+        - name: biz_value
+          in: query
+          description: biz_value
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: signer
+          in: query
+          description: signer
+          required: false
+          type: string
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: status
+          in: query
+          description: status
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfEsignUserFlowListItemVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/esign/esign-user-flows/{id}':
+    get:
+      tags:
+        - 'COMMON - ESIGN '
+      summary: 获取签署人的签署信息
+      operationId: getEsignUserFlowInfoUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EsignUserFlowVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/extend-fields/batch':
+    post:
+      tags:
+        - EXTEND-FIELD
+      summary: 批量保存自定义字段模板
+      operationId: batchSaveExtendFieldTmplsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - in: body
+          name: fieldRequest
+          description: fieldRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ExtendFieldSaveRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/extend-fields/bulk':
+    post:
+      tags:
+        - EXTEND-FIELD
+      summary: 获取自定义字段列表
+      operationId: bulkGetExtendFieldsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: field_group_key
+          in: query
+          description: field_group_key
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ExtendFieldVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/m/menus':
+    get:
+      tags:
+        - ID - MENU Mobile
+      summary: 获取App移动菜单
+      operationId: findAllMobileMenusUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MenuVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/notifications':
+    post:
+      tags:
+        - ' MSG - NOTIFICATION'
+      summary: 新增通知
+      operationId: sendNotificationUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - in: body
+          name: requestVO
+          description: requestVO
+          required: true
+          schema:
+            $ref: '#/definitions/NotificationCreateVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/all':
+    get:
+      tags:
+        - ' MSG - NOTIFICATION'
+      summary: 查看全部的通知消息
+      operationId: getAllNotificationUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: message_type
+          in: query
+          description: message_type
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfNotificationVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/read-all':
+    post:
+      tags:
+        - ' MSG - NOTIFICATION'
+      summary: 全部通知已读
+      operationId: readAllUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: message_type
+          in: query
+          description: message_type
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int32
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/unread':
+    get:
+      tags:
+        - ' MSG - NOTIFICATION'
+      summary: 查看未读的通知消息
+      operationId: getUnreadNotificationUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: message_type
+          in: query
+          description: message_type
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfNotificationVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/unread-count':
+    get:
+      tags:
+        - ' MSG - NOTIFICATION'
+      summary: 查看未读的通知消息数量
+      operationId: getUnreadNotificationCountUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: message_type
+          in: query
+          description: message_type
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int32
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/{message_id}/read':
+    post:
+      tags:
+        - ' MSG - NOTIFICATION'
+      summary: 单条通知已读
+      operationId: readOneUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: message_id
+          in: path
+          description: message_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int32
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/{message_type}/all':
+    get:
+      tags:
+        - ' MSG - NOTIFICATION'
+      summary: 查看全部的通知消息
+      operationId: getAllNotificationUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: message_type
+          in: path
+          description: message_type
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfNotificationVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/{message_type}/read-all':
+    post:
+      tags:
+        - ' MSG - NOTIFICATION'
+      summary: 全部通知已读
+      operationId: readAllUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: message_type
+          in: path
+          description: message_type
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int32
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/{message_type}/unread':
+    get:
+      tags:
+        - ' MSG - NOTIFICATION'
+      summary: 查看未读的通知消息
+      operationId: getUnreadNotificationUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: message_type
+          in: path
+          description: message_type
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfNotificationVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/{message_type}/unread-count':
+    get:
+      tags:
+        - ' MSG - NOTIFICATION'
+      summary: 查看未读的通知消息数量
+      operationId: getUnreadNotificationCountUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: path
+          description: app_id
+          required: true
+          type: string
+        - name: message_type
+          in: path
+          description: message_type
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int32
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/code-defs':
+    get:
+      tags:
+        - ID - CODE_DEF
+      summary: 获取租户CODE DEF
+      operationId: findAllCodeDefsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: codes
+          in: query
+          description: codes
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: include_deleted
+          in: query
+          description: include_deleted
+          required: false
+          type: boolean
+          default: false
+        - name: parent_code
+          in: query
+          description: parent_code
+          required: false
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: type
+          in: query
+          description: type
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: array
+              items:
+                $ref: '#/definitions/CodeDefVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/excol-defs/batch':
+    put:
+      tags:
+        - ID - EXTEND_COLUMN_DEF
+      summary: 批量保存扩展字段配置
+      operationId: batchSaveExtendColumnDefsUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: extendColumnDefBatchSaveVO
+          description: extendColumnDefBatchSaveVO
+          required: true
+          schema:
+            $ref: '#/definitions/ExtendColumnDefBatchSaveVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/excol-defs/page':
+    get:
+      tags:
+        - ID - EXTEND_COLUMN_DEF
+      summary: 获取扩展字段配置
+      operationId: findAllExtendColumnDefsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: table_name
+          in: query
+          description: table_name
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfExtendColumnDefVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/fe-field-configs':
+    post:
+      tags:
+        - ID - FE_FIELD_CONFIG
+      summary: 保存租户的前端列表字段配置
+      operationId: saveTenantFeFieldConfigsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: feFieldConfigSaveVO
+          description: feFieldConfigSaveVO
+          required: true
+          schema:
+            $ref: '#/definitions/FeFieldConfigSaveVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/latest-release-user':
+    get:
+      tags:
+        - ID - RELEASE
+      summary: 查询用户是否访问过最新的Release版本
+      operationId: findLatestReleaseUserUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: user_id
+          in: query
+          description: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReleaseUserVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/object-tags/{object_tag_id}':
+    put:
+      tags:
+        - OSM - TAGS
+      summary: 根据ID更新objectTag信息
+      operationId: updateObjectTagByIdUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: object_tag_id
+          in: path
+          description: object_tag_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: updateRequest
+          description: updateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/OsmObjectTagUpdateRequest'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/objects':
+    get:
+      tags:
+        - OSM - OBJECTS
+      summary: 查询object信息
+      operationId: queryObjectPageUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int32
+          collectionFormat: multi
+        - name: biz_type
+          in: query
+          description: biz_type
+          required: false
+          type: string
+        - name: biz_value
+          in: query
+          description: biz_value
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: delete
+          in: query
+          description: delete
+          required: false
+          type: boolean
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: preview
+          in: query
+          description: preview
+          required: false
+          type: boolean
+        - name: signature
+          in: query
+          description: signature
+          required: false
+          type: boolean
+        - name: signature_expire_hours
+          in: query
+          description: signature_expire_hours
+          required: false
+          type: integer
+          default: 8
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfOsmObjectVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/objects/bulk':
+    get:
+      tags:
+        - OSM - OBJECTS
+      summary: 批量获取object详情
+      operationId: getObjectVOListUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: object_id
+          in: query
+          description: object_id
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: signature
+          in: query
+          description: signature
+          required: false
+          type: boolean
+        - name: signature_expire_hours
+          in: query
+          description: signature_expire_hours
+          required: false
+          type: integer
+          default: 8
+          format: int32
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OsmObjectVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/objects/query-by-biz-value':
+    post:
+      tags:
+        - OSM - OBJECTS
+      summary: 查询object信息
+      operationId: queryObjectPageByBizValueUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int32
+          collectionFormat: multi
+        - in: body
+          name: bizValueList
+          description: bizValueList
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: biz_type
+          in: query
+          description: biz_type
+          required: false
+          type: string
+        - name: delete
+          in: query
+          description: delete
+          required: false
+          type: boolean
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: preview
+          in: query
+          description: preview
+          required: false
+          type: boolean
+        - name: signature
+          in: query
+          description: signature
+          required: false
+          type: boolean
+        - name: signature_expire_hours
+          in: query
+          description: signature_expire_hours
+          required: false
+          type: integer
+          default: 8
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfOsmObjectVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/objects/{object_id}':
+    get:
+      tags:
+        - OSM - OBJECTS
+      summary: 获取object详情
+      operationId: getObjectVOUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: file_name
+          in: query
+          description: file_name
+          required: false
+          type: string
+        - name: object_id
+          in: path
+          description: object_id
+          required: true
+          type: string
+        - name: signature
+          in: query
+          description: signature
+          required: false
+          type: boolean
+        - name: signature_expire_hours
+          in: query
+          description: signature_expire_hours
+          required: false
+          type: integer
+          default: 8
+          format: int32
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OsmObjectVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/oss/callback-parms':
+    get:
+      tags:
+        - OSM - OSS
+      summary: 获取CALLBACK的参数信息
+      operationId: getCallbackParamsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: file_name
+          in: query
+          description: file_name
+          required: true
+          type: string
+        - name: need_preview
+          in: query
+          description: need_preview
+          required: false
+          type: boolean
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/oss/post-policy':
+    get:
+      tags:
+        - OSM - OSS
+      summary: 获取上传文件的签名目录
+      operationId: getPostPolicyUsingGET_1
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: key
+          in: query
+          description: key
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/oss/presigned-url':
+    get:
+      tags:
+        - OSM - OSS
+      summary: 获取OSS的签名地址
+      operationId: getPresignedUrlUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: oss_key
+          in: query
+          description: oss_key
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/release-user':
+    post:
+      tags:
+        - ID - RELEASE
+      summary: 创建Release访问记录
+      operationId: createReleaseUserUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: createRequest
+          description: createRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ReleaseUserCreateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/tags':
+    get:
+      tags:
+        - ID - TAG
+      summary: 标签 - 查询所有标签
+      operationId: findAllTenantTagUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TenantTagVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/tags/{tag_id}':
+    get:
+      tags:
+        - ID - TAG
+      summary: 标签 - 查询某个标签的详情
+      operationId: getTenantTagUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tag_id
+          in: path
+          description: tag_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TenantTagVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/fe-field-configs':
+    get:
+      tags:
+        - ID - FE_FIELD_CONFIG
+      summary: 获取用户的前端列表字段配置
+      operationId: getUserFeFieldConfigsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: list_name
+          in: query
+          description: list_name
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/FeFieldConfigVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - ID - FE_FIELD_CONFIG
+      summary: 保存用户的前端列表字段配置
+      operationId: saveUserFeFieldConfigsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: feFieldConfigSaveVO
+          description: feFieldConfigSaveVO
+          required: true
+          schema:
+            $ref: '#/definitions/FeFieldConfigSaveVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/tenants/{tenant_id}/users/fe-field-configs/reset':
+    post:
+      tags:
+        - ID - FE_FIELD_CONFIG
+      summary: 重置用户的前端列表字段配置
+      operationId: resetUserFeFieldConfigsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: feFieldConfigResetVO
+          description: feFieldConfigResetVO
+          required: true
+          schema:
+            $ref: '#/definitions/FeFieldConfigResetVO'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /v2/api/wechat/jsapi/signature:
+    get:
+      tags:
+        - ID - WECHAT
+      summary: signature
+      operationId: signatureUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: domain
+          in: query
+          description: domain
+          required: true
+          type: string
+        - name: url
+          in: query
+          description: url
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WxCpJsApiSignatureVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/api-access-logs':
+    get:
+      tags:
+        - ID - ACCESS_LOG
+      summary: 查询API访问日志
+      operationId: findAllApiAccessLogsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: api_url
+          in: query
+          description: api_url
+          required: false
+          type: string
+        - name: app_name
+          in: query
+          description: app_name
+          required: false
+          type: string
+        - name: client_id
+          in: query
+          description: client_id
+          required: false
+          type: string
+        - name: disposed
+          in: query
+          description: disposed
+          required: false
+          type: string
+        - name: error
+          in: query
+          description: error
+          required: false
+          type: string
+        - name: from_date
+          in: query
+          description: from_date
+          required: false
+          type: string
+          format: date
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: remote_ip
+          in: query
+          description: remote_ip
+          required: false
+          type: string
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: to_date
+          in: query
+          description: to_date
+          required: false
+          type: string
+          format: date
+        - name: user_id
+          in: query
+          description: user_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfApiAccessLogVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/api-access-logs/disposed':
+    post:
+      tags:
+        - ID - ACCESS_LOG
+      summary: 批量处理API日志
+      operationId: batchDisposeApiAccessLogsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: updateRequest
+          description: updateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/BatchDisposedApiAccessLogRequest'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/serial-numbers':
+    post:
+      tags:
+        - COMMON - SERIAL_NUMBER
+      summary: generateSerialNumbers
+      operationId: generateSerialNumbersUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: generateRequest
+          description: generateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/SerialNumberGenerateRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SerialNumberResultVO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/serial-numbers/ctrls':
+    get:
+      tags:
+        - COMMON - SERIAL_NUMBER_CTRL
+      summary: findSerialNumberCtrls
+      operationId: findSerialNumberCtrlsUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: serial_number_type
+          in: query
+          description: serial_number_type
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SerialNumberCtrlVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/serial-numbers/rule':
+    post:
+      tags:
+        - COMMON - SERIAL_NUMBER
+      summary: createSerialNumberRule
+      operationId: createSerialNumberRuleUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - in: body
+          name: saveRequest
+          description: saveRequest
+          required: true
+          schema:
+            $ref: '#/definitions/SerialNumberRuleSaveRequest'
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/serial-numbers/rule/type':
+    get:
+      tags:
+        - COMMON - SERIAL_NUMBER
+      summary: getSerialNumberTypes
+      operationId: getSerialNumberTypesUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SerialNumberRuleType'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/serial-numbers/rule/type/page':
+    get:
+      tags:
+        - COMMON - SERIAL_NUMBER
+      summary: querySerialNumberRules
+      operationId: querySerialNumberRulesUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - name: type
+          in: query
+          description: type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfSerialNumberRule'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/serial-numbers/rule/{id}':
+    put:
+      tags:
+        - COMMON - SERIAL_NUMBER
+      summary: updateSerialNumberRule
+      operationId: updateSerialNumberRuleUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: updateRequest
+          description: updateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/SerialNumberRuleUpdateRequest'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/serial-numbers/rule/{id}/enable':
+    post:
+      tags:
+        - COMMON - SERIAL_NUMBER
+      summary: enableSerialNumberRule
+      operationId: enableSerialNumberRuleUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/warning-rules/by-rule-type':
+    get:
+      tags:
+        - COMMON - BIZ_WARNING
+      summary: 获取业务对象某指定规则
+      operationId: findActiveWarningRuleDetailUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: biz_type
+          in: query
+          description: biz_type
+          required: true
+          type: string
+        - name: enabled
+          in: query
+          description: enabled
+          required: false
+          type: boolean
+        - name: rule_type
+          in: query
+          description: rule_type
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OptionalOfBizWarningRuleDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/warning-rules/pages':
+    get:
+      tags:
+        - COMMON - BIZ_WARNING
+      summary: 按页获取业务预警所有的规则
+      operationId: findAllBizWarningRulesByPageUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: biz_type
+          in: query
+          description: biz_type
+          required: true
+          type: string
+        - name: page
+          in: query
+          description: Page number of the requested page
+          required: false
+          type: integer
+          format: int32
+        - name: q
+          in: query
+          description: q
+          required: false
+          type: string
+        - name: size
+          in: query
+          description: Size of a page
+          required: false
+          type: integer
+          format: int32
+        - name: sort
+          in: query
+          description: >-
+            Sorting criteria in the format: property(,asc|desc). Default sort
+            order is ascending. Multiple sort criteria are supported.
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PageOfBizWarningRuleListVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/warning-rules/{rule_id}':
+    get:
+      tags:
+        - COMMON - BIZ_WARNING
+      summary: getBizWarningRule
+      operationId: getBizWarningRuleUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: rule_id
+          in: path
+          description: rule_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BizWarningRuleDetailVO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - COMMON - BIZ_WARNING
+      summary: updateBizWarningRule
+      operationId: updateBizWarningRuleUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: rule_id
+          in: path
+          description: rule_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+        - in: body
+          name: updateRequest
+          description: updateRequest
+          required: true
+          schema:
+            $ref: '#/definitions/BizWarningRuleUpdateRequest'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/warning-rules/{rule_id}/disable':
+    put:
+      tags:
+        - COMMON - BIZ_WARNING
+      summary: disableBizWarningRule
+      operationId: disableBizWarningRuleUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: rule_id
+          in: path
+          description: rule_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/api/{tenant_id}/warning-rules/{rule_id}/enable':
+    put:
+      tags:
+        - COMMON - BIZ_WARNING
+      summary: enableBizWarningRule
+      operationId: enableBizWarningRuleUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: rule_id
+          in: path
+          description: rule_id
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/v2/openapi/osm/tenants/{tenant_id}/post-policy':
+    get:
+      tags:
+        - OSM - FILES
+      summary: 获取上传文件的签名目录
+      operationId: getPostPolicyUsingGET
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: the bearer token value
+          required: true
+          type: string
+          default: Bearer XXX
+        - name: app_id
+          in: query
+          description: app_id
+          required: true
+          type: integer
+          format: int32
+        - name: key
+          in: query
+          description: key
+          required: true
+          type: string
+        - name: tenant_id
+          in: path
+          description: tenant_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+definitions:
+  ApiAccessLogVO:
+    type: object
+    properties:
+      apiUrl:
+        type: string
+      appId:
+        type: integer
+        format: int32
+      appName:
+        type: string
+      disposed:
+        type: string
+      errMsg:
+        type: string
+      extend:
+        type: string
+      id:
+        type: string
+      methodName:
+        type: string
+      remoteIp:
+        type: string
+      request:
+        type: string
+      requestTime:
+        type: string
+        format: date-time
+      response:
+        type: string
+      responseTime:
+        type: string
+        format: date-time
+      spendMillis:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+    title: ApiAccessLogVO
+  AppVO:
+    type: object
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+        format: int32
+      logoUrl:
+        type: string
+      name:
+        type: string
+      shortName:
+        type: string
+      status:
+        type: integer
+        format: int32
+      supportedTypes:
+        type: array
+        items:
+          type: string
+      uri:
+        type: string
+    title: AppVO
+  AreaVO:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      name:
+        type: string
+      parentCode:
+        type: integer
+        format: int32
+      pinyin:
+        type: string
+    title: AreaVO
+  BatchDisposedApiAccessLogRequest:
+    type: object
+    properties:
+      ids:
+        type: array
+        items:
+          type: integer
+          format: int64
+    title: BatchDisposedApiAccessLogRequest
+  BizWarningRuleDetailVO:
+    type: object
+    properties:
+      bizType:
+        type: string
+      description:
+        type: string
+      enabled:
+        type: boolean
+      expression:
+        type: string
+      id:
+        type: string
+      priority:
+        type: integer
+        format: int32
+      remark:
+        type: string
+      ruleCode:
+        type: string
+      ruleName:
+        type: string
+      ruleRanges:
+        type: array
+        items:
+          $ref: '#/definitions/BizWarningRuleRangeVO'
+      ruleType:
+        type: string
+    title: BizWarningRuleDetailVO
+  BizWarningRuleListVO:
+    type: object
+    properties:
+      bindingField:
+        type: string
+      bizType:
+        type: string
+      description:
+        type: string
+      enabled:
+        type: boolean
+      expression:
+        type: string
+      id:
+        type: string
+      priority:
+        type: integer
+        format: int32
+      remark:
+        type: string
+      ruleCode:
+        type: string
+      ruleName:
+        type: string
+      ruleType:
+        type: string
+    title: BizWarningRuleListVO
+  BizWarningRuleRangeUpdateRequest:
+    type: object
+    properties:
+      color:
+        type: string
+      deleted:
+        type: boolean
+      id:
+        type: string
+      max:
+        type: integer
+        format: int32
+      min:
+        type: integer
+        format: int32
+      rangeName:
+        type: string
+      result:
+        type: integer
+        format: int32
+      sequence:
+        type: integer
+        format: int32
+    title: BizWarningRuleRangeUpdateRequest
+  BizWarningRuleRangeVO:
+    type: object
+    properties:
+      color:
+        type: string
+      id:
+        type: string
+      max:
+        type: integer
+        format: int32
+      min:
+        type: integer
+        format: int32
+      rangeName:
+        type: string
+      result:
+        type: integer
+        format: int32
+      ruleId:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+    title: BizWarningRuleRangeVO
+  BizWarningRuleUpdateRequest:
+    type: object
+    properties:
+      enabled:
+        type: boolean
+      ranges:
+        type: array
+        items:
+          $ref: '#/definitions/BizWarningRuleRangeUpdateRequest'
+      remark:
+        type: string
+    title: BizWarningRuleUpdateRequest
+  CodeDefCreateVO:
+    type: object
+    required:
+      - sequence
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      parentCode:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      type:
+        type: string
+    title: CodeDefCreateVO
+  CodeDefUpdateVO:
+    type: object
+    required:
+      - sequence
+      - status
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      parentCode:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      status:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      type:
+        type: string
+    title: CodeDefUpdateVO
+  CodeDefVO:
+    type: object
+    properties:
+      code:
+        type: string
+      deleted:
+        type: boolean
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      parentCode:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      status:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      type:
+        type: string
+    title: CodeDefVO
+  CodeTypeDefVO:
+    type: object
+    properties:
+      codeDefType:
+        type: string
+      id:
+        type: string
+      maintainable:
+        type: boolean
+      sequence:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      typeDesc:
+        type: string
+      typeName:
+        type: string
+      typeNames:
+        type: array
+        items:
+          type: string
+    title: CodeTypeDefVO
+  ConfigItemVO:
+    type: object
+    discriminator: value_type
+    properties:
+      appId:
+        type: integer
+        format: int32
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      id:
+        type: string
+      keyName:
+        type: string
+      keyValue:
+        type: object
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      publicized:
+        type: boolean
+      tenantId:
+        type: string
+      valueType:
+        type: string
+        enum:
+          - STRING
+          - INTEGER
+          - DATE
+          - LIST
+      version:
+        type: integer
+        format: int32
+    title: ConfigItemVO
+  DateConfigItemVO:
+    title: DateConfigItemVO
+    allOf:
+      - $ref: '#/definitions/ConfigItemVO'
+      - type: object
+        properties:
+          appId:
+            type: integer
+            format: int32
+          createdBy:
+            type: string
+          createdDate:
+            type: string
+            format: date-time
+          id:
+            type: string
+          keyName:
+            type: string
+          keyValue:
+            type: string
+            format: date
+          lastModifiedBy:
+            type: string
+          lastModifiedDate:
+            type: string
+            format: date-time
+          publicized:
+            type: boolean
+          tenantId:
+            type: string
+          valueType:
+            type: string
+            enum:
+              - STRING
+              - INTEGER
+              - DATE
+              - LIST
+          version:
+            type: integer
+            format: int32
+        title: DateConfigItemVO
+  EsignConfigVO:
+    type: object
+    properties:
+      bizType:
+        type: string
+      id:
+        type: string
+      posX:
+        type: number
+        format: float
+      posY:
+        type: number
+        format: float
+      remark:
+        type: string
+      sealPage:
+        type: integer
+        format: int32
+      sealType:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+    title: EsignConfigVO
+  EsignCreateRequest:
+    type: object
+    properties:
+      bizScene:
+        type: string
+      bizType:
+        type: string
+      bizValue:
+        type: string
+      files:
+        type: array
+        items:
+          $ref: '#/definitions/EsignFileSealRequest'
+      signUserId:
+        type: string
+    title: EsignCreateRequest
+  EsignFileSealRequest:
+    type: object
+    required:
+      - ridingPosY
+    properties:
+      contentType:
+        type: string
+      fileName:
+        type: string
+      fileUrl:
+        type: string
+      ridingPosY:
+        type: number
+        format: float
+      sealPoses:
+        type: array
+        items:
+          $ref: '#/definitions/EsignSealPosRequest'
+    title: EsignFileSealRequest
+  EsignFileVO:
+    type: object
+    properties:
+      fileId:
+        type: string
+      fileName:
+        type: string
+      fileUrl:
+        type: string
+    title: EsignFileVO
+  EsignFlowListItemVO:
+    type: object
+    properties:
+      bizScene:
+        type: string
+      bizType:
+        type: string
+      bizValue:
+        type: string
+      docs:
+        type: array
+        items:
+          $ref: '#/definitions/EsignFileVO'
+      endAt:
+        type: string
+        format: date-time
+      flowId:
+        type: string
+      id:
+        type: string
+      remark:
+        type: string
+      signers:
+        type: array
+        items:
+          $ref: '#/definitions/EsignFlowSignerListItemVO'
+      startAt:
+        type: string
+        format: date-time
+      status:
+        type: integer
+        format: int32
+    title: EsignFlowListItemVO
+  EsignFlowRefreshResultVO:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: integer
+        format: int32
+    title: EsignFlowRefreshResultVO
+  EsignFlowSignerListItemVO:
+    type: object
+    properties:
+      flowId:
+        type: string
+      signerUserId:
+        type: string
+      signerUserName:
+        type: string
+    title: EsignFlowSignerListItemVO
+  EsignSealPosRequest:
+    type: object
+    required:
+      - posX
+      - posY
+    properties:
+      page:
+        type: integer
+        format: int32
+      posX:
+        type: number
+        format: float
+      posY:
+        type: number
+        format: float
+    title: EsignSealPosRequest
+  EsignUserFlowListItemVO:
+    type: object
+    properties:
+      applicant:
+        type: string
+      applicantName:
+        type: string
+      bizScene:
+        type: string
+      bizType:
+        type: string
+      bizValue:
+        type: string
+      endAt:
+        type: string
+        format: date-time
+      id:
+        type: string
+      signer:
+        type: string
+      signerName:
+        type: string
+      startAt:
+        type: string
+        format: date-time
+      status:
+        type: string
+    title: EsignUserFlowListItemVO
+  EsignUserFlowVO:
+    type: object
+    properties:
+      bizScene:
+        type: string
+      bizType:
+        type: string
+      bizValue:
+        type: string
+      endAt:
+        type: string
+        format: date-time
+      flowId:
+        type: string
+      id:
+        type: string
+      signUrl:
+        type: string
+      startAt:
+        type: string
+        format: date-time
+      status:
+        type: integer
+        format: int32
+    title: EsignUserFlowVO
+  ExtendColumnDefBatchSaveVO:
+    type: object
+    properties:
+      extendColumnDefs:
+        type: array
+        items:
+          $ref: '#/definitions/ExtendColumnDefSaveVO'
+      tableName:
+        type: string
+        minLength: 0
+        maxLength: 64
+    title: ExtendColumnDefBatchSaveVO
+  ExtendColumnDefSaveVO:
+    type: object
+    properties:
+      columnDesc:
+        type: string
+        minLength: 0
+        maxLength: 64
+      columnName:
+        type: string
+        minLength: 0
+        maxLength: 32
+      columnOption:
+        type: string
+        minLength: 0
+        maxLength: 512
+      columnType:
+        type: string
+        minLength: 0
+        maxLength: 32
+      excelColumn:
+        type: boolean
+      id:
+        type: string
+        minLength: 0
+        maxLength: 32
+      maxLength:
+        type: integer
+        format: int32
+      searchColumn:
+        type: boolean
+    title: ExtendColumnDefSaveVO
+  ExtendColumnDefVO:
+    type: object
+    properties:
+      columnDesc:
+        type: string
+      columnName:
+        type: string
+      columnOption:
+        type: string
+      columnType:
+        type: string
+      excelColumn:
+        type: boolean
+      id:
+        type: string
+      maxLength:
+        type: integer
+        format: int32
+      searchColumn:
+        type: boolean
+      tableName:
+        type: string
+    title: ExtendColumnDefVO
+  ExtendFieldSaveRequest:
+    type: object
+    properties:
+      fieldGroupKey:
+        type: string
+      fieldSaveList:
+        type: array
+        items:
+          $ref: '#/definitions/ExtendFieldVO'
+    title: ExtendFieldSaveRequest
+  ExtendFieldVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      description:
+        type: string
+      fieldGroupKey:
+        type: string
+      fieldName:
+        type: string
+      fieldRange:
+        type: string
+      fieldType:
+        type: string
+      fieldWidth:
+        type: string
+      id:
+        type: string
+      lovOption:
+        type: string
+      maxLength:
+        type: string
+      required:
+        type: boolean
+      sequence:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+    title: ExtendFieldVO
+  FeFieldConfigItemSaveVO:
+    type: object
+    properties:
+      fieldName:
+        type: string
+    title: FeFieldConfigItemSaveVO
+  FeFieldConfigResetVO:
+    type: object
+    properties:
+      listName:
+        type: string
+    title: FeFieldConfigResetVO
+  FeFieldConfigSaveVO:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/FeFieldConfigItemSaveVO'
+      listName:
+        type: string
+    title: FeFieldConfigSaveVO
+  FeFieldConfigVO:
+    type: object
+    properties:
+      fieldName:
+        type: string
+      listName:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+    title: FeFieldConfigVO
+  IntegerConfigItemVO:
+    title: IntegerConfigItemVO
+    allOf:
+      - $ref: '#/definitions/ConfigItemVO'
+      - type: object
+        properties:
+          appId:
+            type: integer
+            format: int32
+          createdBy:
+            type: string
+          createdDate:
+            type: string
+            format: date-time
+          id:
+            type: string
+          keyName:
+            type: string
+          keyValue:
+            type: integer
+            format: int32
+          lastModifiedBy:
+            type: string
+          lastModifiedDate:
+            type: string
+            format: date-time
+          publicized:
+            type: boolean
+          tenantId:
+            type: string
+          valueType:
+            type: string
+            enum:
+              - STRING
+              - INTEGER
+              - DATE
+              - LIST
+          version:
+            type: integer
+            format: int32
+        title: IntegerConfigItemVO
+  MenuVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      category:
+        type: string
+      children:
+        type: array
+        items:
+          $ref: '#/definitions/MenuVO'
+      code:
+        type: string
+      color:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      deleted:
+        type: boolean
+      description:
+        type: string
+      icon:
+        type: string
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      name:
+        type: string
+      originId:
+        type: string
+      pid:
+        type: string
+      resource:
+        type: string
+      sequence:
+        type: integer
+        format: int32
+      state:
+        type: string
+      tenantId:
+        type: string
+      type:
+        type: integer
+        format: int32
+      url:
+        type: string
+      version:
+        type: integer
+        format: int32
+    title: MenuVO
+  NewInstanceVO:
+    type: object
+    properties:
+      id:
+        type: string
+    title: NewInstanceVO
+  NotificationCreateVO:
+    type: object
+    required:
+      - appId
+    properties:
+      appId:
+        type: integer
+        format: int32
+      content:
+        type: string
+        minLength: 0
+        maxLength: 1024
+      extraContent:
+        type: string
+        minLength: 0
+        maxLength: 1024
+      hyperlink:
+        type: string
+        minLength: 0
+        maxLength: 512
+      messageType:
+        type: string
+        minLength: 0
+        maxLength: 32
+      recipients:
+        type: array
+        items:
+          $ref: '#/definitions/NotificationRecipientVO'
+      title:
+        type: string
+        minLength: 0
+        maxLength: 128
+    title: NotificationCreateVO
+  NotificationRecipientVO:
+    type: object
+    properties:
+      recipientId:
+        type: string
+      recipientType:
+        type: string
+    title: NotificationRecipientVO
+  NotificationVO:
+    type: object
+    properties:
+      content:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      extraContent:
+        type: string
+      hyperlink:
+        type: string
+      id:
+        type: string
+      status:
+        type: integer
+        format: int32
+      title:
+        type: string
+      type:
+        type: string
+    title: NotificationVO
+  OptionalOfBizWarningRuleDetailVO:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      present:
+        type: boolean
+    title: OptionalOfBizWarningRuleDetailVO
+  OsmObjectTagUpdateRequest:
+    type: object
+    properties:
+      public:
+        type: boolean
+    title: OsmObjectTagUpdateRequest
+  OsmObjectVO:
+    type: object
+    properties:
+      bizType:
+        type: string
+      bizValue:
+        type: string
+      createdBy:
+        type: string
+      createdByName:
+        type: string
+      deleted:
+        type: boolean
+      id:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedByName:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      name:
+        type: string
+      ossKey:
+        type: string
+      previewObjectId:
+        type: string
+      public:
+        type: integer
+        format: int32
+      signature:
+        $ref: '#/definitions/OssSignature'
+      size:
+        type: integer
+        format: int32
+      tagId:
+        type: string
+      type:
+        type: string
+    title: OsmObjectVO
+  OssSignature:
+    type: object
+    properties:
+      expireTime:
+        type: string
+        format: date-time
+      origin:
+        type: string
+      pdf:
+        type: string
+      standard:
+        type: string
+      thumbnail:
+        type: string
+    title: OssSignature
+  PageOfApiAccessLogVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/ApiAccessLogVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfApiAccessLogVO
+  PageOfBizWarningRuleListVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/BizWarningRuleListVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfBizWarningRuleListVO
+  PageOfCodeTypeDefVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/CodeTypeDefVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfCodeTypeDefVO
+  PageOfEsignFlowListItemVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/EsignFlowListItemVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfEsignFlowListItemVO
+  PageOfEsignUserFlowListItemVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/EsignUserFlowListItemVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfEsignUserFlowListItemVO
+  PageOfExtendColumnDefVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/ExtendColumnDefVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfExtendColumnDefVO
+  PageOfNotificationVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/NotificationVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfNotificationVO
+  PageOfOsmObjectVO:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/OsmObjectVO'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfOsmObjectVO
+  PageOfSerialNumberRule:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          $ref: '#/definitions/SerialNumberRule'
+      empty:
+        type: boolean
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      size:
+        type: integer
+        format: int32
+      sort:
+        $ref: '#/definitions/Sort'
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: PageOfSerialNumberRule
+  ReleaseUserCreateRequest:
+    type: object
+    properties:
+      releaseId:
+        type: string
+      userId:
+        type: string
+    title: ReleaseUserCreateRequest
+  ReleaseUserVO:
+    type: object
+    properties:
+      releaseId:
+        type: string
+      tenantId:
+        type: string
+      userId:
+        type: string
+    title: ReleaseUserVO
+  ReleaseVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      appName:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      productId:
+        type: integer
+        format: int32
+      productName:
+        type: string
+      time:
+        type: string
+        format: date-time
+    title: ReleaseVO
+  SerialNumberCtrlVO:
+    type: object
+    properties:
+      createEditable:
+        type: boolean
+      enableSerialNumber:
+        type: boolean
+      serialNumberType:
+        type: string
+      updateEditable:
+        type: boolean
+    title: SerialNumberCtrlVO
+  SerialNumberGenerateRequest:
+    type: object
+    required:
+      - type
+    properties:
+      size:
+        type: integer
+        format: int32
+      type:
+        type: string
+    title: SerialNumberGenerateRequest
+  SerialNumberResultVO:
+    type: object
+    properties:
+      message:
+        type: string
+      serialNumbers:
+        type: array
+        items:
+          type: string
+      success:
+        type: boolean
+      version:
+        type: integer
+        format: int32
+    title: SerialNumberResultVO
+  SerialNumberRule:
+    type: object
+    properties:
+      availableNumber:
+        type: string
+      code:
+        type: string
+      currentValue:
+        type: string
+      dateFormat:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      maxValue:
+        type: string
+      minValue:
+        type: string
+      name:
+        type: string
+      resetDate:
+        type: string
+        format: date-time
+      resetRule:
+        type: string
+      serialLength:
+        type: integer
+        format: int32
+      status:
+        type: integer
+        format: int32
+      statusDesc:
+        type: string
+      step:
+        type: integer
+        format: int32
+      tenantId:
+        type: string
+      type:
+        type: string
+      typeDesc:
+        type: string
+      validEndDate:
+        type: string
+        format: date
+      validStartDate:
+        type: string
+        format: date
+      version:
+        type: integer
+        format: int32
+    title: SerialNumberRule
+  SerialNumberRuleSaveRequest:
+    type: object
+    required:
+      - code
+      - maxValue
+      - minValue
+      - resetRule
+      - step
+      - type
+      - validEndDate
+      - validStartDate
+    properties:
+      availableNumber:
+        type: integer
+        format: int64
+      code:
+        type: string
+      currentValue:
+        type: integer
+        format: int64
+      dateFormat:
+        type: string
+      description:
+        type: string
+      maxValue:
+        type: integer
+        format: int64
+      minValue:
+        type: integer
+        format: int64
+      name:
+        type: string
+      resetRule:
+        type: string
+      serialLength:
+        type: integer
+        format: int32
+      status:
+        type: integer
+        format: int32
+      step:
+        type: integer
+        format: int32
+      type:
+        type: string
+      validEndDate:
+        type: string
+        format: date
+      validStartDate:
+        type: string
+        format: date
+      version:
+        type: integer
+        format: int32
+    title: SerialNumberRuleSaveRequest
+  SerialNumberRuleType:
+    type: object
+    properties:
+      parentCode:
+        type: string
+      typeCode:
+        type: string
+      typeName:
+        type: string
+    title: SerialNumberRuleType
+  SerialNumberRuleUpdateRequest:
+    type: object
+    required:
+      - maxValue
+      - minValue
+      - serialLength
+      - validEndDate
+      - validStartDate
+    properties:
+      description:
+        type: string
+      maxValue:
+        type: integer
+        format: int64
+      minValue:
+        type: integer
+        format: int64
+      name:
+        type: string
+      serialLength:
+        type: integer
+        format: int32
+      validEndDate:
+        type: string
+        format: date
+      validStartDate:
+        type: string
+        format: date
+      version:
+        type: integer
+        format: int32
+    title: SerialNumberRuleUpdateRequest
+  Sort:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      sorted:
+        type: boolean
+      unsorted:
+        type: boolean
+    title: Sort
+  StringConfigItemVO:
+    title: StringConfigItemVO
+    allOf:
+      - $ref: '#/definitions/ConfigItemVO'
+      - type: object
+        properties:
+          appId:
+            type: integer
+            format: int32
+          createdBy:
+            type: string
+          createdDate:
+            type: string
+            format: date-time
+          id:
+            type: string
+          keyName:
+            type: string
+          keyValue:
+            type: string
+          lastModifiedBy:
+            type: string
+          lastModifiedDate:
+            type: string
+            format: date-time
+          publicized:
+            type: boolean
+          tenantId:
+            type: string
+          valueType:
+            type: string
+            enum:
+              - STRING
+              - INTEGER
+              - DATE
+              - LIST
+          version:
+            type: integer
+            format: int32
+        title: StringConfigItemVO
+  StringListConfigItemVO:
+    title: StringListConfigItemVO
+    allOf:
+      - $ref: '#/definitions/ConfigItemVO'
+      - type: object
+        properties:
+          appId:
+            type: integer
+            format: int32
+          createdBy:
+            type: string
+          createdDate:
+            type: string
+            format: date-time
+          id:
+            type: string
+          keyName:
+            type: string
+          keyValue:
+            type: array
+            items:
+              type: string
+          lastModifiedBy:
+            type: string
+          lastModifiedDate:
+            type: string
+            format: date-time
+          publicized:
+            type: boolean
+          tenantId:
+            type: string
+          valueType:
+            type: string
+            enum:
+              - STRING
+              - INTEGER
+              - DATE
+              - LIST
+          version:
+            type: integer
+            format: int32
+        title: StringListConfigItemVO
+  SystemInfo:
+    type: object
+    properties:
+      serverSysTime:
+        type: string
+        format: date-time
+    title: SystemInfo
+  TenantAppVO:
+    type: object
+    properties:
+      appId:
+        type: integer
+        format: int32
+      description:
+        type: string
+      effectiveDate:
+        type: string
+        format: date
+      expiredDate:
+        type: string
+        format: date
+      id:
+        type: string
+      logoUrl:
+        type: string
+      name:
+        type: string
+      shortName:
+        type: string
+      status:
+        type: integer
+        format: int32
+      supportedTypes:
+        type: array
+        items:
+          type: string
+      tenantId:
+        type: string
+      uri:
+        type: string
+    title: TenantAppVO
+  TenantTagVO:
+    type: object
+    properties:
+      id:
+        type: string
+      tagName:
+        type: string
+      tenantId:
+        type: string
+    title: TenantTagVO
+  TenantVO:
+    type: object
+    properties:
+      companyAddress:
+        type: string
+      companyDomain:
+        type: string
+      companyEmail:
+        type: string
+      companyFax:
+        type: string
+      companyLogo:
+        type: string
+      companyPhone:
+        type: string
+      companySite:
+        type: string
+      companyStandardColor:
+        type: string
+      companyTheme:
+        type: string
+      description:
+        type: string
+      helpDeskEnable:
+        type: boolean
+      id:
+        type: string
+      loginBackground:
+        type: string
+      loginLocation:
+        type: string
+      loginMarginTop:
+        type: integer
+        format: int32
+      logo:
+        type: string
+      name:
+        type: string
+      nickName:
+        type: string
+      status:
+        type: integer
+        format: int32
+    title: TenantVO
+  WxCpJsApiSignatureVO:
+    type: object
+    properties:
+      corpId:
+        type: string
+      nonceStr:
+        type: string
+      signature:
+        type: string
+      timestamp:
+        type: string
+    title: WxCpJsApiSignatureVO

@@ -1,0 +1,1363 @@
+definitions:
+  AccountCreationVO:
+    accountInvoices:
+      case_alias: null
+      items:
+        $ref: '#/definitions/AccountInvoiceVO'
+      type: array
+    accountLevel:
+      case_alias: null
+      type: string
+    accountName:
+      case_alias: 客户名称
+      type: string
+    accountNo:
+      case_alias: 客户代码
+      type: string
+    accountPayments:
+      case_alias: null
+      items:
+        $ref: '#/definitions/AccountPaymentVO'
+      type: array
+    accountShortName:
+      case_alias: 客户简称
+      type: string
+    accountType:
+      case_alias: null
+      type: string
+    acctClassificationLv1:
+      case_alias: null
+      type: string
+    acctClassificationLv2:
+      case_alias: null
+      type: string
+    address_vo:
+      $ref: '#/definitions/AddressSaveVO'
+      case_alias: null
+    contactName:
+      case_alias: null
+      type: string
+    email:
+      case_alias: null
+      type: string
+    ext1:
+      case_alias: null
+      type: string
+    ext2:
+      case_alias: null
+      type: string
+    ext3:
+      case_alias: null
+      type: string
+    ext4:
+      case_alias: null
+      type: string
+    ext5:
+      case_alias: null
+      type: string
+    extInfo:
+      $ref: '#/definitions/ExtInfoVO'
+      case_alias: null
+    fax:
+      case_alias: null
+      type: string
+    mobile:
+      case_alias: null
+      type: string
+    orgCode:
+      case_alias: 统一信用代码
+      type: string
+    parentAccountId:
+      case_alias: null
+      type: string
+    paymentCurrencyNo:
+      case_alias: 结算币种
+      type: string
+    region:
+      case_alias: null
+      type: string
+    scope:
+      case_alias: null
+      type: string
+    segment:
+      case_alias: null
+      type: string
+    segmentCode:
+      case_alias: null
+      type: string
+    telephone:
+      case_alias: null
+      type: string
+    
+  AccountDetailVO:
+    accountInvoices:
+      case_alias: null
+      items:
+        $ref: '#/definitions/AccountInvoiceVO'
+      type: array
+    accountLevel:
+      case_alias: null
+      type: string
+    accountName:
+      case_alias: null
+      type: string
+    accountNo:
+      case_alias: null
+      type: string
+    accountPayments:
+      case_alias: null
+      items:
+        $ref: '#/definitions/AccountPaymentVO'
+      type: array
+    accountShortName:
+      case_alias: null
+      type: string
+    accountType:
+      case_alias: null
+      type: string
+    acctClassificationLv1:
+      case_alias: null
+      type: string
+    acctClassificationLv2:
+      case_alias: null
+      type: string
+    addressId:
+      case_alias: null
+      format: int64
+      type: integer
+    addressVO:
+      $ref: '#/definitions/AddressVO'
+      case_alias: null
+    contactDetails:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ContactDetailVO'
+      type: array
+    contactName:
+      case_alias: null
+      type: string
+    createdBy:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    email:
+      case_alias: null
+      type: string
+    ext1:
+      case_alias: null
+      type: string
+    ext2:
+      case_alias: null
+      type: string
+    ext3:
+      case_alias: null
+      type: string
+    ext4:
+      case_alias: null
+      type: string
+    ext5:
+      case_alias: null
+      type: string
+    extInfo:
+      $ref: '#/definitions/ExtInfoVO'
+      case_alias: null
+    fax:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    mobile:
+      case_alias: null
+      type: string
+    orgCode:
+      case_alias: null
+      type: string
+    parentAccountId:
+      case_alias: null
+      type: string
+    paymentCurrencyNo:
+      case_alias: null
+      type: string
+    region:
+      case_alias: null
+      type: string
+    scope:
+      case_alias: null
+      type: string
+    segment:
+      case_alias: null
+      type: string
+    segmentCode:
+      case_alias: null
+      type: string
+    telephone:
+      case_alias: null
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  AccountInvoiceVO:
+    accountId:
+      case_alias: null
+      type: string
+    address:
+      case_alias: null
+      type: string
+    bank:
+      case_alias: null
+      type: string
+    bankNo:
+      case_alias: null
+      type: string
+    createdBy:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    id:
+      case_alias: null
+      type: string
+    invoiceName:
+      case_alias: null
+      type: string
+    invoiceType:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    taxNo:
+      case_alias: null
+      type: string
+    telephone:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  AccountListItemVO:
+    accountLevel:
+      case_alias: null
+      type: string
+    accountName:
+      case_alias: null
+      type: string
+    accountNo:
+      case_alias: null
+      type: string
+    accountShortName:
+      case_alias: null
+      type: string
+    accountType:
+      case_alias: null
+      type: string
+    accountTypeName:
+      case_alias: null
+      type: string
+    acctClassificationLv1:
+      case_alias: null
+      type: string
+    acctClassificationLv2:
+      case_alias: null
+      type: string
+    address:
+      case_alias: null
+      type: string
+    addressId:
+      case_alias: null
+      format: int64
+      type: integer
+    city:
+      case_alias: null
+      type: string
+    contactName:
+      case_alias: null
+      type: string
+    country:
+      case_alias: null
+      type: string
+    createdBy:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    email:
+      case_alias: null
+      type: string
+    exchangeRate:
+      case_alias: null
+      type: number
+    fax:
+      case_alias: null
+      type: string
+    fullAddress:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    mobile:
+      case_alias: null
+      type: string
+    orgCode:
+      case_alias: null
+      type: string
+    originalCurrencyNo:
+      case_alias: null
+      type: string
+    parentAccountId:
+      case_alias: null
+      type: string
+    paymentCurrencyName:
+      case_alias: null
+      type: string
+    paymentCurrencyNo:
+      case_alias: null
+      type: string
+    province:
+      case_alias: null
+      type: string
+    scope:
+      case_alias: null
+      type: string
+    segment:
+      case_alias: null
+      type: string
+    segmentCode:
+      case_alias: null
+      type: string
+    telephone:
+      case_alias: null
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  AccountPaymentVO:
+    accountId:
+      case_alias: null
+      type: string
+    bank:
+      case_alias: null
+      type: string
+    bankAddress:
+      case_alias: null
+      type: string
+    bankNo:
+      case_alias: null
+      type: string
+    createdBy:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    id:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    openBank:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  AccountUpdateVO:
+    accountInvoices:
+      case_alias: null
+      items:
+        $ref: '#/definitions/AccountInvoiceVO'
+      type: array
+    accountLevel:
+      case_alias: null
+      type: string
+    accountName:
+      case_alias: 客户名称
+      type: string
+    accountNo:
+      case_alias: 客户代码
+      type: string
+    accountPayments:
+      case_alias: null
+      items:
+        $ref: '#/definitions/AccountPaymentVO'
+      type: array
+    accountShortName:
+      case_alias: 客户简称
+      type: string
+    accountType:
+      case_alias: null
+      type: string
+    acctClassificationLv1:
+      case_alias: null
+      type: string
+    acctClassificationLv2:
+      case_alias: null
+      type: string
+    address_vo:
+      $ref: '#/definitions/AddressSaveVO'
+      case_alias: null
+    contactName:
+      case_alias: 联系人
+      type: string
+    email:
+      case_alias: 邮箱
+      type: string
+    ext1:
+      case_alias: null
+      type: string
+    ext2:
+      case_alias: null
+      type: string
+    ext3:
+      case_alias: null
+      type: string
+    ext4:
+      case_alias: null
+      type: string
+    ext5:
+      case_alias: null
+      type: string
+    extInfo:
+      $ref: '#/definitions/ExtInfoVO'
+      case_alias: null
+    fax:
+      case_alias: null
+      type: string
+    mobile:
+      case_alias: 手机
+      type: string
+    orgCode:
+      case_alias: 统一信用代码
+      type: string
+    parentAccountId:
+      case_alias: null
+      type: string
+    paymentCurrencyNo:
+      case_alias: 结算币种
+      type: string
+    region:
+      case_alias: null
+      type: string
+    scope:
+      case_alias: null
+      type: string
+    segment:
+      case_alias: 行业类型
+      type: string
+    segmentCode:
+      case_alias: null
+      type: string
+    telephone:
+      case_alias: 联系电话
+      type: string
+  AddressSaveVO:
+    addressDetail:
+      case_alias: null
+      maxLength: 1024
+      minLength: 0
+      type: string
+    city:
+      case_alias: null
+      format: int32
+      type: integer
+    country:
+      case_alias: null
+      format: int32
+      type: integer
+    district:
+      case_alias: null
+      format: int32
+      type: integer
+    province:
+      case_alias: null
+      format: int32
+      type: integer
+  AddressVO:
+    addressDetail:
+      case_alias: null
+      type: string
+    city:
+      case_alias: null
+      format: int32
+      type: integer
+    country:
+      case_alias: null
+      format: int32
+      type: integer
+    district:
+      case_alias: null
+      format: int32
+      type: integer
+    fullAddress:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    province:
+      case_alias: null
+      format: int32
+      type: integer
+  ContactDetailVO:
+    birthday:
+      case_alias: null
+      format: date
+      type: string
+    email:
+      case_alias: null
+      type: string
+    fullname:
+      case_alias: null
+      type: string
+    gender:
+      case_alias: null
+      type: string
+    hobby:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    jobTitle:
+      case_alias: null
+      type: string
+    mobile:
+      case_alias: null
+      type: string
+    positionType:
+      case_alias: null
+      type: string
+    remark:
+      case_alias: null
+      type: string
+    telephone:
+      case_alias: null
+      type: string
+  ContactSaveRequest:
+    birthday:
+      case_alias: null
+      format: date
+      type: string
+    email:
+      case_alias: null
+      type: string
+    fullname:
+      case_alias: null
+      type: string
+    gender:
+      case_alias: null
+      type: string
+    hobby:
+      case_alias: null
+      type: string
+    jobTitle:
+      case_alias: null
+      type: string
+    mobile:
+      case_alias: null
+      type: string
+    positionType:
+      case_alias: null
+      type: string
+    remark:
+      case_alias: null
+      type: string
+    telephone:
+      case_alias: null
+      type: string
+  ContactVO:
+    accountId:
+      case_alias: null
+      type: string
+    accountName:
+      case_alias: null
+      type: string
+    birthday:
+      case_alias: null
+      format: date
+      type: string
+    email:
+      case_alias: null
+      type: string
+    fullname:
+      case_alias: null
+      type: string
+    gender:
+      case_alias: null
+      type: string
+    hobby:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    jobTitle:
+      case_alias: null
+      type: string
+    mobile:
+      case_alias: null
+      type: string
+    positionType:
+      case_alias: null
+      type: string
+    remark:
+      case_alias: null
+      type: string
+    telephone:
+      case_alias: null
+      type: string
+  ExtInfoVO:
+    ext1:
+      case_alias: null
+      type: string
+    ext2:
+      case_alias: null
+      type: string
+    ext3:
+      case_alias: null
+      type: string
+    ext4:
+      case_alias: null
+      type: string
+    ext5:
+      case_alias: null
+      type: string
+    ext_1:
+      case_alias: null
+      type: string
+    ext_2:
+      case_alias: null
+      type: string
+    ext_3:
+      case_alias: null
+      type: string
+    ext_4:
+      case_alias: null
+      type: string
+    ext_5:
+      case_alias: null
+      type: string
+  NewInstanceVO:
+    id:
+      case_alias: null
+      type: string
+  PageOfAccountListItemVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/AccountListItemVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfContactVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ContactVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  Sort:
+    empty:
+      case_alias: null
+      type: boolean
+    sorted:
+      case_alias: null
+      type: boolean
+    unsorted:
+      case_alias: null
+      type: boolean
+paths:
+  /v2/api/private/tenants/{tenant_id}/account-contacts/bulk-get:
+    post:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: contactIds
+      in: body
+      name: contactIds
+      required: true
+      schema:
+        items:
+          type: string
+        type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/accounts:
+    post:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      in: header
+      name: X-App-ID
+      required: true
+      type: string
+    - case_alias: null
+      in: header
+      name: X-Operator-ID
+      required: true
+      type: string
+    - case_alias: null
+      description: contractCreationVO
+      in: body
+      name: contractCreationVO
+      required: true
+      schema:
+        $ref: '#/definitions/AccountCreationVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/accounts/bulk-get-by-ids:
+    post:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: accountIds
+      in: body
+      name: accountIds
+      required: true
+      schema:
+        items:
+          type: string
+        type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/accounts/bulk-get-by-nos:
+    post:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: accountNos
+      in: body
+      name: accountNos
+      required: true
+      schema:
+        items:
+          type: string
+        type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/accounts/bulk-get-by-params:
+    get:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: account_level
+      in: query
+      name: account_level
+      required: false
+      type: string
+    - case_alias: null
+      description: account_name
+      in: query
+      name: account_name
+      required: false
+      type: string
+    - case_alias: null
+      description: account_region
+      in: query
+      name: account_region
+      required: false
+      type: string
+    - case_alias: null
+      description: account_type
+      in: query
+      name: account_type
+      required: false
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/accounts/template:
+    get:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/accounts/{account_id}:
+    get:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: account_id
+      in: path
+      name: account_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    put:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      in: header
+      name: X-App-ID
+      required: true
+      type: string
+    - case_alias: null
+      in: header
+      name: X-Operator-ID
+      required: true
+      type: string
+    - case_alias: null
+      description: account_id
+      in: path
+      name: account_id
+      required: true
+      type: string
+    - case_alias: null
+      description: contractUpdateVO
+      in: body
+      name: contractUpdateVO
+      required: true
+      schema:
+        $ref: '#/definitions/AccountUpdateVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/accounts/{account_no}/get-one-by-no:
+    get:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: account_no
+      in: path
+      name: account_no
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/accounts/{org_code}/get-one-by-org-code:
+    get:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: org_code
+      in: path
+      name: org_code
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/account-contacts/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: account_id
+      in: query
+      name: account_id
+      required: false
+      type: string
+    - case_alias: null
+      description: account_name
+      in: query
+      name: account_name
+      required: false
+      type: string
+    - case_alias: null
+      description: fullname
+      in: query
+      name: fullname
+      required: false
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/account-contacts/{contact_id}:
+    delete:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: contact_id
+      in: path
+      name: contact_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/accounts:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: contractCreationVO
+      in: body
+      name: contractCreationVO
+      required: true
+      schema:
+        $ref: '#/definitions/AccountCreationVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/accounts/manual-no-enable:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/accounts/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: 客户名称
+      description: account_name
+      in: query
+      name: account_name
+      required: false
+      type: string
+    - case_alias: 客户编号
+      description: account_no
+      in: query
+      name: account_no
+      required: false
+      type: string
+    - case_alias: null
+      description: account_type
+      in: query
+      name: account_type
+      required: false
+      type: string
+    - case_alias: null
+      description: keywords
+      in: query
+      name: keywords
+      required: false
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/accounts/{account_id}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: account_id
+      in: path
+      name: account_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: account_id
+      in: path
+      name: account_id
+      required: true
+      type: string
+    - case_alias: null
+      description: contractUpdateVO
+      in: body
+      name: contractUpdateVO
+      required: true
+      schema:
+        $ref: '#/definitions/AccountUpdateVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/accounts/{account_id}/contact:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: account_id
+      in: path
+      name: account_id
+      required: true
+      type: string
+    - case_alias: null
+      description: contactSaveRequest
+      in: body
+      name: contactSaveRequest
+      required: true
+      schema:
+        $ref: '#/definitions/ContactSaveRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/accounts/{account_id}/contacts/{contact_id}:
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: account_id
+      in: path
+      name: account_id
+      required: true
+      type: string
+    - case_alias: null
+      description: contactSaveRequest
+      in: body
+      name: contactSaveRequest
+      required: true
+      schema:
+        $ref: '#/definitions/ContactSaveRequest'
+    - case_alias: null
+      description: contact_id
+      in: path
+      name: contact_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string

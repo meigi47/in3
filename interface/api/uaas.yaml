@@ -1,0 +1,10 @@
+account: #这是给interface调取接口存的常量关系
+  retrieve:
+    url: "/v2/api/tenants/{tenant_id}/users/page"
+    type: "get"
+    description: "销售分销/客户管理/查询客户"
+  get_from_token:
+    url: "/v2/api/user-info"
+    type: "get"
+    description: "从Token中获取用户信息"
+  

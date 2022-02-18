@@ -1,0 +1,600 @@
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:
+  - q: 常钰
+  - 合同编号: AUTO_PP
+  - account_name: AUTO_PP测试
+  - 下单日期: '2021-08-03T10:52:25'
+    业务员: 常钰
+    原币币种: 美元
+    合同编号: AUTO_PP
+    币种汇率: 6
+    订单类型: 0
+    重要程度: false
+    销售订单交期: '2021-08-25'
+    销售订单名称: AUTO_PP_1{start_timestamp}
+    销售订单类型: 普通销售
+  - BOM:
+    - children: AUTO_PP_B{start_timestamp}
+      number: 1
+      parent: AUTO_PP_A{start_timestamp}
+    - children: AUTO_PP_C{start_timestamp}
+      number: 2
+      parent: AUTO_PP_A{start_timestamp}
+    - children: AUTO_PP_D{start_timestamp}
+      number: 1
+      parent: AUTO_PP_B{start_timestamp}
+    - children: AUTO_PP_E{start_timestamp}
+      number: 1
+      parent: AUTO_PP_B{start_timestamp}
+    - children: AUTO_PP_F{start_timestamp}
+      number: 1
+      parent: AUTO_PP_C{start_timestamp}
+  - 计量单位组: 无固定换算单位组
+  - 交付物: 
+    - 物料编号: AUTO_PP_A{start_timestamp}
+      未税单价: "100.000000"
+      税率: "13.00"
+      含税单价: "113.000000"
+      价税合计: "11300.00"
+      数量: "100"
+      交货日期: "2021-11-30"
+      未税总额: "10000.00"
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_A{start_timestamp}
+    物料描述: AUTO_PP_A{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_A{start_timestamp}
+    计量单位组: 无固定换算单位组
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_B{start_timestamp}
+    物料描述: AUTO_PP_B{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_B{start_timestamp}
+    计量单位组: 无固定换算单位组
+    特殊采购类型: "PH"
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_C{start_timestamp}
+    物料描述: AUTO_PP_C{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_C{start_timestamp}
+    计量单位组: 无固定换算单位组
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_D{start_timestamp}
+    物料描述: AUTO_PP_D{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_D{start_timestamp}
+    计量单位组: 无固定换算单位组
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_E{start_timestamp}
+    物料描述: AUTO_PP_E{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_E{start_timestamp}
+    计量单位组: 无固定换算单位组
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_F{start_timestamp}
+    物料描述: AUTO_PP_F{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_F{start_timestamp}
+    计量单位组: 无固定换算单位组
+  期望校验数据:
+  - 销售订单名称: AUTO_PP_1{start_timestamp}
+    参考单据类型: 关联销售订单
+    客户名称: AUTO_PP测试
+    订单交期: '2021-08-25'
+    合同编号: AUTO_PP
+    生产数量: 100
+    计划完成日期: "2021-11-30"
+    交付物: AUTO_PP_A{start_timestamp}
+    BOM:
+    - children: AUTO_PP_B{start_timestamp}
+      number: 1
+      parent: AUTO_PP_A{start_timestamp}
+    - children: AUTO_PP_C{start_timestamp}
+      number: 2
+      parent: AUTO_PP_A{start_timestamp}
+    - children: AUTO_PP_D{start_timestamp}
+      number: 1
+      parent: AUTO_PP_B{start_timestamp}
+    - children: AUTO_PP_E{start_timestamp}
+      number: 1
+      parent: AUTO_PP_B{start_timestamp}
+    - children: AUTO_PP_F{start_timestamp}
+      number: 1
+      parent: AUTO_PP_C{start_timestamp}
+    物料明细:
+    - 物料编号: AUTO_PP_D{start_timestamp}
+      工单需求: 100
+      单台需求: 1
+    - 物料编号: AUTO_PP_E{start_timestamp}
+      工单需求: 100
+      单台需求: 1
+    - 物料编号: AUTO_PP_C{start_timestamp}
+      工单需求: 200
+      单台需求: 2
+  期望结果:
+  - 新建成功
+  标题: 新建工单/关联销售订单
+  步骤:
+  - 1、创建一个销售订单并下发，该销售订单需绑定物料，该物料需要已在系统维护好BOM。2、点击新建工单按钮，选择参考销售订单，填入必填信息，保存。3、校验信息是否一致，包含工单BOM和物料明细。
+  测试用例集: 计划管理/工单管理
+  测试集内顺序: 1
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:
+  - q: 常钰
+  - 合同编号: AUTO_PP
+  - account_name: AUTO_PP测试
+  - 下单日期: '2021-08-03T10:52:25'
+    业务员: 常钰
+    原币币种: 美元
+    合同编号: AUTO_PP
+    币种汇率: 6
+    订单类型: 0
+    重要程度: false
+    销售订单交期: '2021-08-25'
+    销售订单名称: AUTO_PP_2{start_timestamp}
+    销售订单类型: 普通销售
+  - BOM:
+    - children: AUTO_PP_H{start_timestamp}
+      number: 1
+      parent: AUTO_PP_G{start_timestamp}
+    - children: AUTO_PP_I{start_timestamp}
+      number: 2
+      parent: AUTO_PP_G{start_timestamp}
+  - 计量单位组: 无固定换算单位组
+  - 交付物: 
+    - 物料编号: AUTO_PP_G{start_timestamp}
+      未税单价: "100.000000"
+      税率: "13.00"
+      含税单价: "113.000000"
+      价税合计: "11300.00"
+      数量: "100"
+      交货日期: "2021-11-30"
+      未税总额: "10000.00"
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_G{start_timestamp}
+    物料描述: AUTO_PP_G{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_G{start_timestamp}
+    计量单位组: 无固定换算单位组
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_H{start_timestamp}
+    物料描述: AUTO_PP_H{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_H{start_timestamp}
+    计量单位组: 无固定换算单位组
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_I{start_timestamp}
+    物料描述: AUTO_PP_I{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_I{start_timestamp}
+    计量单位组: 无固定换算单位组
+  期望校验数据:
+  - 销售订单名称: AUTO_PP_2{start_timestamp}
+    参考单据类型: 手绑销售订单
+    客户名称: AUTO_PP测试
+    订单交期: '2021-08-25'
+    合同编号: AUTO_PP
+    生产数量: 100
+    计划完成日期: "2021-11-30"
+    交付物: AUTO_PP_G{start_timestamp}
+    BOM:
+    - children: AUTO_PP_H{start_timestamp}
+      number: 1
+      parent: AUTO_PP_G{start_timestamp}
+    - children: AUTO_PP_I{start_timestamp}
+      number: 2
+      parent: AUTO_PP_G{start_timestamp}
+    物料明细:
+    - 物料编号: AUTO_PP_H{start_timestamp}
+      工单需求: 100
+      单台需求: 1
+    - 物料编号: AUTO_PP_I{start_timestamp}
+      工单需求: 200
+      单台需求: 2
+  期望结果:
+  - 新建成功
+  标题: 新建工单/手绑销售订单
+  步骤:
+  - 1、创建一个销售订单并下发，该销售订单需绑定物料，该物料需要已在系统维护好BOM。2、点击新建工单按钮，选择参考销售订单，填入必填信息，保存。3、校验信息是否一致，包含工单BOM和物料明细。
+  测试用例集: 计划管理/工单管理
+  测试集内顺序: 2
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:
+  - q: 常钰
+  - 合同编号: AUTO_PP
+  - account_name: AUTO_PP测试
+  - 下单日期: '2021-08-03T10:52:25'
+    业务员: 常钰
+    原币币种: 美元
+    合同编号: AUTO_PP
+    币种汇率: 6
+    订单类型: 0
+    重要程度: false
+    销售订单交期: '2021-08-25'
+    销售订单名称: AUTO_PP_3{start_timestamp}
+    销售订单类型: 普通销售
+  - BOM:
+    - children: AUTO_PP_K{start_timestamp}
+      number: 1
+      parent: AUTO_PP_J{start_timestamp}
+    - children: AUTO_PP_L{start_timestamp}
+      number: 2
+      parent: AUTO_PP_K{start_timestamp}
+  - 计量单位组: 无固定换算单位组
+  - 交付物: 
+    - 物料编号: AUTO_PP_J{start_timestamp}
+      未税单价: "100.000000"
+      税率: "13.00"
+      含税单价: "113.000000"
+      价税合计: "11300.00"
+      数量: "100"
+      交货日期: "2021-12-30"
+      未税总额: "10000.00"
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_J{start_timestamp}
+    物料描述: AUTO_PP_J{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_J{start_timestamp}
+    计量单位组: 无固定换算单位组
+    物料来源: 'MO'
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_K{start_timestamp}
+    物料描述: AUTO_PP_K{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_K{start_timestamp}
+    计量单位组: 无固定换算单位组
+    物料来源: 'MO'
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '10'
+    物料名称: AUTO_PP_L{start_timestamp}
+    物料描述: AUTO_PP_L{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_L{start_timestamp}
+    计量单位组: 无固定换算单位组
+    物料来源: 'PO'
+  期望校验数据:
+  - 销售订单名称: AUTO_PP_3{start_timestamp}
+    参考单据类型: 手绑销售订单
+    客户名称: AUTO_PP测试
+    订单交期: '2021-08-25'
+    合同编号: AUTO_PP
+    生产数量: 100
+    计划完成日期: "2021-12-30"
+    交付物: AUTO_PP_J{start_timestamp}
+    BOM:
+    - children: AUTO_PP_K{start_timestamp}
+      number: 1
+      parent: AUTO_PP_J{start_timestamp}
+    - children: AUTO_PP_L{start_timestamp}
+      number: 2
+      parent: AUTO_PP_K{start_timestamp}
+    物料明细:
+    - 物料编号: AUTO_PP_K{start_timestamp}
+      工单需求: 100
+      单台需求: 1
+  期望结果:
+  - 新建成功
+  标题: 新建工单/生产需求计划转工单
+  步骤:
+  - 1、创建一个销售订单并下发，该销售订单需绑定物料，该物料需要已在系统维护好BOM。2、点击新建工单按钮，选择参考销售订单，填入必填信息，保存。3、校验信息是否一致，包含工单BOM和物料明细。
+  测试用例集: 计划管理/工单管理
+  测试集内顺序: 3
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:  
+  - 物料名称: 'AUTO_PP_G{start_timestamp}'
+  - 销售订单名称: 'AUTO_PP_2{start_timestamp}'
+  期望校验数据:
+  - 1
+  期望结果:
+  - 释放成功
+  标题: 释放工单
+  步骤:
+  - 1、根据给定的工单信息查找出对应的工单。2、释放。3、校验。
+  测试用例集: 计划管理/工单管理
+  测试集内顺序: 4
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:  
+  - 物料名称: 'AUTO_PP_G{start_timestamp}'
+  - 销售订单名称: 'AUTO_PP_2{start_timestamp}'
+  - finish_date: "2021-11-30"
+  期望校验数据:
+  - 完工时间: "2021-11-30"
+  期望结果:
+  - 工单完工成功
+  标题: 工单完工
+  步骤:
+  - 1、选择一个已经释放的工单。2、点击完工，选择全量完工。3、给出完工时间，确定完工。4、校验
+  测试用例集: 计划管理/工单管理
+  测试集内顺序: 5
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:  
+  - 物料名称: 'AUTO_PP_A{start_timestamp}'
+  - 销售订单名称: 'AUTO_PP_1{start_timestamp}'
+  - BOM:
+    - children: AUTO_PP_E{start_timestamp}
+      number: 5
+      parent: AUTO_PP_A{start_timestamp}
+    - children: AUTO_PP_F{start_timestamp}
+      number: 2
+      parent: AUTO_PP_A{start_timestamp}
+  期望校验数据:
+  - BOM:
+    - children: AUTO_PP_E{start_timestamp}
+      number: 5
+      parent: AUTO_PP_A{start_timestamp}
+    - children: AUTO_PP_F{start_timestamp}
+      number: 2
+      parent: AUTO_PP_A{start_timestamp}
+  期望结果:
+  - 更新成功
+  标题: 单个更新工单BOM
+  步骤:
+  - 1、主数据更新物料BOM。2、工单管理点击物料对应的工单更新BOM按钮。3、校验BOM是否正确更新。
+  测试用例集: 计划管理/工单管理
+  测试集内顺序: 6
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:  
+  - 销售订单名称: 'AUTO_PP_1{start_timestamp}'
+  - 物料名称: 'AUTO_PP_A{start_timestamp}'
+  期望校验数据:
+  - document_name: AUTO_PP_1{start_timestamp}
+  期望结果:
+  - 查询成功
+  标题: 查询工单
+  步骤:
+  - 1、根据给定的销售订单进行查询 2、检查信息是否一致
+  测试用例集: 计划管理/工单管理
+  测试集内顺序: 7
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:  
+  - 销售订单名称: 'AUTO_PP_1{start_timestamp}'
+  - 物料名称: 'AUTO_PP_A{start_timestamp}'
+  期望校验数据:
+  - document_name: AUTO_PP_1{start_timestamp}
+  期望结果:
+  - 正确查看工单详情
+  标题: 工单详情
+  步骤:
+  - 1、根据给定的销售订单进行查询，获取工单id 2、根据工单id获取工单详情 3、检查信息是否一致
+  测试用例集: 计划管理/工单管理
+  测试集内顺序: 8
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:  
+  - 销售订单名称: 'AUTO_PP_2{start_timestamp}'
+    物料名称: 'AUTO_PP_G{start_timestamp}'
+    申请入库数量: 50
+  期望校验数据:
+  - 销售订单名称: 'AUTO_PP_2{start_timestamp}'
+    物料名称: 'AUTO_PP_G{start_timestamp}'
+    申请入库数量: 50
+  期望结果:
+  - 新建成功
+  标题: 工单入库申请单新建
+  步骤:
+  - 1、选择已经完工的工单，填入必填信息（申请入库数量）提交 2、校验工单入库申请单信息是否正确
+  测试用例集: 计划管理/工单入库申请单
+  测试集内顺序: 9
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:  
+  - 销售订单名称: 'AUTO_PP_2{start_timestamp}'
+    物料名称: 'AUTO_PP_G{start_timestamp}'
+  期望校验数据:
+  - 销售订单名称: 'AUTO_PP_2{start_timestamp}'
+    物料名称: 'AUTO_PP_G{start_timestamp}'
+  期望结果:
+  - 查询成功
+  标题: 工单入库申请单查询
+  步骤:
+  - 1、给出查询条件，查询;2、校验查询出的结果是否正确
+  测试用例集: 计划管理/工单入库申请单
+  测试集内顺序: 10
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:  
+  - 销售订单名称: 'AUTO_PP_2{start_timestamp}'
+    物料名称: 'AUTO_PP_G{start_timestamp}'
+  期望校验数据:
+  - 销售订单名称: 'AUTO_PP_2{start_timestamp}'
+    物料名称: 'AUTO_PP_G{start_timestamp}'
+  期望结果:
+  - 工单入库申请单详情正确
+  标题: 工单入库申请单详情
+  步骤:
+  - 1、给出查询条件，查询;2、校验查询出的结果是否正确
+  测试用例集: 计划管理/工单入库申请单
+  测试集内顺序: 11
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:  
+  - 1
+  期望校验数据:
+  - 申请单状态: 'A'
+  期望结果:
+  - 成功废弃该工单入库申请单
+  标题: 工单入库申请单废弃
+  步骤:
+  - 1、给出查询条件，查询;2、校验查询出的结果是否正确
+  测试用例集: 计划管理/工单入库申请单
+  测试集内顺序: 12
+  需求: null
+- Jira键值: null
+  优先级: 高
+  描述: null
+  数据:
+  - q: 常钰
+  - 合同编号: AUTO_PP
+  - account_name: AUTO_PP测试
+  - 下单日期: '2021-08-03T10:52:25'
+    业务员: 常钰
+    原币币种: 美元
+    合同编号: AUTO_PP
+    币种汇率: 6
+    订单类型: 0
+    重要程度: false
+    销售订单交期: '2021-08-25'
+    销售订单名称: AUTO_PP_4{start_timestamp}
+    销售订单类型: 普通销售
+  - BOM:
+    - children: AUTO_PP_N{start_timestamp}
+      number: 2
+      parent: AUTO_PP_M{start_timestamp}
+    - children: AUTO_PP_O{start_timestamp}
+      number: 3
+      parent: AUTO_PP_N{start_timestamp}
+    - children: AUTO_PP_P{start_timestamp}
+      number: 1
+      parent: AUTO_PP_M{start_timestamp}
+  - 计量单位组: 无固定换算单位组
+  - 交付物: 
+    - 物料编号: AUTO_PP_M{start_timestamp}
+      未税单价: "100.000000"
+      税率: "13.00"
+      含税单价: "113.000000"
+      价税合计: "11300.00"
+      数量: "100"
+      交货日期: "2021-12-30"
+      未税总额: "10000.00"
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '1'
+    物料名称: AUTO_PP_M{start_timestamp}
+    物料描述: AUTO_PP_M{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_M{start_timestamp}
+    计量单位组: 无固定换算单位组
+    物料来源: 'MO'
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '1'
+    物料名称: AUTO_PP_N{start_timestamp}
+    物料描述: AUTO_PP_N{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_N{start_timestamp}
+    计量单位组: 无固定换算单位组
+    物料来源: 'MO'
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '1'
+    物料名称: AUTO_PP_O{start_timestamp}
+    物料描述: AUTO_PP_O{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_O{start_timestamp}
+    计量单位组: 无固定换算单位组
+    物料来源: 'PO'
+  - 启用日期: '2021-11-22T00:00:00'
+    失效日期: '2023-11-22T00:00:00'
+    提前期: '1'
+    物料名称: AUTO_PP_P{start_timestamp}
+    物料描述: AUTO_PP_P{start_timestamp}
+    物料类别: 其他
+    物料编号: AUTO_PP_P{start_timestamp}
+    计量单位组: 无固定换算单位组
+    物料来源: 'PO'
+  期望校验数据:
+  - 物料编号: AUTO_PP_M{start_timestamp}
+    类型: 销售订单
+    单据名称: AUTO_PP_4{start_timestamp}
+    需求日期: '2021-12-30'
+    数量: -100
+    产生: 
+    - 物料编号: AUTO_PP_M{start_timestamp}
+      类型: 预排计划
+      需求日期: '2021-12-30'
+      建议开始日期: '2021-12-29'
+      数量: 100
+      产生: 
+      - 物料编号: AUTO_PP_N{start_timestamp}
+        类型: 相关需求（预排）
+        需求日期: '2021-12-29'
+        数量: -200
+        产生:
+        - 物料编号: AUTO_PP_N{start_timestamp}
+          类型: 预排计划
+          需求日期: '2021-12-29'
+          建议开始日期: '2021-12-28'
+          数量: 200
+          产生:
+          - 物料编号: AUTO_PP_O{start_timestamp}
+            类型: 相关需求（预排）
+            需求日期: '2021-12-28'
+            数量: -600
+            产生: 
+            - 物料编号: AUTO_PP_O{start_timestamp}
+              类型: 预排计划
+              需求日期: '2021-12-28'
+              建议开始日期: '2021-12-27'
+              数量: 600
+      - 物料编号: AUTO_PP_P{start_timestamp}
+        类型: 相关需求（预排）
+        需求日期: '2021-12-29'
+        数量: -100
+        产生:
+        - 物料编号: AUTO_PP_P{start_timestamp}
+          类型: 预排计划
+          需求日期: '2021-12-29'
+          建议开始日期: '2021-12-28'
+          数量: 100
+  期望结果:
+  - 校验成功
+  标题: MRP结果校验场景一
+  步骤:
+  - 1、创建一个销售订单并下发，该销售订单需绑定物料，该物料需要已在系统维护好BOM。2、点击新建工单按钮，选择参考销售订单，填入必填信息，保存。3、校验信息是否一致，包含工单BOM和物料明细。
+  测试用例集: 计划管理/MRP
+  测试集内顺序: 13
+  需求: null

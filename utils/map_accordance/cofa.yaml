@@ -1,0 +1,4046 @@
+definitions:
+  ApiAccessLogVO:
+    apiUrl:
+      case_alias: null
+      type: string
+    appId:
+      case_alias: null
+      format: int32
+      type: integer
+    appName:
+      case_alias: null
+      type: string
+    disposed:
+      case_alias: null
+      type: string
+    errMsg:
+      case_alias: null
+      type: string
+    extend:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    methodName:
+      case_alias: null
+      type: string
+    remoteIp:
+      case_alias: null
+      type: string
+    request:
+      case_alias: null
+      type: string
+    requestTime:
+      case_alias: null
+      format: date-time
+      type: string
+    response:
+      case_alias: null
+      type: string
+    responseTime:
+      case_alias: null
+      format: date-time
+      type: string
+    spendMillis:
+      case_alias: null
+      format: int32
+      type: integer
+    tenantId:
+      case_alias: null
+      type: string
+  AppVO:
+    description:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      format: int32
+      type: integer
+    logoUrl:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    shortName:
+      case_alias: null
+      type: string
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+    supportedTypes:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    uri:
+      case_alias: null
+      type: string
+  AreaVO:
+    code:
+      case_alias: null
+      format: int32
+      type: integer
+    name:
+      case_alias: null
+      type: string
+    parentCode:
+      case_alias: null
+      format: int32
+      type: integer
+    pinyin:
+      case_alias: null
+      type: string
+  BatchDisposedApiAccessLogRequest:
+    ids:
+      case_alias: null
+      items:
+        format: int64
+        type: integer
+      type: array
+  BizWarningRuleDetailVO:
+    bizType:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    enabled:
+      case_alias: null
+      type: boolean
+    expression:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    priority:
+      case_alias: null
+      format: int32
+      type: integer
+    remark:
+      case_alias: null
+      type: string
+    ruleCode:
+      case_alias: null
+      type: string
+    ruleName:
+      case_alias: null
+      type: string
+    ruleRanges:
+      case_alias: null
+      items:
+        $ref: '#/definitions/BizWarningRuleRangeVO'
+      type: array
+    ruleType:
+      case_alias: null
+      type: string
+  BizWarningRuleListVO:
+    bindingField:
+      case_alias: null
+      type: string
+    bizType:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    enabled:
+      case_alias: null
+      type: boolean
+    expression:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    priority:
+      case_alias: null
+      format: int32
+      type: integer
+    remark:
+      case_alias: null
+      type: string
+    ruleCode:
+      case_alias: null
+      type: string
+    ruleName:
+      case_alias: null
+      type: string
+    ruleType:
+      case_alias: null
+      type: string
+  BizWarningRuleRangeUpdateRequest:
+    color:
+      case_alias: null
+      type: string
+    deleted:
+      case_alias: null
+      type: boolean
+    id:
+      case_alias: null
+      type: string
+    max:
+      case_alias: null
+      format: int32
+      type: integer
+    min:
+      case_alias: null
+      format: int32
+      type: integer
+    rangeName:
+      case_alias: null
+      type: string
+    result:
+      case_alias: null
+      format: int32
+      type: integer
+    sequence:
+      case_alias: null
+      format: int32
+      type: integer
+  BizWarningRuleRangeVO:
+    color:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    max:
+      case_alias: null
+      format: int32
+      type: integer
+    min:
+      case_alias: null
+      format: int32
+      type: integer
+    rangeName:
+      case_alias: null
+      type: string
+    result:
+      case_alias: null
+      format: int32
+      type: integer
+    ruleId:
+      case_alias: null
+      type: string
+    sequence:
+      case_alias: null
+      format: int32
+      type: integer
+  BizWarningRuleUpdateRequest:
+    enabled:
+      case_alias: null
+      type: boolean
+    ranges:
+      case_alias: null
+      items:
+        $ref: '#/definitions/BizWarningRuleRangeUpdateRequest'
+      type: array
+    remark:
+      case_alias: null
+      type: string
+  CodeDefCreateVO:
+    code:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    parentCode:
+      case_alias: null
+      type: string
+    sequence:
+      case_alias: null
+      format: int32
+      type: integer
+    tenantId:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      type: string
+  CodeDefUpdateVO:
+    code:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    parentCode:
+      case_alias: null
+      type: string
+    sequence:
+      case_alias: null
+      format: int32
+      type: integer
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+    tenantId:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      type: string
+  CodeDefVO:
+    code:
+      case_alias: null
+      type: string
+    deleted:
+      case_alias: null
+      type: boolean
+    description:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    parentCode:
+      case_alias: null
+      type: string
+    sequence:
+      case_alias: null
+      format: int32
+      type: integer
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+    tenantId:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      type: string
+  CodeTypeDefVO:
+    codeDefType:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    maintainable:
+      case_alias: null
+      type: boolean
+    sequence:
+      case_alias: null
+      format: int32
+      type: integer
+    tenantId:
+      case_alias: null
+      type: string
+    typeDesc:
+      case_alias: null
+      type: string
+    typeName:
+      case_alias: null
+      type: string
+    typeNames:
+      case_alias: null
+      items:
+        type: string
+      type: array
+  ConfigItemVO:
+    appId:
+      case_alias: null
+      format: int32
+      type: integer
+    createdBy:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    id:
+      case_alias: null
+      type: string
+    keyName:
+      case_alias: null
+      type: string
+    keyValue:
+      case_alias: null
+      type: object
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    publicized:
+      case_alias: null
+      type: boolean
+    tenantId:
+      case_alias: null
+      type: string
+    valueType:
+      case_alias: null
+      enum:
+      - STRING
+      - INTEGER
+      - DATE
+      - LIST
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  EsignConfigVO:
+    bizType:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    posX:
+      case_alias: null
+      format: float
+      type: number
+    posY:
+      case_alias: null
+      format: float
+      type: number
+    remark:
+      case_alias: null
+      type: string
+    sealPage:
+      case_alias: null
+      format: int32
+      type: integer
+    sealType:
+      case_alias: null
+      format: int32
+      type: integer
+    tenantId:
+      case_alias: null
+      type: string
+  EsignCreateRequest:
+    bizScene:
+      case_alias: null
+      type: string
+    bizType:
+      case_alias: null
+      type: string
+    bizValue:
+      case_alias: null
+      type: string
+    files:
+      case_alias: null
+      items:
+        $ref: '#/definitions/EsignFileSealRequest'
+      type: array
+    signUserId:
+      case_alias: null
+      type: string
+  EsignFileSealRequest:
+    contentType:
+      case_alias: null
+      type: string
+    fileName:
+      case_alias: null
+      type: string
+    fileUrl:
+      case_alias: null
+      type: string
+    ridingPosY:
+      case_alias: null
+      format: float
+      type: number
+    sealPoses:
+      case_alias: null
+      items:
+        $ref: '#/definitions/EsignSealPosRequest'
+      type: array
+  EsignFileVO:
+    fileId:
+      case_alias: null
+      type: string
+    fileName:
+      case_alias: null
+      type: string
+    fileUrl:
+      case_alias: null
+      type: string
+  EsignFlowListItemVO:
+    bizScene:
+      case_alias: null
+      type: string
+    bizType:
+      case_alias: null
+      type: string
+    bizValue:
+      case_alias: null
+      type: string
+    docs:
+      case_alias: null
+      items:
+        $ref: '#/definitions/EsignFileVO'
+      type: array
+    endAt:
+      case_alias: null
+      format: date-time
+      type: string
+    flowId:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    remark:
+      case_alias: null
+      type: string
+    signers:
+      case_alias: null
+      items:
+        $ref: '#/definitions/EsignFlowSignerListItemVO'
+      type: array
+    startAt:
+      case_alias: null
+      format: date-time
+      type: string
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+  EsignFlowRefreshResultVO:
+    id:
+      case_alias: null
+      type: string
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+  EsignFlowSignerListItemVO:
+    flowId:
+      case_alias: null
+      type: string
+    signerUserId:
+      case_alias: null
+      type: string
+    signerUserName:
+      case_alias: null
+      type: string
+  EsignSealPosRequest:
+    page:
+      case_alias: null
+      format: int32
+      type: integer
+    posX:
+      case_alias: null
+      format: float
+      type: number
+    posY:
+      case_alias: null
+      format: float
+      type: number
+  EsignUserFlowListItemVO:
+    applicant:
+      case_alias: null
+      type: string
+    applicantName:
+      case_alias: null
+      type: string
+    bizScene:
+      case_alias: null
+      type: string
+    bizType:
+      case_alias: null
+      type: string
+    bizValue:
+      case_alias: null
+      type: string
+    endAt:
+      case_alias: null
+      format: date-time
+      type: string
+    id:
+      case_alias: null
+      type: string
+    signer:
+      case_alias: null
+      type: string
+    signerName:
+      case_alias: null
+      type: string
+    startAt:
+      case_alias: null
+      format: date-time
+      type: string
+    status:
+      case_alias: null
+      type: string
+  EsignUserFlowVO:
+    bizScene:
+      case_alias: null
+      type: string
+    bizType:
+      case_alias: null
+      type: string
+    bizValue:
+      case_alias: null
+      type: string
+    endAt:
+      case_alias: null
+      format: date-time
+      type: string
+    flowId:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    signUrl:
+      case_alias: null
+      type: string
+    startAt:
+      case_alias: null
+      format: date-time
+      type: string
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+  ExtendColumnDefBatchSaveVO:
+    extendColumnDefs:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ExtendColumnDefSaveVO'
+      type: array
+    tableName:
+      case_alias: null
+      maxLength: 64
+      minLength: 0
+      type: string
+  ExtendColumnDefSaveVO:
+    columnDesc:
+      case_alias: null
+      maxLength: 64
+      minLength: 0
+      type: string
+    columnName:
+      case_alias: null
+      maxLength: 32
+      minLength: 0
+      type: string
+    columnOption:
+      case_alias: null
+      maxLength: 512
+      minLength: 0
+      type: string
+    columnType:
+      case_alias: null
+      maxLength: 32
+      minLength: 0
+      type: string
+    excelColumn:
+      case_alias: null
+      type: boolean
+    id:
+      case_alias: null
+      maxLength: 32
+      minLength: 0
+      type: string
+    maxLength:
+      case_alias: null
+      format: int32
+      type: integer
+    searchColumn:
+      case_alias: null
+      type: boolean
+  ExtendColumnDefVO:
+    columnDesc:
+      case_alias: null
+      type: string
+    columnName:
+      case_alias: null
+      type: string
+    columnOption:
+      case_alias: null
+      type: string
+    columnType:
+      case_alias: null
+      type: string
+    excelColumn:
+      case_alias: null
+      type: boolean
+    id:
+      case_alias: null
+      type: string
+    maxLength:
+      case_alias: null
+      format: int32
+      type: integer
+    searchColumn:
+      case_alias: null
+      type: boolean
+    tableName:
+      case_alias: null
+      type: string
+  ExtendFieldSaveRequest:
+    fieldGroupKey:
+      case_alias: null
+      type: string
+    fieldSaveList:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ExtendFieldVO'
+      type: array
+  ExtendFieldVO:
+    appId:
+      case_alias: null
+      format: int32
+      type: integer
+    description:
+      case_alias: null
+      type: string
+    fieldGroupKey:
+      case_alias: null
+      type: string
+    fieldName:
+      case_alias: null
+      type: string
+    fieldRange:
+      case_alias: null
+      type: string
+    fieldType:
+      case_alias: null
+      type: string
+    fieldWidth:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    lovOption:
+      case_alias: null
+      type: string
+    maxLength:
+      case_alias: null
+      type: string
+    required:
+      case_alias: null
+      type: boolean
+    sequence:
+      case_alias: null
+      format: int32
+      type: integer
+    tenantId:
+      case_alias: null
+      type: string
+  FeFieldConfigItemSaveVO:
+    fieldName:
+      case_alias: null
+      type: string
+  FeFieldConfigResetVO:
+    listName:
+      case_alias: null
+      type: string
+  FeFieldConfigSaveVO:
+    items:
+      case_alias: null
+      items:
+        $ref: '#/definitions/FeFieldConfigItemSaveVO'
+      type: array
+    listName:
+      case_alias: null
+      type: string
+  FeFieldConfigVO:
+    fieldName:
+      case_alias: null
+      type: string
+    listName:
+      case_alias: null
+      type: string
+    sequence:
+      case_alias: null
+      format: int32
+      type: integer
+  MenuVO:
+    appId:
+      case_alias: null
+      format: int32
+      type: integer
+    category:
+      case_alias: null
+      type: string
+    children:
+      case_alias: null
+      items:
+        $ref: '#/definitions/MenuVO'
+      type: array
+    code:
+      case_alias: null
+      type: string
+    color:
+      case_alias: null
+      type: string
+    createdBy:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    deleted:
+      case_alias: null
+      type: boolean
+    description:
+      case_alias: null
+      type: string
+    icon:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    name:
+      case_alias: null
+      type: string
+    originId:
+      case_alias: null
+      type: string
+    pid:
+      case_alias: null
+      type: string
+    resource:
+      case_alias: null
+      type: string
+    sequence:
+      case_alias: null
+      format: int32
+      type: integer
+    state:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      format: int32
+      type: integer
+    url:
+      case_alias: null
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  NewInstanceVO:
+    id:
+      case_alias: null
+      type: string
+  NotificationCreateVO:
+    appId:
+      case_alias: null
+      format: int32
+      type: integer
+    content:
+      case_alias: null
+      maxLength: 1024
+      minLength: 0
+      type: string
+    extraContent:
+      case_alias: null
+      maxLength: 1024
+      minLength: 0
+      type: string
+    hyperlink:
+      case_alias: null
+      maxLength: 512
+      minLength: 0
+      type: string
+    messageType:
+      case_alias: null
+      maxLength: 32
+      minLength: 0
+      type: string
+    recipients:
+      case_alias: null
+      items:
+        $ref: '#/definitions/NotificationRecipientVO'
+      type: array
+    title:
+      case_alias: null
+      maxLength: 128
+      minLength: 0
+      type: string
+  NotificationRecipientVO:
+    recipientId:
+      case_alias: null
+      type: string
+    recipientType:
+      case_alias: null
+      type: string
+  NotificationVO:
+    content:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    extraContent:
+      case_alias: null
+      type: string
+    hyperlink:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+    title:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      type: string
+  OptionalOfBizWarningRuleDetailVO:
+    empty:
+      case_alias: null
+      type: boolean
+    present:
+      case_alias: null
+      type: boolean
+  OsmObjectTagUpdateRequest:
+    public:
+      case_alias: null
+      type: boolean
+  OsmObjectVO:
+    bizType:
+      case_alias: null
+      type: string
+    bizValue:
+      case_alias: null
+      type: string
+    createdBy:
+      case_alias: null
+      type: string
+    createdByName:
+      case_alias: null
+      type: string
+    deleted:
+      case_alias: null
+      type: boolean
+    id:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedByName:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    name:
+      case_alias: null
+      type: string
+    ossKey:
+      case_alias: null
+      type: string
+    previewObjectId:
+      case_alias: null
+      type: string
+    public:
+      case_alias: null
+      format: int32
+      type: integer
+    signature:
+      $ref: '#/definitions/OssSignature'
+      case_alias: null
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    tagId:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      type: string
+  OssSignature:
+    expireTime:
+      case_alias: null
+      format: date-time
+      type: string
+    origin:
+      case_alias: null
+      type: string
+    pdf:
+      case_alias: null
+      type: string
+    standard:
+      case_alias: null
+      type: string
+    thumbnail:
+      case_alias: null
+      type: string
+  PageOfApiAccessLogVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ApiAccessLogVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfBizWarningRuleListVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/BizWarningRuleListVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfCodeTypeDefVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/CodeTypeDefVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfEsignFlowListItemVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/EsignFlowListItemVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfEsignUserFlowListItemVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/EsignUserFlowListItemVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfExtendColumnDefVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ExtendColumnDefVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfNotificationVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/NotificationVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfOsmObjectVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/OsmObjectVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfSerialNumberRule:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/SerialNumberRule'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  ReleaseUserCreateRequest:
+    releaseId:
+      case_alias: null
+      type: string
+    userId:
+      case_alias: null
+      type: string
+  ReleaseUserVO:
+    releaseId:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+    userId:
+      case_alias: null
+      type: string
+  ReleaseVO:
+    appId:
+      case_alias: null
+      format: int32
+      type: integer
+    appName:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    productId:
+      case_alias: null
+      format: int32
+      type: integer
+    productName:
+      case_alias: null
+      type: string
+    time:
+      case_alias: null
+      format: date-time
+      type: string
+  SerialNumberCtrlVO:
+    createEditable:
+      case_alias: null
+      type: boolean
+    enableSerialNumber:
+      case_alias: null
+      type: boolean
+    serialNumberType:
+      case_alias: null
+      type: string
+    updateEditable:
+      case_alias: null
+      type: boolean
+  SerialNumberGenerateRequest:
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    type:
+      case_alias: null
+      type: string
+  SerialNumberResultVO:
+    message:
+      case_alias: null
+      type: string
+    serialNumbers:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    success:
+      case_alias: null
+      type: boolean
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  SerialNumberRule:
+    availableNumber:
+      case_alias: null
+      type: string
+    code:
+      case_alias: null
+      type: string
+    currentValue:
+      case_alias: null
+      type: string
+    dateFormat:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    id:
+      case_alias: null
+      type: string
+    maxValue:
+      case_alias: null
+      type: string
+    minValue:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    resetDate:
+      case_alias: null
+      format: date-time
+      type: string
+    resetRule:
+      case_alias: null
+      type: string
+    serialLength:
+      case_alias: null
+      format: int32
+      type: integer
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+    statusDesc:
+      case_alias: null
+      type: string
+    step:
+      case_alias: null
+      format: int32
+      type: integer
+    tenantId:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      type: string
+    typeDesc:
+      case_alias: null
+      type: string
+    validEndDate:
+      case_alias: null
+      format: date
+      type: string
+    validStartDate:
+      case_alias: null
+      format: date
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  SerialNumberRuleSaveRequest:
+    availableNumber:
+      case_alias: null
+      format: int64
+      type: integer
+    code:
+      case_alias: null
+      type: string
+    currentValue:
+      case_alias: null
+      format: int64
+      type: integer
+    dateFormat:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    maxValue:
+      case_alias: null
+      format: int64
+      type: integer
+    minValue:
+      case_alias: null
+      format: int64
+      type: integer
+    name:
+      case_alias: null
+      type: string
+    resetRule:
+      case_alias: null
+      type: string
+    serialLength:
+      case_alias: null
+      format: int32
+      type: integer
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+    step:
+      case_alias: null
+      format: int32
+      type: integer
+    type:
+      case_alias: null
+      type: string
+    validEndDate:
+      case_alias: null
+      format: date
+      type: string
+    validStartDate:
+      case_alias: null
+      format: date
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  SerialNumberRuleType:
+    parentCode:
+      case_alias: null
+      type: string
+    typeCode:
+      case_alias: null
+      type: string
+    typeName:
+      case_alias: null
+      type: string
+  SerialNumberRuleUpdateRequest:
+    description:
+      case_alias: null
+      type: string
+    maxValue:
+      case_alias: null
+      format: int64
+      type: integer
+    minValue:
+      case_alias: null
+      format: int64
+      type: integer
+    name:
+      case_alias: null
+      type: string
+    serialLength:
+      case_alias: null
+      format: int32
+      type: integer
+    validEndDate:
+      case_alias: null
+      format: date
+      type: string
+    validStartDate:
+      case_alias: null
+      format: date
+      type: string
+    version:
+      case_alias: null
+      format: int32
+      type: integer
+  Sort:
+    empty:
+      case_alias: null
+      type: boolean
+    sorted:
+      case_alias: null
+      type: boolean
+    unsorted:
+      case_alias: null
+      type: boolean
+  SystemInfo:
+    serverSysTime:
+      case_alias: null
+      format: date-time
+      type: string
+  TenantAppVO:
+    appId:
+      case_alias: null
+      format: int32
+      type: integer
+    description:
+      case_alias: null
+      type: string
+    effectiveDate:
+      case_alias: null
+      format: date
+      type: string
+    expiredDate:
+      case_alias: null
+      format: date
+      type: string
+    id:
+      case_alias: null
+      type: string
+    logoUrl:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    shortName:
+      case_alias: null
+      type: string
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+    supportedTypes:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    tenantId:
+      case_alias: null
+      type: string
+    uri:
+      case_alias: null
+      type: string
+  TenantTagVO:
+    id:
+      case_alias: null
+      type: string
+    tagName:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+  TenantVO:
+    companyAddress:
+      case_alias: null
+      type: string
+    companyDomain:
+      case_alias: null
+      type: string
+    companyEmail:
+      case_alias: null
+      type: string
+    companyFax:
+      case_alias: null
+      type: string
+    companyLogo:
+      case_alias: null
+      type: string
+    companyPhone:
+      case_alias: null
+      type: string
+    companySite:
+      case_alias: null
+      type: string
+    companyStandardColor:
+      case_alias: null
+      type: string
+    companyTheme:
+      case_alias: null
+      type: string
+    description:
+      case_alias: null
+      type: string
+    helpDeskEnable:
+      case_alias: null
+      type: boolean
+    id:
+      case_alias: null
+      type: string
+    loginBackground:
+      case_alias: null
+      type: string
+    loginLocation:
+      case_alias: null
+      type: string
+    loginMarginTop:
+      case_alias: null
+      format: int32
+      type: integer
+    logo:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    nickName:
+      case_alias: null
+      type: string
+    status:
+      case_alias: null
+      format: int32
+      type: integer
+  WxCpJsApiSignatureVO:
+    corpId:
+      case_alias: null
+      type: string
+    nonceStr:
+      case_alias: null
+      type: string
+    signature:
+      case_alias: null
+      type: string
+    timestamp:
+      case_alias: null
+      type: string
+paths:
+  /v2/api/apps/{app_id}/users/{user_id}/access-logs:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: user_id
+      in: path
+      name: user_id
+      required: true
+      type: string
+  /v2/api/areas:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+  /v2/api/osm/tenants/{tenant_id}/files/list:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      format: int32
+      in: query
+      name: app_id
+      required: true
+      type: integer
+    - case_alias: null
+      description: config_key
+      in: query
+      name: config_key
+      required: true
+      type: string
+    - case_alias: null
+      description: sub_path
+      in: query
+      name: sub_path
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/osm/tenants/{tenant_id}/files/signature:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: file_name
+      in: query
+      name: file_name
+      required: true
+      type: string
+    - case_alias: null
+      description: oss_key
+      in: query
+      name: oss_key
+      required: true
+      type: string
+    - case_alias: null
+      description: signature_expire_hours
+      format: int32
+      in: query
+      name: signature_expire_hours
+      required: false
+      type: integer
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/public/apps/all:
+    get: {}
+  /v2/api/public/tenants/all:
+    get: {}
+  /v2/api/public/tenants/{tenant_id}/apps/{app_id}/m/menus:
+    get:
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/public/tenants/{tenant_id}/oss/callback-parms:
+    get:
+    - case_alias: null
+      description: file_name
+      in: query
+      name: file_name
+      required: true
+      type: string
+    - case_alias: null
+      description: need_preview
+      in: query
+      name: need_preview
+      required: false
+      type: boolean
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/public/tenants/{tenant_id}/oss/post-policy:
+    get:
+    - case_alias: null
+      description: app_id
+      format: int32
+      in: query
+      name: app_id
+      required: true
+      type: integer
+    - case_alias: null
+      description: key
+      in: query
+      name: key
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/public/tenants/{tenant_id}/oss/presigned-url:
+    get:
+    - case_alias: null
+      description: oss_key
+      in: query
+      name: oss_key
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/public/tenants/{tenant_id}/tenant-apps/all:
+    get:
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/public/tenants/{tenant_id}/users/{user_id}/apps/{app_id}/m/menus:
+    get:
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: user_id
+      in: path
+      name: user_id
+      required: true
+      type: string
+  /v2/api/releases/latest-release:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+  /v2/api/sys/sys-info:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/admin/code-defs/code-types/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: code_def_type_like
+      in: query
+      name: code_def_type_like
+      required: false
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: type_name
+      in: query
+      items:
+        type: string
+      name: type_name
+      required: false
+      type: array
+    - case_alias: null
+      description: type_name_like
+      in: query
+      name: type_name_like
+      required: false
+      type: string
+  /v2/api/tenants/{tenant_id}/admin/code-defs/types/{type}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: type
+      in: path
+      name: type
+      required: true
+      type: string
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: codeDefCreateVO
+      in: body
+      name: codeDefCreateVO
+      required: true
+      schema:
+        $ref: '#/definitions/CodeDefCreateVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: type
+      in: path
+      name: type
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/admin/code-defs/{id}:
+    delete:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: codeDefUpdateVO
+      in: body
+      name: codeDefUpdateVO
+      required: true
+      schema:
+        $ref: '#/definitions/CodeDefUpdateVO'
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/admin/code-defs/{id}/active:
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/configs:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: key_name
+      in: query
+      items:
+        type: string
+      name: key_name
+      required: true
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/esign/configs:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: biz_type
+      in: query
+      name: biz_type
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/esign/esign-flows:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      in: header
+      name: X-Operator-ID
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: eSignStartRequest
+      in: body
+      name: eSignStartRequest
+      required: true
+      schema:
+        $ref: '#/definitions/EsignCreateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/esign/esign-flows/pages:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: biz_type
+      in: query
+      name: biz_type
+      required: true
+      type: string
+    - case_alias: null
+      description: biz_value
+      in: query
+      name: biz_value
+      required: true
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/esign/esign-flows/{id}/refresh:
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/esign/esign-user-flows/pages:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: applicant
+      in: query
+      name: applicant
+      required: false
+      type: string
+    - case_alias: null
+      description: biz_type
+      in: query
+      name: biz_type
+      required: false
+      type: string
+    - case_alias: null
+      description: biz_value
+      in: query
+      name: biz_value
+      required: false
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: signer
+      in: query
+      name: signer
+      required: false
+      type: string
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      collectionFormat: multi
+      description: status
+      in: query
+      items:
+        type: string
+      name: status
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/esign/esign-user-flows/{id}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/extend-fields/batch:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: fieldRequest
+      in: body
+      name: fieldRequest
+      required: true
+      schema:
+        $ref: '#/definitions/ExtendFieldSaveRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/extend-fields/bulk:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: field_group_key
+      in: query
+      name: field_group_key
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/m/menus:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/notifications:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: requestVO
+      in: body
+      name: requestVO
+      required: true
+      schema:
+        $ref: '#/definitions/NotificationCreateVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/all:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: message_type
+      in: query
+      items:
+        type: string
+      name: message_type
+      required: false
+      type: array
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/read-all:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: message_type
+      in: query
+      items:
+        type: string
+      name: message_type
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/unread:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: message_type
+      in: query
+      items:
+        type: string
+      name: message_type
+      required: false
+      type: array
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/unread-count:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: message_type
+      in: query
+      items:
+        type: string
+      name: message_type
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/{message_id}/read:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: message_id
+      in: path
+      name: message_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/{message_type}/all:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: message_type
+      in: path
+      name: message_type
+      required: true
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/{message_type}/read-all:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: message_type
+      in: path
+      name: message_type
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/{message_type}/unread:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: message_type
+      in: path
+      name: message_type
+      required: true
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/apps/{app_id}/notifications/{message_type}/unread-count:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      in: path
+      name: app_id
+      required: true
+      type: string
+    - case_alias: null
+      description: message_type
+      in: path
+      name: message_type
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/code-defs:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: codes
+      in: query
+      items:
+        type: string
+      name: codes
+      required: false
+      type: array
+    - case_alias: null
+      default: false
+      description: include_deleted
+      in: query
+      name: include_deleted
+      required: false
+      type: boolean
+    - case_alias: null
+      description: parent_code
+      in: query
+      name: parent_code
+      required: false
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: type
+      in: query
+      items:
+        type: string
+      name: type
+      required: true
+      type: array
+  /v2/api/tenants/{tenant_id}/excol-defs/batch:
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: extendColumnDefBatchSaveVO
+      in: body
+      name: extendColumnDefBatchSaveVO
+      required: true
+      schema:
+        $ref: '#/definitions/ExtendColumnDefBatchSaveVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/excol-defs/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: table_name
+      in: query
+      name: table_name
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/fe-field-configs:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: feFieldConfigSaveVO
+      in: body
+      name: feFieldConfigSaveVO
+      required: true
+      schema:
+        $ref: '#/definitions/FeFieldConfigSaveVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/latest-release-user:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: user_id
+      in: query
+      name: user_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/object-tags/{object_tag_id}:
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      format: int32
+      in: query
+      name: app_id
+      required: true
+      type: integer
+    - case_alias: null
+      description: object_tag_id
+      in: path
+      name: object_tag_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: updateRequest
+      in: body
+      name: updateRequest
+      required: true
+      schema:
+        $ref: '#/definitions/OsmObjectTagUpdateRequest'
+  /v2/api/tenants/{tenant_id}/objects:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: app_id
+      in: query
+      items:
+        format: int32
+        type: integer
+      name: app_id
+      required: false
+      type: array
+    - case_alias: null
+      description: biz_type
+      in: query
+      name: biz_type
+      required: false
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: biz_value
+      in: query
+      items:
+        type: string
+      name: biz_value
+      required: true
+      type: array
+    - case_alias: null
+      description: delete
+      in: query
+      name: delete
+      required: false
+      type: boolean
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: preview
+      in: query
+      name: preview
+      required: false
+      type: boolean
+    - case_alias: null
+      description: signature
+      in: query
+      name: signature
+      required: false
+      type: boolean
+    - case_alias: null
+      default: 8
+      description: signature_expire_hours
+      format: int32
+      in: query
+      name: signature_expire_hours
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/objects/bulk:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      format: int32
+      in: query
+      name: app_id
+      required: true
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: object_id
+      in: query
+      items:
+        type: string
+      name: object_id
+      required: true
+      type: array
+    - case_alias: null
+      description: signature
+      in: query
+      name: signature
+      required: false
+      type: boolean
+    - case_alias: null
+      default: 8
+      description: signature_expire_hours
+      format: int32
+      in: query
+      name: signature_expire_hours
+      required: false
+      type: integer
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/objects/query-by-biz-value:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      collectionFormat: multi
+      description: app_id
+      in: query
+      items:
+        format: int32
+        type: integer
+      name: app_id
+      required: false
+      type: array
+    - case_alias: null
+      description: bizValueList
+      in: body
+      name: bizValueList
+      required: true
+      schema:
+        items:
+          type: string
+        type: array
+    - case_alias: null
+      description: biz_type
+      in: query
+      name: biz_type
+      required: false
+      type: string
+    - case_alias: null
+      description: delete
+      in: query
+      name: delete
+      required: false
+      type: boolean
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: preview
+      in: query
+      name: preview
+      required: false
+      type: boolean
+    - case_alias: null
+      description: signature
+      in: query
+      name: signature
+      required: false
+      type: boolean
+    - case_alias: null
+      default: 8
+      description: signature_expire_hours
+      format: int32
+      in: query
+      name: signature_expire_hours
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/objects/{object_id}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: file_name
+      in: query
+      name: file_name
+      required: false
+      type: string
+    - case_alias: null
+      description: object_id
+      in: path
+      name: object_id
+      required: true
+      type: string
+    - case_alias: null
+      description: signature
+      in: query
+      name: signature
+      required: false
+      type: boolean
+    - case_alias: null
+      default: 8
+      description: signature_expire_hours
+      format: int32
+      in: query
+      name: signature_expire_hours
+      required: false
+      type: integer
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/oss/callback-parms:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: file_name
+      in: query
+      name: file_name
+      required: true
+      type: string
+    - case_alias: null
+      description: need_preview
+      in: query
+      name: need_preview
+      required: false
+      type: boolean
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/oss/post-policy:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      format: int32
+      in: query
+      name: app_id
+      required: true
+      type: integer
+    - case_alias: null
+      description: key
+      in: query
+      name: key
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/oss/presigned-url:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: oss_key
+      in: query
+      name: oss_key
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/release-user:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: createRequest
+      in: body
+      name: createRequest
+      required: true
+      schema:
+        $ref: '#/definitions/ReleaseUserCreateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/tags:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/tags/{tag_id}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: tag_id
+      in: path
+      name: tag_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/users/fe-field-configs:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: list_name
+      in: query
+      name: list_name
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: feFieldConfigSaveVO
+      in: body
+      name: feFieldConfigSaveVO
+      required: true
+      schema:
+        $ref: '#/definitions/FeFieldConfigSaveVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/users/fe-field-configs/reset:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: feFieldConfigResetVO
+      in: body
+      name: feFieldConfigResetVO
+      required: true
+      schema:
+        $ref: '#/definitions/FeFieldConfigResetVO'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/wechat/jsapi/signature:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      format: int32
+      in: query
+      name: app_id
+      required: true
+      type: integer
+    - case_alias: null
+      description: domain
+      in: query
+      name: domain
+      required: true
+      type: string
+    - case_alias: null
+      description: url
+      in: query
+      name: url
+      required: true
+      type: string
+  /v2/api/{tenant_id}/api-access-logs:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: api_url
+      in: query
+      name: api_url
+      required: false
+      type: string
+    - case_alias: null
+      description: app_name
+      in: query
+      name: app_name
+      required: false
+      type: string
+    - case_alias: null
+      description: client_id
+      in: query
+      name: client_id
+      required: false
+      type: string
+    - case_alias: null
+      description: disposed
+      in: query
+      name: disposed
+      required: false
+      type: string
+    - case_alias: null
+      description: error
+      in: query
+      name: error
+      required: false
+      type: string
+    - case_alias: null
+      description: from_date
+      format: date
+      in: query
+      name: from_date
+      required: false
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: remote_ip
+      in: query
+      name: remote_ip
+      required: false
+      type: string
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: to_date
+      format: date
+      in: query
+      name: to_date
+      required: false
+      type: string
+    - case_alias: null
+      description: user_id
+      in: query
+      name: user_id
+      required: false
+      type: string
+  /v2/api/{tenant_id}/api-access-logs/disposed:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: updateRequest
+      in: body
+      name: updateRequest
+      required: true
+      schema:
+        $ref: '#/definitions/BatchDisposedApiAccessLogRequest'
+  /v2/api/{tenant_id}/serial-numbers:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: generateRequest
+      in: body
+      name: generateRequest
+      required: true
+      schema:
+        $ref: '#/definitions/SerialNumberGenerateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/{tenant_id}/serial-numbers/ctrls:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: serial_number_type
+      in: query
+      name: serial_number_type
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/{tenant_id}/serial-numbers/rule:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: saveRequest
+      in: body
+      name: saveRequest
+      required: true
+      schema:
+        $ref: '#/definitions/SerialNumberRuleSaveRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/{tenant_id}/serial-numbers/rule/type:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/{tenant_id}/serial-numbers/rule/type/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: type
+      in: query
+      name: type
+      required: true
+      type: string
+  /v2/api/{tenant_id}/serial-numbers/rule/{id}:
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: updateRequest
+      in: body
+      name: updateRequest
+      required: true
+      schema:
+        $ref: '#/definitions/SerialNumberRuleUpdateRequest'
+  /v2/api/{tenant_id}/serial-numbers/rule/{id}/enable:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: id
+      in: path
+      name: id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/{tenant_id}/warning-rules/by-rule-type:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: biz_type
+      in: query
+      name: biz_type
+      required: true
+      type: string
+    - case_alias: null
+      description: enabled
+      in: query
+      name: enabled
+      required: false
+      type: boolean
+    - case_alias: null
+      description: rule_type
+      in: query
+      name: rule_type
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/{tenant_id}/warning-rules/pages:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: biz_type
+      in: query
+      name: biz_type
+      required: true
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: q
+      in: query
+      name: q
+      required: false
+      type: string
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/{tenant_id}/warning-rules/{rule_id}:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: rule_id
+      in: path
+      name: rule_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: rule_id
+      in: path
+      name: rule_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+    - case_alias: null
+      description: updateRequest
+      in: body
+      name: updateRequest
+      required: true
+      schema:
+        $ref: '#/definitions/BizWarningRuleUpdateRequest'
+  /v2/api/{tenant_id}/warning-rules/{rule_id}/disable:
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: rule_id
+      in: path
+      name: rule_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/{tenant_id}/warning-rules/{rule_id}/enable:
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: rule_id
+      in: path
+      name: rule_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/openapi/osm/tenants/{tenant_id}/post-policy:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: app_id
+      format: int32
+      in: query
+      name: app_id
+      required: true
+      type: integer
+    - case_alias: null
+      description: key
+      in: query
+      name: key
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string

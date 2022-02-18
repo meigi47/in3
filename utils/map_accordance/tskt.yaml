@@ -1,0 +1,581 @@
+definitions:
+  ImportTaskVO:
+    code:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    durationTime:
+      case_alias: null
+      type: number
+    errorType:
+      case_alias: null
+      type: string
+    expiredAt:
+      case_alias: null
+      format: date-time
+      type: string
+    extra:
+      case_alias: null
+      type: object
+    failCount:
+      case_alias: null
+      format: int32
+      type: integer
+    finishedAt:
+      case_alias: null
+      format: date-time
+      type: string
+    groupNo:
+      case_alias: null
+      format: int64
+      type: integer
+    id:
+      case_alias: null
+      type: string
+    importFileObject:
+      $ref: '#/definitions/OsmObjectVO'
+      case_alias: null
+    importFileObjectId:
+      case_alias: null
+      type: string
+    importResultObject:
+      $ref: '#/definitions/OsmObjectVO'
+      case_alias: null
+    importResultObjectId:
+      case_alias: null
+      type: string
+    importType:
+      case_alias: null
+      type: string
+    msg:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    remark:
+      case_alias: null
+      type: string
+    result:
+      case_alias: null
+      type: string
+    sourceCreatedBy:
+      case_alias: null
+      type: string
+    status:
+      case_alias: null
+      type: string
+    successCount:
+      case_alias: null
+      format: int32
+      type: integer
+    sysSn:
+      case_alias: null
+      format: int64
+      type: integer
+    taskSource:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      type: string
+  NewInstanceVO:
+    id:
+      case_alias: null
+      type: string
+  OsmObjectVO:
+    bizType:
+      case_alias: null
+      type: string
+    bizValue:
+      case_alias: null
+      type: string
+    createdBy:
+      case_alias: null
+      type: string
+    createdByName:
+      case_alias: null
+      type: string
+    deleted:
+      case_alias: null
+      type: boolean
+    id:
+      case_alias: null
+      type: string
+    lastModifiedBy:
+      case_alias: null
+      type: string
+    lastModifiedByName:
+      case_alias: null
+      type: string
+    lastModifiedDate:
+      case_alias: null
+      format: date-time
+      type: string
+    name:
+      case_alias: null
+      type: string
+    ossKey:
+      case_alias: null
+      type: string
+    previewObjectId:
+      case_alias: null
+      type: string
+    public:
+      case_alias: null
+      format: int32
+      type: integer
+    signature:
+      $ref: '#/definitions/OssSignature'
+      case_alias: null
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    tagId:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      type: string
+  OssSignature:
+    expireTime:
+      case_alias: null
+      format: date-time
+      type: string
+    origin:
+      case_alias: null
+      type: string
+    pdf:
+      case_alias: null
+      type: string
+    standard:
+      case_alias: null
+      type: string
+    thumbnail:
+      case_alias: null
+      type: string
+  PageOfImportTaskVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/ImportTaskVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  PageOfTaskVO:
+    content:
+      case_alias: null
+      items:
+        $ref: '#/definitions/TaskVO'
+      type: array
+    empty:
+      case_alias: null
+      type: boolean
+    first:
+      case_alias: null
+      type: boolean
+    last:
+      case_alias: null
+      type: boolean
+    number:
+      case_alias: null
+      format: int32
+      type: integer
+    numberOfElements:
+      case_alias: null
+      format: int32
+      type: integer
+    size:
+      case_alias: null
+      format: int32
+      type: integer
+    sort:
+      $ref: '#/definitions/Sort'
+      case_alias: null
+    totalElements:
+      case_alias: null
+      format: int64
+      type: integer
+    totalPages:
+      case_alias: null
+      format: int32
+      type: integer
+  Sort:
+    empty:
+      case_alias: null
+      type: boolean
+    sorted:
+      case_alias: null
+      type: boolean
+    unsorted:
+      case_alias: null
+      type: boolean
+  TaskCreateRequest:
+    code:
+      case_alias: null
+      type: string
+    errorType:
+      case_alias: null
+      type: string
+    importObjectId:
+      case_alias: null
+      type: string
+    importType:
+      case_alias: null
+      type: string
+    params:
+      case_alias: null
+      type: object
+    remark:
+      case_alias: null
+      type: string
+  TaskImportCreateRequest:
+    errorType:
+      case_alias: null
+      type: string
+    fileList:
+      case_alias: null
+      items:
+        $ref: '#/definitions/TaskImportFileCreateRequest'
+      type: array
+    remark:
+      case_alias: null
+      type: string
+    sourceCreateBy:
+      case_alias: null
+      type: string
+    sourceType:
+      case_alias: null
+      type: string
+  TaskImportFileCreateRequest:
+    code:
+      case_alias: null
+      type: string
+    importType:
+      case_alias: null
+      type: string
+    objectId:
+      case_alias: null
+      type: string
+  TaskInstanceVO:
+    newIdList:
+      case_alias: null
+      items:
+        type: string
+      type: array
+    success:
+      case_alias: null
+      type: boolean
+  TaskVO:
+    code:
+      case_alias: null
+      type: string
+    createdDate:
+      case_alias: null
+      format: date-time
+      type: string
+    durationTime:
+      case_alias: null
+      type: number
+    expiredAt:
+      case_alias: null
+      format: date-time
+      type: string
+    extra:
+      case_alias: null
+      type: object
+    finishedAt:
+      case_alias: null
+      format: date-time
+      type: string
+    groupNo:
+      case_alias: null
+      format: int64
+      type: integer
+    id:
+      case_alias: null
+      type: string
+    name:
+      case_alias: null
+      type: string
+    remark:
+      case_alias: null
+      type: string
+    result:
+      case_alias: null
+      type: string
+    sourceCreatedBy:
+      case_alias: null
+      type: string
+    status:
+      case_alias: null
+      type: string
+    sysSn:
+      case_alias: null
+      format: int64
+      type: integer
+    taskSource:
+      case_alias: null
+      type: string
+    tenantId:
+      case_alias: null
+      type: string
+    type:
+      case_alias: null
+      type: string
+paths:
+  /v2/api/private/tenants/{tenant_id}/tasks:
+    post:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: createRequest
+      in: body
+      name: createRequest
+      required: true
+      schema:
+        $ref: '#/definitions/TaskCreateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/tasks/import:
+    post:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: createRequest
+      in: body
+      name: createRequest
+      required: true
+      schema:
+        $ref: '#/definitions/TaskImportCreateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/tasks/page/sbos:
+    get:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: source_created_by
+      in: query
+      name: source_created_by
+      required: true
+      type: string
+    - case_alias: null
+      description: source_type
+      in: query
+      name: source_type
+      required: true
+      type: string
+    - case_alias: null
+      description: task_type
+      in: query
+      name: task_type
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/private/tenants/{tenant_id}/tasks/{task_id}/cancel:
+    put:
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: task_id
+      in: path
+      name: task_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/tasks:
+    post:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: createRequest
+      in: body
+      name: createRequest
+      required: true
+      schema:
+        $ref: '#/definitions/TaskCreateRequest'
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/tasks/page:
+    get:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: Page number of the requested page
+      format: int32
+      in: query
+      name: page
+      required: false
+      type: integer
+    - case_alias: null
+      description: Size of a page
+      format: int32
+      in: query
+      name: size
+      required: false
+      type: integer
+    - case_alias: null
+      collectionFormat: multi
+      description: 'Sorting criteria in the format: property(,asc|desc). Default sort
+        order is ascending. Multiple sort criteria are supported.'
+      in: query
+      items:
+        type: string
+      name: sort
+      required: false
+      type: array
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
+  /v2/api/tenants/{tenant_id}/tasks/{task_id}/cancel:
+    put:
+    - case_alias: null
+      default: Bearer XXX
+      description: the bearer token value
+      in: header
+      name: Authorization
+      required: true
+      type: string
+    - case_alias: null
+      description: T-Code
+      in: header
+      name: T-Code
+      required: true
+      type: string
+    - case_alias: null
+      description: task_id
+      in: path
+      name: task_id
+      required: true
+      type: string
+    - case_alias: null
+      description: tenant_id
+      in: path
+      name: tenant_id
+      required: true
+      type: string
